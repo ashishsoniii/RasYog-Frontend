@@ -2,6 +2,7 @@ from flask import Flask, render_template, request,jsonify
 import JM_Store as ry
 import warnings
 
+
 warnings.filterwarnings('ignore')
 
 app = Flask(__name__)
