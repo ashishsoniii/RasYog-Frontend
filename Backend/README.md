@@ -12,6 +12,8 @@ Flask App for Store Data Analysis
 ### Steps for development setup:
 * Clone the git repository:
   - `git clone <url-of-git-repo>`
+* Get in Backend Folder:
+  - `cd Backend`
 * Setup virtual environment:
   - `python -m venv <name-of-virtual-env>`
 * Activate virtual environment

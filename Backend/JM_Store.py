@@ -18,7 +18,7 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 
 # df=pd.read_excel('')
-df = pd.read_excel('./Excel_Files/Store_data_v2.xlsx')
+df = pd.read_excel('./Files/Store_data_v2.xlsx')
 df['year'] = df['Date'].dt.year
 df['month'] = df['Date'].dt.month
 data = df.drop(['Barcode', 'size', 'Size', 'Style', 'SM', 'Serial No'], axis=1)
