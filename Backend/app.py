@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request,jsonify
 import JM_Store as ry
 import warnings
+from flask_api import status
 
 
 warnings.filterwarnings('ignore')
@@ -33,20 +34,23 @@ Margin_dict={
 
 @app.route('/')
 def home():
-    return jsonify(message="JM Store Data Anyalsis")
+    return jsonify(message="JM Store Data Anyalsis"),status.HTTP_200_OK
     # return render_template('graph.html',display_option=False)
 
 #Route for Option in Select box
 @app.route('/store')
 def Choose_Option():
     Fun=(dict(request.args))
-    options=Option_dict[Fun['id']]
-    graph_data={
-        "plot_name":options,
-        "Topic":Fun['id'],
-        "display_option":True
-    }
-    return jsonify(graph_data)
+    if(Fun['id'] in list(Option_dict.keys())):
+        options=Option_dict[Fun['id']]
+        graph_data={
+            "plot_name":options,
+            "Topic":Fun['id'],
+            "display_option":True
+        }
+        return jsonify(graph_data),status.HTTP_200_OK
+    else:
+        return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
     # return render_template('graph.html',var=Mylist,Topic=FUn['id'],display_option="True")
 
 
@@ -63,7 +67,7 @@ def data_graph():
         elif graph_id == 2:
             plot1,plot2=Data_dict[2]
         else:
-             return jsonify(message='Invalid Input')
+             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
             'plot1':plot1,
             'plot2':plot2,
@@ -73,7 +77,7 @@ def data_graph():
             'Options':Option_dict['data'],
             'display_option':True
         }
-        return jsonify(JSON_Data)
+        return jsonify(JSON_Data),status.HTTP_200_OK
         # return render_template('graph.html', plot1=plot1, plot2=plot2, plot3=plot3, plot4=plot4,var=data,Topic='data',display_option=True)
     # elif request.method == 'GET':
     #     return render_template('graph.html')
@@ -90,7 +94,7 @@ def margin_graph():
         elif graph_id == 2:
             plot1,plot2=Margin_dict[2]
         else:
-             return jsonify(message='Invalid Input')
+             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
             'plot1':plot1,
             'plot2':plot2,
@@ -100,7 +104,7 @@ def margin_graph():
             'Option':Option_dict['margin'],
             'display_option':True
         }
-        return jsonify(JSON_Data)
+        return jsonify(JSON_Data),status.HTTP_200_OK
         # return render_template('graph.html', plot1=plot1, plot2=plot2, plot3=plot3, plot4=plot4, var=margin, Topic='margin',display_option="True")
     # elif request.method == 'GET':
     #     return render_template('graph.html')
