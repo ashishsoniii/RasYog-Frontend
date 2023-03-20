@@ -323,7 +323,7 @@ def treemap_popularity():
 
   return graphJSON
 
-  def treemap_popularity_2():
+def treemap_popularity_2():
     fig = px.treemap(data_frame = data_2022,color='Brand',
                       path=['PC','Department', 'Brand','Product','popularity'],
                       title='Popularity Analysis for Brands upto Product level',values = 'popularity')

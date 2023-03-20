@@ -35,7 +35,10 @@ Margin_dict={
             2: [ry.scatter_product(), ry.scatter_margin(), ry.scatter_sales()]
            
 }
-
+Maps_dict={
+            1: [ry.treemap_popularity(), ry.treemap_popularity_2()],
+            2: [ry.treemap_margin(), ry.treemap_margin_2()]
+}
 
 @app.route('/')
 def home():
@@ -46,6 +49,7 @@ def home():
 @app.route('/store')
 def Choose_Option():
     Fun=(dict(request.args))
+    print(Fun)
     if(Fun['id'] in list(Option_dict.keys())):
         options=Option_dict[Fun['id']]
         graph_data={
@@ -115,46 +119,31 @@ def margin_graph():
     #     return render_template('graph.html')
 
 # Route for Tree Maps
-# @app.route('/Treemaps', methods=['POST', 'GET'])
-# def TreeMaps_graph():
-#     if request.method == 'POST':
-#         graph_id = (request.get_json())['graph']
-#         plot1,plot2,plot3,plot4 = None,None,None,None
-
-
 @app.route('/maps', methods=['POST', 'GET'])
-def map_graph():
+def TreeMaps_graph():
     if request.method == 'POST':
-        graph_id = int(request.form['graph'])
-        Graph_dict={
-            1: [ry.treemap_popularity(), ry.treemap_popularity_2()],
-            2: [ry.treemap_margin(), ry.treemap_margin_2()]
-        }
-        plot1 = None
-        plot2 = None
-        plot3 = None
-        plot4 = None
+        graph_id = (request.get_json())['graph']
+        plot1,plot2,plot3,plot4 = None,None,None,None
         if graph_id == 1:
-            plot1 = Graph_dict[1][0]
-            plot2 = Graph_dict[1][1]
-            # plot3 = Graph_dict[1][2]
-            # plot4 = Graph_dict[1][3]
+            plot1,plot2 = Maps_dict[1]
         elif graph_id == 2:
-            plot1 = Graph_dict[2][0]
-            plot2 = Graph_dict[2][1]
+            plot1,plot2 = Maps_dict[2]
         else:
-            return "Invalid Input"
-
-        maps = [{"plot": 'Brand and popularity', "id": 1},
-                 {"plot": 'Product and popularity', "id": 2},
-                 {"plot": 'Brand and Margin', "id": 3},
-                 {"plot": 'Product and Margin', "id": 4}
-                 ]
-        return render_template('graph.html', plot1=plot1, plot2=plot2, plot3=plot3, plot4=plot4, var=maps,
-                               Topic='maps', display_option=True)
-    elif request.method == 'GET':
-        return render_template('graph.html')
-
+           return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
+        JSON_Data={
+            'plot1':plot1,
+            'plot2':plot2,
+            'plot3':plot3,
+            'plot4':plot4,
+            'Topic':'maps',
+            'Option':Option_dict['maps'],
+            'display_option':True
+        }
+        return jsonify(JSON_Data),status.HTTP_200_OK
+    #     return render_template('graph.html', plot1=plot1, plot2=plot2, plot3=plot3, plot4=plot4, var=maps,
+    #                            Topic='maps', display_option=True)
+    # elif request.method == 'GET':
+    #     return render_template('graph.html')
 
 
 if __name__ == '__main__':
