@@ -322,3 +322,65 @@ def treemap_popularity():
   graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
   return graphJSON
+
+  def treemap_popularity_2():
+    fig = px.treemap(data_frame = data_2022,color='Brand',
+                      path=['PC','Department', 'Brand','Product','popularity'],
+                      title='Popularity Analysis for Brands upto Product level',values = 'popularity')
+    fig.update_traces(root_color="lightgrey")
+    fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+    return graphJSON
+
+
+def treemap_margin():
+  fig = px.treemap(data_frame = data_2022,color='Brand',title='Margin Analysis for Brands upto Design level',
+                   path=['PC','Department', 'Product','Brand','Design','Color','margin'])
+  fig.update_traces(root_color="lightgrey")
+  fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
+  graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+  return graphJSON
+
+def treemap_margin_2():
+  fig = px.treemap(data_frame = data_2022, title='Margin Analysis for Brands upto Product Level',
+                   path=['PC','Department', 'Brand','Product','Design','Color','margin'],color='Brand')
+  fig.update_traces(root_color="lightgrey")
+  fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
+  graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+  return graphJSON
+
+
+def scatter_product():
+  fig = px.scatter(data_2022, y="Brand", x= "margin", color= "Product",
+                 title="Effective Margin Distribution wrt Brand and Product")
+  graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+  return graphJSON
+
+
+
+def scatter_margin():
+  fig = px.scatter(data_2022, x="popularity", y= "Brand", color= "Product",
+                 title="Effective Popularity Distribution wrt Brand and Product")
+  graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+  return graphJSON
+
+
+def scatter_sales():
+  fig = px.scatter(data_2022, x="sales", y= 'Brand', color= 'Product',
+                 title="Effective Sales Distribution")
+  graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+  return graphJSON
+
+
+def scatter_sales_2(cat1, cat2):
+  fig = px.scatter(pos_data, x="Amount", y= cat1, color= cat2,
+                 title="Effective Sales Distribution")
+  graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+  return graphJSON

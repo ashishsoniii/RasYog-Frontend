@@ -20,7 +20,11 @@ Option_dict={
         {"plot":'Brand Vs Product Analysis',"id":2},
         {"plot":'Popularity Vs Margin for Brands',"id":3}
         ],
-        "maps":['Other Graph','Some more graph']
+        "maps": [{"plot": 'Brand and popularity', "id": 1},
+                 {"plot": 'Product and popularity', "id": 2},
+                 {"plot": 'Brand and Margin', "id": 3},
+                 {"plot": 'Product and Margin', "id": 4}
+                 ]
 }
 Data_dict={
             1: [ry.summary_all_years(), ry.summary_month_margin(), ry.summary_month_sales()],
@@ -28,7 +32,8 @@ Data_dict={
 }   
 Margin_dict={
             1: [ry.popularity_yearwise(), ry.compare_popularity_yearwise(['JAIPUR MODERN', '11.11', 'OH LA LA']), ry.margin_brands(), ry.popularity_brands()],
-            2: [ry.monthwise_summary(2015, 2016), ry.animated_monthwise_summary()]
+            2: [ry.scatter_product(), ry.scatter_margin(), ry.scatter_sales()]
+           
 }
 
 
@@ -110,11 +115,46 @@ def margin_graph():
     #     return render_template('graph.html')
 
 # Route for Tree Maps
-@app.route('/Treemaps', methods=['POST', 'GET'])
-def TreeMaps_graph():
+# @app.route('/Treemaps', methods=['POST', 'GET'])
+# def TreeMaps_graph():
+#     if request.method == 'POST':
+#         graph_id = (request.get_json())['graph']
+#         plot1,plot2,plot3,plot4 = None,None,None,None
+
+
+@app.route('/maps', methods=['POST', 'GET'])
+def map_graph():
     if request.method == 'POST':
-        graph_id = (request.get_json())['graph']
-        plot1,plot2,plot3,plot4 = None,None,None,None
+        graph_id = int(request.form['graph'])
+        Graph_dict={
+            1: [ry.treemap_popularity(), ry.treemap_popularity_2()],
+            2: [ry.treemap_margin(), ry.treemap_margin_2()]
+        }
+        plot1 = None
+        plot2 = None
+        plot3 = None
+        plot4 = None
+        if graph_id == 1:
+            plot1 = Graph_dict[1][0]
+            plot2 = Graph_dict[1][1]
+            # plot3 = Graph_dict[1][2]
+            # plot4 = Graph_dict[1][3]
+        elif graph_id == 2:
+            plot1 = Graph_dict[2][0]
+            plot2 = Graph_dict[2][1]
+        else:
+            return "Invalid Input"
+
+        maps = [{"plot": 'Brand and popularity', "id": 1},
+                 {"plot": 'Product and popularity', "id": 2},
+                 {"plot": 'Brand and Margin', "id": 3},
+                 {"plot": 'Product and Margin', "id": 4}
+                 ]
+        return render_template('graph.html', plot1=plot1, plot2=plot2, plot3=plot3, plot4=plot4, var=maps,
+                               Topic='maps', display_option=True)
+    elif request.method == 'GET':
+        return render_template('graph.html')
+
 
 
 if __name__ == '__main__':
