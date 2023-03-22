@@ -2,11 +2,13 @@ from flask import Flask, render_template, request,jsonify
 import JM_Store as ry
 import warnings
 from flask_api import status
+from flask_cors import CORS
 
 
 warnings.filterwarnings('ignore')
 
 app = Flask(__name__)
+CORS(app)
 
 Option_dict={
         "data":
@@ -43,7 +45,6 @@ Maps_dict={
 @app.route('/')
 def home():
     return jsonify(message="JM Store Data Anyalsis"),status.HTTP_200_OK
-    # return render_template('graph.html',display_option=False)
 
 #Route for Option in Select box
 @app.route('/store')
@@ -60,7 +61,6 @@ def Choose_Option():
         return jsonify(graph_data),status.HTTP_200_OK
     else:
         return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
-    # return render_template('graph.html',var=Mylist,Topic=FUn['id'],display_option="True")
 
 
 
@@ -87,9 +87,7 @@ def data_graph():
             'display_option':True
         }
         return jsonify(JSON_Data),status.HTTP_200_OK
-        # return render_template('graph.html', plot1=plot1, plot2=plot2, plot3=plot3, plot4=plot4,var=data,Topic='data',display_option=True)
-    # elif request.method == 'GET':
-    #     return render_template('graph.html')
+
 
 
 # Route for Popularity and Margin Analysis
@@ -114,9 +112,7 @@ def margin_graph():
             'display_option':True
         }
         return jsonify(JSON_Data),status.HTTP_200_OK
-        # return render_template('graph.html', plot1=plot1, plot2=plot2, plot3=plot3, plot4=plot4, var=margin, Topic='margin',display_option="True")
-    # elif request.method == 'GET':
-    #     return render_template('graph.html')
+
 
 # Route for Tree Maps
 @app.route('/maps', methods=['POST', 'GET'])
@@ -140,10 +136,6 @@ def TreeMaps_graph():
             'display_option':True
         }
         return jsonify(JSON_Data),status.HTTP_200_OK
-    #     return render_template('graph.html', plot1=plot1, plot2=plot2, plot3=plot3, plot4=plot4, var=maps,
-    #                            Topic='maps', display_option=True)
-    # elif request.method == 'GET':
-    #     return render_template('graph.html')
 
 
 if __name__ == '__main__':
