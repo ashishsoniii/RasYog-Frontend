@@ -101,7 +101,7 @@ def margin_graph():
         if graph_id == 1:
             plot1,plot2,plot3,plot4=Margin_dict[1]
         elif graph_id == 2:
-            plot1,plot2=Margin_dict[2]
+            plot1,plot2,plot3=Margin_dict[2]
         else:
              return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={

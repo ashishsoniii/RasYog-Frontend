@@ -141,7 +141,7 @@ def summary_all_years():
     fign = px.bar(year_group_sum, x=years, y=['Margin', 'Sale', 'EffCost'], barmode='group',
                   title='Year wise summary of sale,margin and cost', labels={"EffCost": "Sale"})
     graphJSON = json.dumps(fign, cls=plotly.utils.PlotlyJSONEncoder)
-
+    graphJSON=json.loads(graphJSON)
     return graphJSON
 
 
@@ -149,13 +149,16 @@ def summary_month_margin():
     fign = px.bar(monthwise_sub_data, x='month', y='margin', color='year',
                   barmode='group', title='Month wise summary of margin for different years')
     graphJSON = json.dumps(fign, cls=plotly.utils.PlotlyJSONEncoder)
+    graphJSON=json.loads(graphJSON)
     return graphJSON
 
 
 def summary_month_sales():
     fign = px.bar(monthwise_sub_data, x='month', y='sale', color='year',
                   barmode='group', title='Month wise summary of Sales for different years')
+    
     graphJSON = json.dumps(fign, cls=plotly.utils.PlotlyJSONEncoder)
+    graphJSON=json.loads(graphJSON)
 
     return graphJSON
 
@@ -166,8 +169,9 @@ def monthwise_summary(from_year,to_year):
     df = monthwise_sub_data[(monthwise_sub_data['year']>= from_year) & (monthwise_sub_data['year'] <= to_year)]
     fig = px.bar(df, x='month', y=['margin','cost','sale'], facet_row="year",facet_row_spacing=0.01,height=800, width=800, barmode='group',
               title='Summary of sale,margin and cost for every year ')
+    
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-
+    graphJSON=json.loads(graphJSON)
     return graphJSON
   except Exception as e:
      print("Error Occured ",e)
@@ -178,8 +182,9 @@ def animated_monthwise_summary():
   fig = px.bar(monthwise_sub_data, x='month', y=['margin','cost','sale'], animation_frame="year",
              animation_group="month", barmode='group', range_x = [0,13],range_y=[1000,3900000],
              title='Month-wise summary of sale,margin and cost for every year')
+  
   graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-
+  graphJSON=json.loads(graphJSON)
   return graphJSON
 
 
@@ -217,7 +222,9 @@ def popularity_yearwise():
   fig2 = px.scatter(sub_data_1, x="margin", y="popularity", animation_frame="year", animation_group="brand",
            color="brand", hover_name="brand", size = 'popularity',text='brand', height=700,
            log_x=True, size_max=100, title="Popularity vs Margin for different brands, yearwise")
+  
   graphJSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
+  graphJSON=json.loads(graphJSON)
 
   return graphJSON
 
@@ -226,7 +233,9 @@ def compare_popularity_yearwise(brands):
   fig2 = px.scatter(df, x="margin", y="popularity", animation_frame="year", animation_group="brand",
            color="brand", hover_name="brand", size = 'popularity',text='brand',
            log_x=True, size_max=100, title="Popularity vs Margin for different brands, yearwise")
+  
   graphJSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
+  graphJSON=json.loads(graphJSON)
 
   return graphJSON
 
@@ -238,6 +247,7 @@ pos_sub_data = sub_data_1[sub_data_1['margin']>-1]
 def margin_brands():
   fig = px.sunburst(pos_sub_data,path=['year','brand','margin_format'],color='brand',title="Yearwise Brands with Margin", values="margin")
   graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+  graphJSON=json.loads(graphJSON)
 
   return graphJSON
 
@@ -246,6 +256,7 @@ sub_data_1['popularity'] = sub_data_1['popularity'].astype(int)
 def popularity_brands():
   fig = px.sunburst(sub_data_1,path=['year','brand','popularity'],color='brand',title="Yearwise Brands with Popularity", values='popularity')
   graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+  graphJSON=json.loads(graphJSON)
 
   return graphJSON
 
@@ -320,6 +331,7 @@ def treemap_popularity():
   fig.update_traces(root_color="lightgrey")
   fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
   graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+  graphJSON=json.loads(graphJSON)
 
   return graphJSON
 
@@ -330,6 +342,7 @@ def treemap_popularity_2():
     fig.update_traces(root_color="lightgrey")
     fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    graphJSON=json.loads(graphJSON)
 
     return graphJSON
 
@@ -340,6 +353,7 @@ def treemap_margin():
   fig.update_traces(root_color="lightgrey")
   fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
   graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+  graphJSON=json.loads(graphJSON)
 
   return graphJSON
 
@@ -349,6 +363,7 @@ def treemap_margin_2():
   fig.update_traces(root_color="lightgrey")
   fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
   graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+  graphJSON=json.loads(graphJSON)
 
   return graphJSON
 
@@ -357,6 +372,7 @@ def scatter_product():
   fig = px.scatter(data_2022, y="Brand", x= "margin", color= "Product",
                  title="Effective Margin Distribution wrt Brand and Product")
   graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+  graphJSON=json.loads(graphJSON)
 
   return graphJSON
 
@@ -366,6 +382,7 @@ def scatter_margin():
   fig = px.scatter(data_2022, x="popularity", y= "Brand", color= "Product",
                  title="Effective Popularity Distribution wrt Brand and Product")
   graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+  graphJSON=json.loads(graphJSON)
 
   return graphJSON
 
@@ -374,6 +391,7 @@ def scatter_sales():
   fig = px.scatter(data_2022, x="sales", y= 'Brand', color= 'Product',
                  title="Effective Sales Distribution")
   graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+  graphJSON=json.loads(graphJSON)
 
   return graphJSON
 
@@ -382,5 +400,6 @@ def scatter_sales_2(cat1, cat2):
   fig = px.scatter(pos_data, x="Amount", y= cat1, color= cat2,
                  title="Effective Sales Distribution")
   graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+  graphJSON=json.loads(graphJSON)
 
   return graphJSON
