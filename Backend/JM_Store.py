@@ -386,3 +386,80 @@ def scatter_sales_2(cat1, cat2):
   graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
   return graphJSON
+
+# Payment method Analysis
+
+#df
+party_sub = {'Payment':[],'Sale':[],'Year':[]}
+# vch_group = pos_data.groupby('Vch No')
+# vch_nos = pos_data['Vch No'].unique()
+
+# year_group, years -> party group -> amount
+for year in years:
+  df_year = year_group.get_group(year)
+  # vch no subgroups and unique vale
+  party_grp = df_year.groupby('Party')
+  party_nos = df_year['Party'].unique()
+  # adding values to df lists
+  for party in party_nos:
+    df_party = party_grp.get_group(party)
+    sale = df_party.sum()['Amount']
+    party_sub['Payment'].append(party)
+    party_sub['Sale'].append(sale)
+    party_sub['Year'].append(year)
+
+
+# date_sub['Customer'] = date_sub['Customer'].astype(str)
+party_sub = pd.DataFrame(party_sub)
+# party_sub.head()
+
+
+def payment_method():
+    fig = px.sunburst(party_sub,path=['Year','Payment'],color='Payment',values='Sale', title='Different payment methods and their distribution')
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+    return graphJSON
+
+
+# Department
+def groupby_details(category, name,from_year,to_year):
+  sub_data['year'] = sub_data['year'].astype(int)
+  df = sub_data[(sub_data['year']>= from_year) & (sub_data['year'] <= to_year)]
+  df = df.groupby(category).get_group(name)
+  sales = df.sum()['sales']
+  items = df.sum()['popularity']
+  margin = df.sum()['margin']
+  # print('Total Sales(qty):', items)
+  # print('Total Sales(amount):', sales)
+  # print('Total Margin:', margin)
+  # display(df)
+
+groupby_details('Department','UNISEX',2015,2016)
+
+groupby_details('Brand','AISH',2014,2022)
+
+
+sub_data['year'] = sub_data['year'].astype(int)
+dat = sub_data[(sub_data['year']>=2016) & (sub_data['year']<=2018)]
+
+
+sub_data['year'] = sub_data['year'].astype(int)
+def sorted_margin(n,from_year,to_year):
+  df = sub_data[(sub_data['year']>= from_year) & (sub_data['year'] <= to_year)]
+  df = df.sort_values(by ='margin', ascending=False)
+  # display(df.head(n))
+
+def sorted_sales(n,from_year,to_year):
+  df = sub_data[(sub_data['year']>= from_year) & (sub_data['year'] <= to_year)]
+  df = df.sort_values(by ='sales', ascending=False)
+  # display(df.head(n))
+
+def sorted_qty(n,from_year,to_year):
+  df = sub_data[(sub_data['year']>= from_year) & (sub_data['year'] <= to_year)]
+  df = df.sort_values(by ='popularity', ascending=False)
+  # display(df.head(n))
+
+
+sorted_margin(10,2022,2022)
+
+sorted_qty(3,2016,2022)

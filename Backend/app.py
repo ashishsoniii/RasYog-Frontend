@@ -20,7 +20,7 @@ Option_dict={
         [
         {"plot":'Generalized Analysis : Sunbust',"id":1},
         {"plot":'Brand Vs Product Analysis',"id":2},
-        {"plot":'Popularity Vs Margin for Brands',"id":3}
+        {"plot":'Different Payment Methods',"id":3}
         ],
         "maps": [{"plot": 'Brand and popularity', "id": 1},
                  {"plot": 'Product and popularity', "id": 2},
@@ -30,16 +30,19 @@ Option_dict={
 }
 Data_dict={
             1: [ry.summary_all_years(), ry.summary_month_margin(), ry.summary_month_sales()],
-            2: [ry.monthwise_summary(2015, 2016), ry.animated_monthwise_summary()]
+            2: [ry.monthwise_summary(2016, 2022), ry.animated_monthwise_summary()]
 }   
 Margin_dict={
             1: [ry.popularity_yearwise(), ry.compare_popularity_yearwise(['JAIPUR MODERN', '11.11', 'OH LA LA']), ry.margin_brands(), ry.popularity_brands()],
-            2: [ry.scatter_product(), ry.scatter_margin(), ry.scatter_sales()]
+            2: [ry.scatter_product(), ry.scatter_margin(), ry.scatter_sales()],
+            3: [ry.payment_method()]
            
 }
 Maps_dict={
-            1: [ry.treemap_popularity(), ry.treemap_popularity_2()],
-            2: [ry.treemap_margin(), ry.treemap_margin_2()]
+            1: [ry.treemap_popularity()],
+            2: [ry.treemap_popularity_2()],
+            3: [ry.treemap_margin()],
+            4: [ry.treemap_margin_2()]
 }
 
 @app.route('/')
@@ -100,6 +103,8 @@ def margin_graph():
             plot1,plot2,plot3,plot4=Margin_dict[1]
         elif graph_id == 2:
             plot1,plot2,plot3=Margin_dict[2]
+        elif graph_id == 3:
+            plot1=Margin_dict[3]
         else:
              return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
@@ -121,9 +126,13 @@ def TreeMaps_graph():
         graph_id = (request.get_json())['graph']
         plot1,plot2,plot3,plot4 = None,None,None,None
         if graph_id == 1:
-            plot1,plot2 = Maps_dict[1]
+            plot1 = Maps_dict[1]
         elif graph_id == 2:
-            plot1,plot2 = Maps_dict[2]
+            plot1 = Maps_dict[2]
+        elif graph_id == 3:
+            plot1 = Maps_dict[3]
+        elif graph_id == 4:
+            plot1 = Maps_dict[4]
         else:
            return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
