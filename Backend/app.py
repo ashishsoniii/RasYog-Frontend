@@ -56,7 +56,10 @@ Option_dict_2={
     ],
     "taxonomic":
     [
-    
+        {"plot": "Taxonomic Analysis with year", "id":1},
+        {"plot": "Taxonomic Analysis with year 2", "id":2},
+        {"plot": "Taxonomic Analysis without year", "id":3},
+        {"plot": "Taxonomic Analysis without year 2", "id":4}
     ],
     "treemaps":
     [
@@ -72,6 +75,12 @@ Data_Anyalsis_Dict={
     1:[],
     2:[jmt.sunburst_particular_brand_for_product(),jmt.Overall_Sunbust()],
     3:[jmt.treemap_particular_brand_for_product(),jmt.treemap_brand_similar_product_with_color_design(),jmt.treemap_brand_similar_product_with_design(),jmt.Overall_treemap()],
+}
+Taxonomic_analysis_dict={
+    1:[jmt.year_brand_product(), jmt.product_category_year(), jmt.product_desing_year()],
+    2:[jmt.product_year_brand(), jmt.year_product_desing_color(), jmt.year_size()],
+    3:[jmt.brand_product_design_color(), jmt.color_desing_product(), jmt.product_size()],
+    4:[jmt.product_color(), jmt.product_brand_design(), jmt.brand_product()]
 }
 Tree_maps_taxonomic_dict={
     1:[jmt.Treemap_brand_product_design_color()],
@@ -198,8 +207,31 @@ def Tree_Maps_Taxonomic():
             'plot2':plot2,
             'plot3':plot3,
             'plot4':plot4,
-            'Topic':'mapsTaxonomic',
+            'Topic':'MapsTaxonomic',
             'Option':Option_dict_2['treemaps'],
+            'display_option':True
+        }
+        return jsonify(JSON_Data),status.HTTP_200_OK
+    
+# Route for Taxonomic Analysis
+@app.route('/Taxonomic', methods=['POST', 'GET'])
+def Taxonomic_analysis():
+    if request.method == 'POST':
+        graph_id = (request.get_json())['graph']
+        plot1,plot2,plot3,plot4 = None,None,None,None
+        if graph_id in [1,2,3,4]:
+            plot1=Taxonomic_analysis_dict[graph_id][0]
+            plot2=Taxonomic_analysis_dict[graph_id][1]
+            plot3=Taxonomic_analysis_dict[graph_id][2]
+        else:
+            return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
+        JSON_Data={
+            'plot1':plot1,
+            'plot2':plot2,
+            'plot3':plot3,
+            'plot4':plot4,
+            'Topic':'Taxonomic',
+            'Option':Option_dict_2['taxonomic'],
             'display_option':True
         }
         return jsonify(JSON_Data),status.HTTP_200_OK
