@@ -40,19 +40,19 @@ Margin_dict={
            
 }
 Maps_dict={
-            1: [ry.treemap_popularity()],
-            2: [ry.treemap_popularity_2()],
-            3: [ry.treemap_margin()],
-            4: [ry.treemap_margin_2()]
+            1: [ry.treemap_popularity_for_product(), ry.treemap_popularity_for_product_upto_design()],
+            2: [ry.treemap_popularity_for_brand(), ry.treemap_popularity_for_brand_upto_design()],
+            3: [ry.treemap_margin(), ry.treemap_margin_upto_design()],
+            4: [ry.treemap_margin_2(), ry.treemap_margin_2_upto_design()]
 }
 
 # JM Store Taxonomic 
 Option_dict_2={
     "dataanalysis":
     [
-        {"plot":"Number of Items in each topic Category","id":1},
-        {"plot":'Sunburst Charts',"id":2},
-        {"plot":'Tree Map Plots',"id":3}
+        # {"plot":"Number of Items in each topic Category","id":1}
+        {"plot":'Sunburst Charts',"id":1},
+        {"plot":'Tree Map Plots',"id":2}
     ],
     "taxonomic":
     [
@@ -72,9 +72,8 @@ Option_dict_2={
 }
 
 Data_Anyalsis_Dict={
-    1:[],
-    2:[jmt.sunburst_particular_brand_for_product(),jmt.Overall_Sunbust()],
-    3:[jmt.treemap_particular_brand_for_product(),jmt.treemap_brand_similar_product_with_color_design(),jmt.treemap_brand_similar_product_with_design(),jmt.Overall_treemap()],
+    1:[jmt.sunburst_particular_brand_for_product(),jmt.Overall_Sunbust()],
+    2:[jmt.treemap_particular_brand_for_product(),jmt.treemap_brand_similar_product_with_color_design(),jmt.treemap_brand_similar_product_with_design(),jmt.Overall_treemap()],
 }
 Taxonomic_analysis_dict={
     1:[jmt.year_brand_product(), jmt.product_category_year(), jmt.product_desing_year()],
@@ -177,7 +176,8 @@ def TreeMaps_graph():
         graph_id = (request.get_json())['graph']
         plot1,plot2,plot3,plot4 = None,None,None,None
         if graph_id in [1,2,3,4]:
-            plot1=Tree_maps_taxonomic_dict[graph_id][0]
+            plot1=Maps_dict[graph_id][0]
+            plot2=Maps_dict[graph_id][1]
         else:
            return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
