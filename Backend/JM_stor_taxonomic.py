@@ -14,7 +14,7 @@ import json
 import plotly.offline as pyo
 import plotly.graph_objs as go
 
-df = pd.read_csv('./Files/total_data_file.csv')
+df = pd.read_csv('./total_data_file.csv')
 df=df.drop(['Size','Unnamed: 0'], axis = 1)
 dff = df[['Date','Product Category','Department','Brand','product','Design','Color','size','Qty']]
 
