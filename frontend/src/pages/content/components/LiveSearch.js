@@ -3,10 +3,12 @@ import axios from "axios";
 
 function LiveSearch(props) {
   const [plotName, setPlotName] = useState([]);
+  // eslint-disable-next-line
   const [displayOption, setDisplayOption] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Select your option");
+  // eslint-disable-next-line
   const [selectedOptionId, setSelectedOptionId] = useState(0);
 
   const selectMenuRef = useRef(null);
@@ -28,10 +30,11 @@ function LiveSearch(props) {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:5000/store?id=${props.topic}`,
+          `http://yoglabs.pythonanywhere.com/store?id=${props.topic}`,
           { cancelToken: source.token }
         );
-        // const response = await axios.get(`http://yoglabs.pythonanywhere.com/store?id=${props.topic}`);
+        // const response = await axios.get(
+        //   `http://127.0.0.1:5000/store?id=${props.topic}`,
         const { plot_name, display_option } = response.data;
         setPlotName(plot_name);
         setDisplayOption(display_option);
