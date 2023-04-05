@@ -237,7 +237,11 @@
 
 }
 
+.gtitle {
+    font-size: 2.2rem !important;
+    overflow-wrap: break-word !important;
 
+}
 
 
 
@@ -259,6 +263,12 @@
         margin-top: -36rem;
         margin-bottom: 2%;
 
+    }
+}
+
+@media (max-width: 730px) {
+    .gtitle {
+        font-size: 1.4rem !important;
     }
 }
 
@@ -320,10 +330,15 @@
 
     .on-home-bg {
 
-        margin-top: -108%;
+        margin-top: -125%;
         margin-bottom: 12%;
 
     }
+
+    .gtitle {
+        font-size: 1rem !important;
+    }
+
 
     /* .bg{
         min-height: 600px;
@@ -347,6 +362,7 @@
 
 
 }
+
 @media (max-width: 320px) {
 
     .on-home-bg {

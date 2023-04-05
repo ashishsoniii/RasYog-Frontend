@@ -14,9 +14,9 @@ function Graph(props) {
   const fetchData = async () => {
     try {
       // const response = await axios.post(
-        // `http://127.0.0.1:5000/${props.topic}`,
-        const response = await axios.post(
-          `http://yoglabs.pythonanywhere.com/${props.topic}`,
+      // `http://127.0.0.1:5000/${props.topic}`,
+      const response = await axios.post(
+        `http://yoglabs.pythonanywhere.com/${props.topic}`,
         {
           graph: props.selectedOptionId, // 1 or 2
         },
@@ -48,7 +48,7 @@ function Graph(props) {
       setLoading(false);
       setError(false);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setError(true);
     }
   };
@@ -89,21 +89,21 @@ function Graph(props) {
         {props.selectedOptionId > 0 &&
           (loading ? (
             <motion.div
-                className="boxi no-graph"
-                animate={{
-                  scale: [1, 1.6, 1.6, 1, 1],
-                  rotate: [0, 0, 180, 180, 0],
-                  borderRadius: ["10%", "10%", "50%", "50%", "10%"],
-                }}
-                transition={{
-                  duration: 2,
-                  ease: "easeInOut",
-                  times: [0, 0.2, 0.5, 0.8, 1],
-                  repeat: Infinity,
-                  repeatDelay: 1,
-                }}
-              ></motion.div>
-                        ) : error ? (
+              className="boxi no-graph"
+              animate={{
+                scale: [1, 1.6, 1.6, 1, 1],
+                rotate: [0, 0, 180, 180, 0],
+                borderRadius: ["10%", "10%", "50%", "50%", "10%"],
+              }}
+              transition={{
+                duration: 2,
+                ease: "easeInOut",
+                times: [0, 0.2, 0.5, 0.8, 1],
+                repeat: Infinity,
+                repeatDelay: 1,
+              }}
+            ></motion.div>
+          ) : error ? (
             <div>Error fetching data. Please try again later.</div>
           ) : (
             plots.length > 0 &&
@@ -117,6 +117,9 @@ function Graph(props) {
                       layout: layout,
                       dragmode: "pan",
                       title: title,
+                      titlefont: {
+                        size: "1px", // set the desired font size here
+                      },
                     }}
                     useResizeHandler={true}
                     style={{

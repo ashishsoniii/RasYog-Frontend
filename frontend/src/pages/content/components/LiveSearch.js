@@ -42,7 +42,7 @@ function LiveSearch(props) {
         if (axios.isCancel(error)) {
           // Handle cancelation
         } else {
-          console.error(error);
+          // console.error(error);
         }
       }
     };
