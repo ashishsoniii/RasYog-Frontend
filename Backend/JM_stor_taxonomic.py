@@ -37,7 +37,7 @@ exclude = df2022[df2022['year'] != 2022]
 # Sunburst Charts
 
 def Overall_Sunbust():
-    fig=px.sunburst(data_frame=dff,path=['Product Category','Brand','product','Design','Color','size'],maxdepth=2,width=700, height=700)
+    fig=px.sunburst(data_frame=dff,path=['Product Category','Brand','product','Design','Color','size'],maxdepth=2,width=700, height=700,title="Overall Sunburst")
     # fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -45,7 +45,7 @@ def Overall_Sunbust():
 # Overall_Sunbust()
 
 def sunburst_particular_brand_for_product():
-    fig=px.sunburst(data_frame=dff,path=['Product Category','product','Brand'],maxdepth=2,width=700, height=700)
+    fig=px.sunburst(data_frame=dff,path=['Product Category','product','Brand'],maxdepth=2,width=700, height=700,title=" Sunburst Plot for Particular Brand for a Product ")
     # fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -56,7 +56,7 @@ def sunburst_particular_brand_for_product():
 # Tree Maps plots
 
 def treemap_particular_brand_for_product():
-    fig3 = px.treemap(dff, path=['product','Brand'], color='Brand')
+    fig3 = px.treemap(dff, path=['product','Brand'], color='Brand',title="Treemap for Particular Brand for a Product ")
     # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -64,7 +64,7 @@ def treemap_particular_brand_for_product():
 # treemap_particular_brand_for_product()
 
 def Overall_treemap():
-    fig3 = px.treemap(dff, path=['Product Category','Department','Brand','product','Design','Color','size'])
+    fig3 = px.treemap(dff, path=['Product Category','Department','Brand','product','Design','Color','size'],title="Overall Treemap")
     # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -134,7 +134,7 @@ dd3=dd3.reset_index(name = 'counts')
 # Treemap brand -> product
 
 def Treemap_brand_product():
-    fig3 = px.treemap(dd3, path=['Brand','product'],values = 'counts')
+    fig3 = px.treemap(dd3, path=['Brand','product'],values = 'counts',title="Tree Map for Brand & Product")
     # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
