@@ -19,25 +19,36 @@ function LiveSearch(props) {
   };
 
   useEffect(() => {
-    setSelectedOption("Select your option");
     setSelectedOptionId(0);
+    setSelectedOption("Select your option");
   }, [props.topic]); // reset the state variables when props.topic changes
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:5000/store?id=${props.topic}`
+          `http://127.0.0.1:5000/store?id=${props.topic}`,
+          { cancelToken: source.token }
         );
         // const response = await axios.get(`http://yoglabs.pythonanywhere.com/store?id=${props.topic}`);
         const { plot_name, display_option } = response.data;
         setPlotName(plot_name);
         setDisplayOption(display_option);
       } catch (error) {
-        console.error(error);
+        if (axios.isCancel(error)) {
+          // Handle cancelation
+        } else {
+          console.error(error);
+        }
       }
     };
     fetchData();
+
+    return () => {
+      // Cancel the request when component unmounts or when topic prop changes
+      source.cancel("LiveSearch component unmounted or topic prop changed");
+    };
   }, [props.topic]);
 
   useEffect(() => {

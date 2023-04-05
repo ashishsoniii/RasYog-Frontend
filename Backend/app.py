@@ -43,7 +43,7 @@ def Option_func(var):
         {"plot": "Taxonomic Analysis without year 2", "id":4}
     ]
     elif(var=="mapstaxonomic"):
-         [
+        return [
         {"plot":"brand -> product -> design -> color","id":1},
         {"plot":'brand -> product -> design',"id":2},
         {"plot":'brand -> product',"id":3},
@@ -200,7 +200,7 @@ def TreeMaps_graph():
 
 # 
 # Route for Tree Maps in Taxonomic Analysis
-@app.route('mapstaxonomic', methods=['POST', 'GET'])
+@app.route('/mapstaxonomic', methods=['POST', 'GET'])
 def Tree_Maps_Taxonomic():
     if request.method == 'POST':
         graph_id = (request.get_json())['graph']
@@ -250,10 +250,10 @@ def Data_Anaylsis_Taxonomic():
     if request.method == 'POST':
         graph_id = (request.get_json())['graph']
         plot1,plot2,plot3,plot4 = None,None,None,None
-        if graph_id==2:
-            plot1,plot2=Data_Anyalsis_Dict[2]
-        elif graph_id==3:
-            plot1,plot2,plot3,plot4=Data_Anyalsis_Dict[3]
+        if graph_id==1:
+            plot1,plot2=Data_Anyalsis_Dict[1]
+        elif graph_id==2:
+            plot1,plot2,plot3,plot4=Data_Anyalsis_Dict[2]
         else:
             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={

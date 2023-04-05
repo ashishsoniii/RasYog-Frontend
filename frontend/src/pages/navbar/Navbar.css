@@ -268,7 +268,7 @@ li {
 
     .mobile-menu-link {
         background-color: aliceblue;
-        height: 26rem;
+        height: 40rem;
         display: grid;
         border-radius: 5rem;
         grid-column: 2/5;

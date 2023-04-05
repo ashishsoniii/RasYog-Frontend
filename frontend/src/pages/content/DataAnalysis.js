@@ -6,11 +6,13 @@ function DataAnalysis(props) {
   const [selectedOption, setSelectedOption] = useState("Select your option");
   const [selectedOptionId, setSelectedOptionId] = useState(0);
 
-
   const handleOptionClick = (item) => {
     setSelectedOption(item.plot);
     setSelectedOptionId(item.id);
   };
+  useEffect(() => {
+    setSelectedOptionId(0);
+  }, [props.topic]);
 
   return (
     <>
@@ -30,7 +32,7 @@ function DataAnalysis(props) {
         <Graph
           selectedOption={selectedOption}
           selectedOptionId={selectedOptionId}
-          topic={props.topic} 
+          topic={props.topic}
         />
       </div>
     </>

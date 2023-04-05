@@ -90,8 +90,8 @@ const Navbar = (props) => {
                 className="nav-link nav-link-ltr"
                 to="/dataAnalysis"
                 onClick={() => {
-                  props.onTopicChange("dataanalysis");
-                  props.onAcitiveTopicChange("dataanalysis");
+                  props.onTopicChange("mapstaxonomic");
+                  props.onAcitiveTopicChange("mapstaxonomic");
                   handleMenuClick();
                 }}
               >
@@ -116,8 +116,8 @@ const Navbar = (props) => {
                 className="nav-link nav-link-ltr"
                 to="/dataAnalysis"
                 onClick={() => {
-                  props.onTopicChange("taxonomic");
-                  props.onAcitiveTopicChange("taxonomic");
+                  props.onTopicChange("datataxonomic");
+                  props.onAcitiveTopicChange("datataxonomic");
                   handleMenuClick();
                 }}
               >

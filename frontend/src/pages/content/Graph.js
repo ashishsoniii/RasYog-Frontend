@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Plot from "react-plotly.js";
 import "./Content.css";
+import { motion } from "framer-motion";
 
 function Graph(props) {
   const [plots, setPlots] = useState([]);
+  const [layout, setLayouts] = useState([]);
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -25,16 +27,22 @@ function Graph(props) {
         }
       );
 
-        console.log(response.data);
+      // console.log(response.data);
       const plotsArray = [];
+      let title = "No Title"; // Set a default title in case none is found
       for (let i = 1; i <= 4; i++) {
         if (response.data[`plot${i}`]) {
           const data = JSON.parse(response.data[`plot${i}`]).data;
-          const title = JSON.parse(response.data[`plot${i}`]).layout.title.text; // Move setTitle here
+          const layout = JSON.parse(response.data[`plot${i}`]).layout;
+          if (layout && layout.title && layout.title.text) {
+            title = layout.title.text;
+          }
+
           plotsArray.push(data);
-          setTitle(title);
         }
       }
+      setLayouts(layout);
+      setTitle(title);
 
       setPlots(plotsArray);
       setLoading(false);
@@ -45,16 +53,23 @@ function Graph(props) {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
-    if (props.topic && props.selectedOptionId) {
+    setLoading(false);
+    setPlots([]);
+  }, [props.topic]);
+
+  useEffect(() => {
+    if (props.selectedOptionId) {
       setLoading(true);
+      setPlots([]);
+
       fetchData();
     }
-  }, [props.topic, props.selectedOptionId]);
+  }, [props.selectedOptionId]);
 
   // useEffect(() => {
   //   props.setSelectedOptionId(1); // set selectedOptionId to 0 on topic change
@@ -72,8 +87,22 @@ function Graph(props) {
       <div className="graph-section">
         {props.selectedOptionId > 0 &&
           (loading ? (
-            <div>Loading data...</div>
-          ) : error ? (
+            <motion.div
+                className="boxi no-graph"
+                animate={{
+                  scale: [1, 1.6, 1.6, 1, 1],
+                  rotate: [0, 0, 180, 180, 0],
+                  borderRadius: ["10%", "10%", "50%", "50%", "10%"],
+                }}
+                transition={{
+                  duration: 2,
+                  ease: "easeInOut",
+                  times: [0, 0.2, 0.5, 0.8, 1],
+                  repeat: Infinity,
+                  repeatDelay: 1,
+                }}
+              ></motion.div>
+                        ) : error ? (
             <div>Error fetching data. Please try again later.</div>
           ) : (
             plots.length > 0 &&
@@ -84,6 +113,7 @@ function Graph(props) {
                     key={index}
                     data={plot}
                     layout={{
+                      layout: layout,
                       dragmode: "pan",
                       title: title,
                     }}
