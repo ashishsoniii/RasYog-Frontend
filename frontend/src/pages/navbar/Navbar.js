@@ -6,15 +6,11 @@ import { NavLink } from "react-router-dom";
 
 export const UserContext = React.createContext();
 
-
-
 const Navbar = (props) => {
   const [showMediaIcons, setShowMediaIcons] = useState(false);
   const menuRef = useRef();
 
   const handleMenuClick = () => {
-    
-    
     setShowMediaIcons(!showMediaIcons);
   };
 
@@ -85,6 +81,47 @@ const Navbar = (props) => {
                 }}
               >
                 Tree Maps
+              </NavLink>
+            </li>
+
+            {/* new routes */}
+            <li>
+              <NavLink
+                className="nav-link nav-link-ltr"
+                to="/dataAnalysis"
+                onClick={() => {
+                  props.onTopicChange("dataanalysis");
+                  props.onAcitiveTopicChange("dataanalysis");
+                  handleMenuClick();
+                }}
+              >
+                MapsTaxonomic
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className="nav-link nav-link-ltr"
+                to="/dataAnalysis"
+                onClick={() => {
+                  props.onTopicChange("taxonomic");
+                  props.onAcitiveTopicChange("taxonomic");
+                  handleMenuClick();
+                }}
+              >
+                Taxonomic
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className="nav-link nav-link-ltr"
+                to="/dataAnalysis"
+                onClick={() => {
+                  props.onTopicChange("taxonomic");
+                  props.onAcitiveTopicChange("taxonomic");
+                  handleMenuClick();
+                }}
+              >
+                DataTaxonomic
               </NavLink>
             </li>
           </ul>
