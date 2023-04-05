@@ -1,17 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
-function Graph(props) {
-  // const [topic, setTopic] = useState("");
-  // const [Topic, setTTopic] = useState("");
+function LiveSearch(props) {
   const [plotName, setPlotName] = useState([]);
   const [displayOption, setDisplayOption] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Select your option");
-  const [selectedOptionId, setSelectedOptionId] = useState(1);
+  const [selectedOptionId, setSelectedOptionId] = useState(0);
 
-  const selectMenuRef = useRef(null); // create a ref for the select-menu
+  const selectMenuRef = useRef(null);
 
   const handleOptionClick = (item) => {
     setSelectedOption(item.plot);
@@ -20,7 +18,10 @@ function Graph(props) {
     setIsOpen(false);
   };
 
-  
+  useEffect(() => {
+    setSelectedOption("Select your option");
+    setSelectedOptionId(0);
+  }, [props.topic]); // reset the state variables when props.topic changes
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +29,7 @@ function Graph(props) {
         const response = await axios.get(
           `http://127.0.0.1:5000/store?id=${props.topic}`
         );
+        // const response = await axios.get(`http://yoglabs.pythonanywhere.com/store?id=${props.topic}`);
         const { plot_name, display_option } = response.data;
         setPlotName(plot_name);
         setDisplayOption(display_option);
@@ -48,10 +50,8 @@ function Graph(props) {
       }
     };
 
-    // add event listener to window object
     window.addEventListener("click", handleClickOutside);
 
-    // cleanup function to remove event listener
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
@@ -88,4 +88,4 @@ function Graph(props) {
   );
 }
 
-export default Graph;
+export default LiveSearch;
