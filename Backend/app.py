@@ -29,7 +29,7 @@ def Option_func(var):
                  {"plot": 'Brand and Margin', "id": 3},
                  {"plot": 'Product and Margin', "id": 4}
                  ]
-    elif(var=="dataanalysis"):
+    elif(var=="datataxonomic"):
         return [
         # {"plot":"Number of Items in each topic Category","id":1}
         {"plot":'Sunburst Charts',"id":1},
@@ -42,7 +42,7 @@ def Option_func(var):
         {"plot": "Taxonomic Analysis without year", "id":3},
         {"plot": "Taxonomic Analysis without year 2", "id":4}
     ]
-    elif(var=="treemaps"):
+    elif(var=="mapstaxonomic"):
          [
         {"plot":"brand -> product -> design -> color","id":1},
         {"plot":'brand -> product -> design',"id":2},
@@ -52,24 +52,6 @@ def Option_func(var):
     ]
 
 
-# Option_dict={
-#         "data":
-#         [
-#         {"plot":"Bar Plot : Margin , Sales and Effcost","id":1},
-#         {"plot":'Facets : Bar Plot with months and year',"id":2}
-#         ],
-#         "margin":
-#         [
-#         {"plot":'Generalized Analysis : Sunbust',"id":1},
-#         {"plot":'Brand Vs Product Analysis',"id":2},
-#         {"plot":'Different Payment Methods',"id":3}
-#         ],
-#         "maps": [{"plot": 'Brand and popularity', "id": 1},
-#                  {"plot": 'Product and popularity', "id": 2},
-#                  {"plot": 'Brand and Margin', "id": 3},
-#                  {"plot": 'Product and Margin', "id": 4}
-#                  ]
-# }
 def Data_Route(id):
         if(id==1):
             return [ry.summary_all_years(), ry.summary_month_margin(), ry.summary_month_sales()]
@@ -93,50 +75,9 @@ def Tree_Route(id):
             return [ry.treemap_margin_2(), ry.treemap_margin_2_upto_design()]
 
 
-# Data_dict={
-#             1: [ry.summary_all_years(), ry.summary_month_margin(), ry.summary_month_sales()],
-#             2: [ry.monthwise_summary(2016, 2022), ry.animated_monthwise_summary()]
-# }   
-# Margin_dict={
-#             1: [ry.popularity_yearwise(), ry.compare_popularity_yearwise(['JAIPUR MODERN', '11.11', 'OH LA LA']), ry.margin_brands(), ry.popularity_brands()],
-#             2: [ry.scatter_product(), ry.scatter_margin(), ry.scatter_sales()],
-#             3: [ry.payment_method()]
-           
-# }
-# Maps_dict={
-#             1: [ry.treemap_popularity_for_product(), ry.treemap_popularity_for_product_upto_design()],
-#             2: [ry.treemap_popularity_for_brand(), ry.treemap_popularity_for_brand_upto_design()],
-#             3: [ry.treemap_margin(), ry.treemap_margin_upto_design()],
-#             4: [ry.treemap_margin_2(), ry.treemap_margin_2_upto_design()]
-# }
 
 
 
-
-# JM Store Taxonomic 
-# Option_dict_2={
-#     "dataanalysis":
-#     [
-#         # {"plot":"Number of Items in each topic Category","id":1}
-#         {"plot":'Sunburst Charts',"id":1},
-#         {"plot":'Tree Map Plots',"id":2}
-#     ],
-#     "taxonomic":
-#     [
-#         {"plot": "Taxonomic Analysis with year", "id":1},
-#         {"plot": "Taxonomic Analysis with year 2", "id":2},
-#         {"plot": "Taxonomic Analysis without year", "id":3},
-#         {"plot": "Taxonomic Analysis without year 2", "id":4}
-#     ],
-#     "treemaps":
-#     [
-#         {"plot":"brand -> product -> design -> color","id":1},
-#         {"plot":'brand -> product -> design',"id":2},
-#         {"plot":'brand -> product',"id":3},
-#         {"plot":'year -> brand -> product -> design',"id":4},
-#         {"plot":'year -> product -> design -> color',"id":5}
-#     ]
-# }
 
 Data_Anyalsis_Dict={
     1:[jmt.sunburst_particular_brand_for_product(),jmt.Overall_Sunbust()],
@@ -167,11 +108,8 @@ def Choose_Option():
     Fun_id=Fun['id'].replace(" ","").lower()
     print(Fun)
 
-    if(Fun_id in ["data","margin","maps","taxonomic","treemaps","dataanalysis"]):
+    if(Fun_id in ["data","margin","maps","taxonomic","mapstaxonomic","datataxonomic"]):
         options=Option_func(Fun['id'])
-    #     options=Option_dict[Fun['id']] 
-    # elif(Fun_id in Option_dict_2):
-    #     options=Option_dict_2[Fun['id']]
     else:
         return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
     
@@ -260,9 +198,9 @@ def TreeMaps_graph():
         }
         return jsonify(JSON_Data),status.HTTP_200_OK
 
-
+# 
 # Route for Tree Maps in Taxonomic Analysis
-@app.route('/MapsTaxonomic', methods=['POST', 'GET'])
+@app.route('mapstaxonomic', methods=['POST', 'GET'])
 def Tree_Maps_Taxonomic():
     if request.method == 'POST':
         graph_id = (request.get_json())['graph']
@@ -276,14 +214,14 @@ def Tree_Maps_Taxonomic():
             'plot2':plot2,
             'plot3':plot3,
             'plot4':plot4,
-            'Topic':'MapsTaxonomic',
-            'Option':Option_func('treemaps'),
+            'Topic':'mapstaxonomic',
+            'Option':Option_func('mapstaxonomic'),
             'display_option':True
         }
         return jsonify(JSON_Data),status.HTTP_200_OK
     
 # Route for Taxonomic Analysis
-@app.route('/Taxonomic', methods=['POST', 'GET'])
+@app.route('/taxonomic', methods=['POST', 'GET'])
 def Taxonomic_analysis():
     if request.method == 'POST':
         graph_id = (request.get_json())['graph']
@@ -299,7 +237,7 @@ def Taxonomic_analysis():
             'plot2':plot2,
             'plot3':plot3,
             'plot4':plot4,
-            'Topic':'Taxonomic',
+            'Topic':'taxonomic',
             'Option':Option_func('taxonomic'),
             'display_option':True
         }
@@ -307,15 +245,15 @@ def Taxonomic_analysis():
 
 
 # Route for Data in Taxonomic Analysis
-@app.route('/DataTaxonomic', methods=['POST', 'GET'])
+@app.route('/datataxonomic', methods=['POST', 'GET'])
 def Data_Anaylsis_Taxonomic():
     if request.method == 'POST':
         graph_id = (request.get_json())['graph']
         plot1,plot2,plot3,plot4 = None,None,None,None
         if graph_id==2:
-            plot1,plot2=Data_Anyalsis_Dict[graph_id]
+            plot1,plot2=Data_Anyalsis_Dict[2]
         elif graph_id==3:
-            plot1,plot2,plot3,plot4=Data_Anyalsis_Dict[graph_id]
+            plot1,plot2,plot3,plot4=Data_Anyalsis_Dict[3]
         else:
             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
@@ -323,8 +261,8 @@ def Data_Anaylsis_Taxonomic():
             'plot2':plot2,
             'plot3':plot3,
             'plot4':plot4,
-            'Topic':'DataTaxonomic',
-            'Option':Option_func('dataanalysis'),
+            'Topic':'datataxonomic',
+            'Option':Option_func('datataxonomic'),
             'display_option':True
         }
         return jsonify(JSON_Data),status.HTTP_200_OK
