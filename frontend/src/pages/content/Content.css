@@ -347,6 +347,21 @@
 
 
 }
+@media (max-width: 320px) {
+
+    .on-home-bg {
+
+        margin-top: -180%;
+        margin-bottom: 20%;
+
+    }
+
+    /* .bg{
+        min-height: 600px;
+} */
+
+
+}
 
 .select-container {
     display: flex;
