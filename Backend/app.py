@@ -38,17 +38,17 @@ def Option_func(var):
     elif(var=="taxonomic"):
         return [
         {"plot": "Taxonomic Analysis with year", "id":1},
-        {"plot": "Taxonomic Analysis with year 2", "id":2},
+        {"plot": "Taxonomic Analysis with year of product design color and size", "id":2},
         {"plot": "Taxonomic Analysis without year", "id":3},
-        {"plot": "Taxonomic Analysis without year 2", "id":4}
+        {"plot": "Taxonomic Analysis without year product color and design", "id":4}
     ]
     elif(var=="mapstaxonomic"):
         return [
-        {"plot":"brand -> product -> design -> color","id":1},
-        {"plot":'brand -> product -> design',"id":2},
-        {"plot":'brand -> product',"id":3},
-        {"plot":'year -> brand -> product -> design',"id":4},
-        {"plot":'year -> product -> design -> color',"id":5}
+        {"plot":"Brand -> Product -> Design -> Color","id":1},
+        {"plot":'Brand -> Product -> Design',"id":2},
+        {"plot":'Brand -> Product',"id":3},
+        {"plot":'Year -> Brand -> Product -> Design',"id":4},
+        {"plot":'Year -> Product -> Design -> Color',"id":5}
     ]
 
 
