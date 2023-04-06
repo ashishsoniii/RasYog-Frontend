@@ -1,12 +1,12 @@
 import React from "react";
 import ReactCardSlider from "react-card-slider-component";
 // import { Carousel } from "@trendyol-js/react-carousel";
-import  img1  from "../../../assets/card-img/Barplot.png";
+import img1 from "../../../assets/card-img/Barplot.png";
 import img2 from "../../../assets/card-img/popularity.png";
 import img3 from "../../../assets/card-img/facets.png";
-import  img4  from "../../../assets/card-img/sunbust.png";
-import  img5  from "../../../assets/card-img/Barplot.png";
-import  img6  from "../../../assets/card-img/popularity.png";
+import img4 from "../../../assets/card-img/sunbust.png";
+import img5 from "../../../assets/card-img/Barplot.png";
+import img6 from "../../../assets/card-img/popularity.png";
 
 const slides = [
   {
@@ -15,7 +15,7 @@ const slides = [
     description: "Margin ,Sales and Effcost",
   },
   {
-    image:  img2 ,
+    image: img2,
     title: "Popularity Vs Margin    ",
     description: "Popularity Vs Margin for Brands    ",
   },
@@ -39,11 +39,11 @@ const slides = [
     title: "Popularity Vs Margin ",
     description: "Tree Maps",
   },
-//   {
-//     image: "https://picsum.photos/800/900",
-//     title: "This is a seventh title",
-//     description: "This is a seventh description",
-//   },
+  //   {
+  //     image: "https://picsum.photos/800/900",
+  //     title: "This is a seventh title",
+  //     description: "This is a seventh description",
+  //   },
 ];
 
 const Baz = () => {

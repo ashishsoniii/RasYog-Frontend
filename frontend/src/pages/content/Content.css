@@ -340,7 +340,8 @@
     }
 
     .svg-container {
-        height: 288px !important;
+        height: 160px !important;
+        /* width: 201px !important; */
         margin-top: 100px !important;
     }
 

@@ -140,13 +140,25 @@ li {
     transition: 0.5s;
 }
 
-.menu-link ul li:hover>a.active {
-    transform-origin: left;
+.menu-link ul li>a.active {
+    /* transform-origin: left; */
     /* color: rgb(255, 255, 255); */
     /* color: rgb(233, 0, 0); */
+    /* transition: 300ms; */
+    /* height: 5px; */
+    /* background-color: #af0000; */
+
 
 }
 
+
+
+.nav-link-ltr:hover,
+.nav-link-ltr:active {
+    background-color: #8ca1ca;
+    border-radius: 3rem;
+    color: #af0000;
+}
 
 
 .nav-link {

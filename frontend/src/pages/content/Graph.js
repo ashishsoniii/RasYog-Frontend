@@ -16,7 +16,7 @@ function Graph(props) {
       // const response = await axios.post(
       // `http://127.0.0.1:5000/${props.topic}`,
       const response = await axios.post(
-        `http://yoglabs.pythonanywhere.com/${props.topic}`,
+        `https://yoglabs.pythonanywhere.com/${props.topic}`,
         {
           graph: props.selectedOptionId, // 1 or 2
         },
@@ -114,7 +114,7 @@ function Graph(props) {
                     key={index}
                     data={plot}
                     layout={{
-                      layout: layout,
+                      // layout: layout,
                       dragmode: "pan",
                       title: title,
                       titlefont: {
