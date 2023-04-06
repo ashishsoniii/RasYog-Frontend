@@ -153,12 +153,7 @@ li {
 
 
 
-.nav-link-ltr:hover,
-.nav-link-ltr:active {
-    background-color: #8ca1ca;
-    border-radius: 3rem;
-    color: #af0000;
-}
+
 
 
 .nav-link {
