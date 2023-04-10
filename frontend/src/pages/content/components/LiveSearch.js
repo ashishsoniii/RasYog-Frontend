@@ -29,13 +29,13 @@ function LiveSearch(props) {
     const source = axios.CancelToken.source();
     const fetchData = async () => {
       try {
-        // const response = await axios.get(
-          // `https://yoglabs.pythonanywhere.com/store?id=${props.topic}`,
-          // { cancelToken: source.token }
-        // );
         const response = await axios.get(
-          `http://127.0.0.1:5000/store?id=${props.topic}`,
-        ); 
+          `https://yoglabs.pythonanywhere.com/store?id=${props.topic}`,
+          { cancelToken: source.token }
+        );
+        // const response = await axios.get(
+        //   `http://127.0.0.1:5000/store?id=${props.topic}`,
+        // ); 
         const { plot_name, display_option } = response.data;
         setPlotName(plot_name);
         setDisplayOption(display_option);

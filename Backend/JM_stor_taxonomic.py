@@ -36,16 +36,23 @@ exclude = df2022[df2022['year'] != 2022]
 
 # Sunburst Charts
 
-def Overall_Sunbust():
-    fig=px.sunburst(data_frame=dff,path=['Product Category','Brand','product','Design','Color','size'],maxdepth=2,width=700, height=700,title="Overall Sunburst")
+def Overall_Sunbust(initial=2014,final=2022):
+    # print(dff)
+    new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
+    # print(new_dff)
+
+    fig=px.sunburst(data_frame=new_dff,path=['Product Category','Brand','product','Design','Color','size'],maxdepth=2,width=700, height=700,title="Overall Sunburst")
     # fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
 # Overall_Sunbust()
 
-def sunburst_particular_brand_for_product():
-    fig=px.sunburst(data_frame=dff,path=['Product Category','product','Brand'],maxdepth=2,width=700, height=700,title=" Sunburst Plot for Particular Brand for a Product ")
+def sunburst_particular_brand_for_product(initial=2014,final=2022):
+
+    new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
+    # print(new_dff)
+    fig=px.sunburst(data_frame=new_dff,path=['Product Category','product','Brand'],maxdepth=2,width=700, height=700,title=" Sunburst Plot for Particular Brand for a Product ")
     # fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -55,38 +62,46 @@ def sunburst_particular_brand_for_product():
 
 # Tree Maps plots
 
-def treemap_particular_brand_for_product():
-    fig3 = px.treemap(dff, path=['product','Brand'], color='Brand',title="Treemap for Particular Brand for a Product ")
+def treemap_particular_brand_for_product(initial=2014,final=2022):
+    # print(dff)
+    new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
+    # print(new_dff)
+    fig3 = px.treemap(new_dff, path=['product','Brand'], color='Brand',title="Treemap for Particular Brand for a Product ")
     # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
 # treemap_particular_brand_for_product()
 
-def Overall_treemap():
-    fig3 = px.treemap(dff, path=['Product Category','Department','Brand','product','Design','Color','size'],title="Overall Treemap")
-    # fig3.show()
+def Overall_treemap(initial=2014,final=2022):
+    new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
+    
+    fig3 = px.treemap(new_dff, path=['Product Category','Department','Brand','product','Design','Color','size'],title="Overall Treemap")
+    fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
-# Overall_treemap()
+Overall_treemap()
 
 
-def treemap_brand_similar_product_with_color_design():
-    fig3 = px.treemap(dff, path=['Product Category','Department','product','Design','Brand'], color='Brand')
-    # fig3.show()
+def treemap_brand_similar_product_with_color_design(initial=2014,final=2022):
+    new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
+
+    fig3 = px.treemap(new_dff, path=['Product Category','Department','product','Design','Brand'], color='Brand')
+    fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
-# treemap_brand_similar_product_with_color_design()
+treemap_brand_similar_product_with_color_design()
 
-def treemap_brand_similar_product_with_design():
-    fig3 = px.treemap(dff, path=['Product Category','Department','product','Design','Brand'], color='Brand')
-    # fig3.show()
+def treemap_brand_similar_product_with_design(initial=2014,final=2022):
+    new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
+    fig3 = px.treemap(new_dff, path=['Product Category','Department','product','Design','Brand'], color='Brand')
+    fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
-# treemap_brand_similar_product_with_design()
+treemap_brand_similar_product_with_design()
 
 # treemap_brand_similar_product()
 

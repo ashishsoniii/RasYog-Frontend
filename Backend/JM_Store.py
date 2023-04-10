@@ -162,9 +162,9 @@ for year in years:
         monthwise_sub_data['margin'].append(margin)
 # create dataframe from dictionary
 monthwise_sub_data = pd.DataFrame(monthwise_sub_data)
-print(monthwise_sub_data)
+# print(monthwise_sub_data)
 
-def summary_month_margin(initial=2014,final=2020):
+def summary_month_margin(initial=2014,final=2022):
     new_monthwise_sub_data = monthwise_sub_data[(monthwise_sub_data['year'] >= (initial) ) & (monthwise_sub_data['year'] <= (final) )]
 
     fign = px.bar(new_monthwise_sub_data, x='month', y='margin', color='year',
@@ -227,27 +227,34 @@ for year in years:
 # create dataframe from dictionary
 sub_data_1 = pd.DataFrame(sub_data_1)
 
-
 # popularity
 
 
-def popularity_yearwise():
-    fig2 = px.scatter(sub_data_1, x="margin", y="popularity", animation_frame="year", animation_group="brand",
+def popularity_yearwise(initial=2014,final=2022):
+    new_sub_data_1 = sub_data_1[(sub_data_1['year'] >= str(initial) ) & (sub_data_1['year'] <= str(final) )]
+    # print(new_sub_data_1)
+    fig2 = px.scatter(new_sub_data_1, x="margin", y="popularity", animation_frame="year", animation_group="brand",
                       color="brand", hover_name="brand", size='popularity', text='brand', height=700,
                       log_x=True, size_max=100, title="Popularity vs Margin for different brands, yearwise")
+    # fig2.show()
     graphJSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
 
     return graphJSON
 
+# popularity_yearwise()
 
-def compare_popularity_yearwise(brands):
+def compare_popularity_yearwise(brands,initial=2014,final=2022):
     df = sub_data_1[sub_data_1['brand'].isin(brands)]
-    fig2 = px.scatter(df, x="margin", y="popularity", animation_frame="year", animation_group="brand",
+    new_df = df[(df['year'] >= str(initial) ) & (df['year'] <= str(final) )]
+    # print(new_df)
+    fig2 = px.scatter(new_df, x="margin", y="popularity", animation_frame="year", animation_group="brand",
                       color="brand", hover_name="brand", size='popularity', text='brand',
                       log_x=True, size_max=100, title="Popularity vs Margin for different brands, yearwise")
+    # fig2.show()
     graphJSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
+# compare_popularity_yearwise(['JAIPUR MODERN', '11.11', 'OH LA LA'])
 
 def numerizer(x):
     return numerize.numerize(x['margin'])
@@ -257,7 +264,7 @@ sub_data_1['margin_format'] = sub_data_1.apply(lambda x: numerizer(x), axis=1)
 pos_sub_data = sub_data_1[sub_data_1['margin'] > -1]
 # print("Pos sub data",pos_sub_data)
 
-def margin_brands(initial=2014,final=2020):
+def margin_brands(initial=2014,final=2022):
     new_pos_sub_data = pos_sub_data[(pos_sub_data['year'] >= str(initial) ) & (pos_sub_data['year'] <= str(final) )]
     fig = px.sunburst(new_pos_sub_data, path=['year', 'brand', 'margin_format'], color='brand',
                       title="Yearwise Brands with Margin", values="margin")
@@ -265,13 +272,13 @@ def margin_brands(initial=2014,final=2020):
 
     return graphJSON
 
-margin_brands()
+# margin_brands()
 # sunburst
 
 sub_data_1['popularity'] = sub_data_1['popularity'].astype(int)
 # print("Sub data 1",sub_data_1)
 
-def popularity_brands(initial=2014,final=2020):
+def popularity_brands(initial=2014,final=2022):
     new_sub_data_1 = sub_data_1[(sub_data_1['year'] >= str(initial) ) & (sub_data_1['year'] <= str(final) )]
     fig = px.sunburst(new_sub_data_1, path=['year', 'brand', 'popularity'], color='brand',
                       title="Yearwise Brands with Popularity", values='popularity')
