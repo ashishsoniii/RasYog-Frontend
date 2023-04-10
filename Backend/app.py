@@ -106,7 +106,7 @@ def home():
 def Choose_Option():
     Fun=(dict(request.args))
     Fun_id=Fun['id'].replace(" ","").lower()
-    print(Fun)
+    # print(Fun)
 
     if(Fun_id in ["data","margin","maps","taxonomic","mapstaxonomic","datataxonomic"]):
         options=Option_func(Fun['id'])

@@ -13,10 +13,10 @@ function Graph(props) {
 
   const fetchData = async () => {
     try {
-      // const response = await axios.post(
-      // `http://127.0.0.1:5000/${props.topic}`,
       const response = await axios.post(
-        `https://yoglabs.pythonanywhere.com/${props.topic}`,
+      `http://127.0.0.1:5000/${props.topic}`,
+      // const response = await axios.post(
+      //   `https://yoglabs.pythonanywhere.com/${props.topic}`,
         {
           graph: props.selectedOptionId, // 1 or 2
         },
