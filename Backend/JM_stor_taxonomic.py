@@ -163,8 +163,9 @@ df5 = df5.reset_index(name = 'counts')
 
 # Treemap year -> brand -> product
 
-def Treemap_year_brand_product():
-    fig3 = px.treemap(df5, path=['year','Brand','product'],values = 'counts')
+def Treemap_year_brand_product(initial=2014,final=2022):
+    df = df5[(df5['year'] >= (initial) ) & (df5['year'] <= (final) )]
+    fig3 = px.treemap(df, path=['year','Brand','product'],values = 'counts')
     # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -178,7 +179,7 @@ df6 = df6.reset_index(name = 'counts')
 
 # Treemap year -> product -> design -> color
 
-def Treemap_year_product_design_color(initial=2019,final=2020):
+def Treemap_year_product_design_color(initial=2014,final=2020):
     # print(df6)
     df = df6[(df6['year'] >= (initial) ) & (df6['year'] <= (final) )]
     # print(df)
@@ -187,7 +188,7 @@ def Treemap_year_product_design_color(initial=2019,final=2020):
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
-Treemap_year_product_design_color()
+# Treemap_year_product_design_color()
 
 
 # TAXONOMIC ANALYSIS
@@ -271,6 +272,7 @@ df5['counts']=1
 def product_year_brand():
     fig3 = px.treemap(df5, path=['year','Brand','product'],values = 'counts')
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
+    # fig3.show()
     return graphJSON
 
 df6 = dff[['year','product','Design','Color']]
@@ -287,7 +289,7 @@ df7 = dff[['product','Design','Color']]
 df7 = df7.value_counts()
 df7 = df7.reset_index(name = 'counts')
 df7['counts']=1
-print(df7)
+# print(df7)
 def color_desing_product():
     fig3 = px.treemap(df7, path=['product','Design','Color'],values = 'counts')
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)

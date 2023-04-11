@@ -52,49 +52,76 @@ def Option_func(var):
     ]
 
 
-def Data_Route(id):
+def Data_Route(id,start,end):
         if(id==1):
-            return [ry.summary_all_years(2018, 2022), ry.summary_month_margin(), ry.summary_month_sales()]
+            return [ry.summary_all_years(), ry.summary_month_margin(), ry.summary_month_sales()]
         elif(id==2):
-             return [ry.monthwise_summary(2016, 2022), ry.animated_monthwise_summary()]
-def Margin_Route(id):
+             return [ry.monthwise_summary(start,end), ry.animated_monthwise_summary(start,end)]
+def Margin_Route(id,start,end):
         if(id==1):
-            return [ry.popularity_yearwise(), ry.compare_popularity_yearwise(['JAIPUR MODERN', '11.11', 'OH LA LA']), ry.margin_brands(), ry.popularity_brands()]
+            return [ry.popularity_yearwise(start,end), ry.compare_popularity_yearwise(['JAIPUR MODERN', '11.11', 'OH LA LA'],start,end), ry.margin_brands(start,end), ry.popularity_brands(start,end)]
         elif(id==2):
-             return [ry.scatter_product(), ry.scatter_margin(), ry.scatter_sales()]
+             return [ry.scatter_product(end), ry.scatter_margin(end), ry.scatter_sales(end)]
         elif(id==3):
-            return [ry.payment_method()]
-def Tree_Route(id):
+            return [ry.payment_method(start,end)]
+def Tree_Route(id,end):
         if(id==1):
-            return[ry.treemap_popularity_for_product(), ry.treemap_popularity_for_product_upto_design()]
+            return[ry.treemap_popularity_for_product(final_year=end), ry.treemap_popularity_for_product_upto_design(final_year=end)]
         elif(id==2):
-             return [ry.treemap_popularity_for_brand(), ry.treemap_popularity_for_brand_upto_design()]
+             return [ry.treemap_popularity_for_brand(final_year=end), ry.treemap_popularity_for_brand_upto_design(final_year=end)]
         elif(id==3):
-            return [ry.treemap_margin(), ry.treemap_margin_upto_design()]
+            return [ry.treemap_margin(final_year=end), ry.treemap_margin_upto_design(final_year=end)]
         elif(id==4):
-            return [ry.treemap_margin_2(), ry.treemap_margin_2_upto_design()]
+            return [ry.treemap_margin_2(final_year=end), ry.treemap_margin_2_upto_design(final_year=end)]
+
+
+def Data_Taxonomic_Route(id,start,end):
+        if(id==1):
+            return [jmt.sunburst_particular_brand_for_product(start,end),jmt.Overall_Sunbust(start,end)]
+        elif(id==2):
+             return [jmt.treemap_particular_brand_for_product(start,end),jmt.treemap_brand_similar_product_with_color_design(start,end),jmt.treemap_brand_similar_product_with_design(start,end),jmt.Overall_treemap(start,end)]
+        
+def Taxonomic_Route(id):
+        if(id==1):
+            return [jmt.year_brand_product(), jmt.product_category_year(), jmt.product_desing_year()]
+        elif(id==2):
+             return [jmt.product_year_brand(), jmt.year_product_desing_color(), jmt.year_size()]
+        elif(id==3):
+            return [jmt.brand_product_design_color(), jmt.color_desing_product(), jmt.product_size()]
+        elif(id==4):
+            return [jmt.product_color(), jmt.product_brand_design(), jmt.brand_product()]
+
+def TreeMap_Taxonomic_Route(id,start,end):
+        if(id==1):
+            return [jmt.Treemap_brand_product_design_color()]
+        elif(id==2):
+             return [jmt.Treemap_brand_product_design()]
+        elif(id==3):
+            return [jmt.Treemap_brand_product()]
+        elif(id==4):
+            return [jmt.Treemap_year_brand_product(start,end)]
+        elif(id==5):
+            return [jmt.Treemap_year_product_design_color(start,end)]
 
 
 
 
-
-
-Data_Anyalsis_Dict={
-    1:[jmt.sunburst_particular_brand_for_product(),jmt.Overall_Sunbust()],
-    2:[jmt.treemap_particular_brand_for_product(),jmt.treemap_brand_similar_product_with_color_design(),jmt.treemap_brand_similar_product_with_design(),jmt.Overall_treemap()],
-}
-Taxonomic_analysis_dict={
-    1:[jmt.year_brand_product(), jmt.product_category_year(), jmt.product_desing_year()],
-    2:[jmt.product_year_brand(), jmt.year_product_desing_color(), jmt.year_size()],
-    3:[jmt.brand_product_design_color(), jmt.color_desing_product(), jmt.product_size()],
-    4:[jmt.product_color(), jmt.product_brand_design(), jmt.brand_product()]
-}
-Tree_maps_taxonomic_dict={
-    1:[jmt.Treemap_brand_product_design_color()],
-    2:[jmt.Treemap_brand_product_design()],
-    3:[jmt.Treemap_brand_product()],
-    4:[jmt.Treemap_year_brand_product()]
-}
+# Data_Anyalsis_Dict={
+#     1:[jmt.sunburst_particular_brand_for_product(),jmt.Overall_Sunbust()],
+#     2:[jmt.treemap_particular_brand_for_product(),jmt.treemap_brand_similar_product_with_color_design(),jmt.treemap_brand_similar_product_with_design(),jmt.Overall_treemap()],
+# }
+# Taxonomic_analysis_dict={
+#     1:[jmt.year_brand_product(), jmt.product_category_year(), jmt.product_desing_year()],
+#     2:[jmt.product_year_brand(), jmt.year_product_desing_color(), jmt.year_size()],
+#     3:[jmt.brand_product_design_color(), jmt.color_desing_product(), jmt.product_size()],
+#     4:[jmt.product_color(), jmt.product_brand_design(), jmt.brand_product()]
+# }
+# Tree_maps_taxonomic_dict={
+#     1:[jmt.Treemap_brand_product_design_color()],
+#     2:[jmt.Treemap_brand_product_design()],
+#     3:[jmt.Treemap_brand_product()],
+#     4:[jmt.Treemap_year_brand_product()]
+# }
 
 @app.route('/')
 def home():
@@ -123,14 +150,16 @@ def Choose_Option():
 @app.route('/data', methods=['POST'])
 def data_graph():
     if request.method == 'POST':
-        graph_id = (request.get_json())['graph']
-        
+        graphInfo= (request.get_json())
+        graph_id=graphInfo["graph"]
+        from_year=int(graphInfo['starting'])
+        to_year=int(graphInfo['end'])
         plot1,plot2,plot3,plot4 = None,None,None,None
         if graph_id == 1:
             # plot1,plot2,plot3=Data_dict[1]
-            plot1,plot2,plot3=Data_Route(1)
+            plot1,plot2,plot3=Data_Route(1,from_year,to_year)
         elif graph_id == 2:
-            plot1,plot2=Data_Route(2)
+            plot1,plot2=Data_Route(2,from_year,to_year)
         else:
              return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         
@@ -151,14 +180,17 @@ def data_graph():
 @app.route('/margin', methods=['POST'])
 def margin_graph():
     if request.method == 'POST':
-        graph_id = (request.get_json())['graph']
+        graphInfo= (request.get_json())
+        graph_id=int(graphInfo["graph"])
+        from_year=int(graphInfo['starting'])
+        to_year=int(graphInfo['end'])
         plot1,plot2,plot3,plot4 = None,None,None,None
         if graph_id == 1:
-            plot1,plot2,plot3,plot4=Margin_Route(1)
+            plot1,plot2,plot3,plot4=Margin_Route(1,start=from_year,end=to_year)
         elif graph_id == 2:
-            plot1,plot2,plot3=Margin_Route(2)
+            plot1,plot2,plot3=Margin_Route(2,start=from_year,end=to_year)
         elif graph_id == 3:
-            plot1=Margin_Route(3)
+            plot1=Margin_Route(3,start=from_year,end=to_year)
         else:
             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
@@ -177,13 +209,14 @@ def margin_graph():
 @app.route('/maps', methods=['POST'])
 def TreeMaps_graph():
     if request.method == 'POST':
-        graph_id = (request.get_json())['graph']
+        graphInfo=(request.get_json())
+        graph_id=int(graphInfo["graph"])
+        from_year=int(graphInfo['starting'])
+        to_year=int(graphInfo['end'])
         plot1,plot2,plot3,plot4 = None,None,None,None
         if graph_id in [1,2,3,4]:
-            # plot1=Maps_dict[graph_id][0]
-            plot1=Tree_Route(graph_id)[0]
-            plot2=Tree_Route(graph_id)[1]
-            # plot2=Maps_dict[graph_id][1]
+            plot1=Tree_Route(graph_id,to_year)[0]
+            plot2=Tree_Route(graph_id,to_year)[1]
         else:
            return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
@@ -202,10 +235,13 @@ def TreeMaps_graph():
 @app.route('/mapstaxonomic', methods=['POST', 'GET'])
 def Tree_Maps_Taxonomic():
     if request.method == 'POST':
-        graph_id = (request.get_json())['graph']
+        graphInfo= (request.get_json())
+        graph_id=int(graphInfo["graph"])
+        # from_year=int(graphInfo['starting'])
+        # to_year=int(graphInfo['end'])
         plot1,plot2,plot3,plot4 = None,None,None,None
         if graph_id in [1,2,3,4,5]:
-            plot1=Tree_maps_taxonomic_dict[graph_id][0]
+            plot1=TreeMap_Taxonomic_Route(graph_id)[0]
         else:
             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
@@ -223,12 +259,15 @@ def Tree_Maps_Taxonomic():
 @app.route('/taxonomic', methods=['POST', 'GET'])
 def Taxonomic_analysis():
     if request.method == 'POST':
-        graph_id = (request.get_json())['graph']
+        graphInfo= (request.get_json())
+        graph_id=int(graphInfo["graph"])
+        from_year=int(graphInfo['starting'])
+        to_year=int(graphInfo['end'])
         plot1,plot2,plot3,plot4 = None,None,None,None
         if graph_id in [1,2,3,4]:
-            plot1=Taxonomic_analysis_dict[graph_id][0]
-            plot2=Taxonomic_analysis_dict[graph_id][1]
-            plot3=Taxonomic_analysis_dict[graph_id][2]
+            plot1=Taxonomic_Route(graph_id,from_year,to_year)[0]
+            plot2=Taxonomic_Route(graph_id,from_year,to_year)[1]
+            plot3=Taxonomic_Route(graph_id,from_year,to_year)[2]
         else:
             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
@@ -247,12 +286,19 @@ def Taxonomic_analysis():
 @app.route('/datataxonomic', methods=['POST', 'GET'])
 def Data_Anaylsis_Taxonomic():
     if request.method == 'POST':
-        graph_id = (request.get_json())['graph']
+        graphInfo= (request.get_json())
+        graph_id=int(graphInfo["graph"])
+        from_year=int(graphInfo['starting'])
+        to_year=int(graphInfo['end'])
         plot1,plot2,plot3,plot4 = None,None,None,None
         if graph_id==1:
-            plot1,plot2=Data_Anyalsis_Dict[1]
+            plot1=Data_Taxonomic_Route(graph_id,from_year,to_year)[0]
+            plot2=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
         elif graph_id==2:
-            plot1,plot2,plot3,plot4=Data_Anyalsis_Dict[2]
+            plot1=Data_Taxonomic_Route(graph_id,from_year,to_year)[0]
+            plot2=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
+            plot3=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
+            plot4=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
         else:
             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
