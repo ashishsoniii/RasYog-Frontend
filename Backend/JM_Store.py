@@ -358,50 +358,61 @@ data_2022 = sub_data[sub_data['year'] == str(2022)]
 # print(data_2022)
 
 
-def treemap_popularity_for_product():
+def treemap_popularity_for_product(final_year=2022):
+    data_2022 = sub_data[sub_data['year'] == str(final_year)]
     fig = px.treemap(data_frame=data_2022, path=['PC', 'Department', 'Product', 'Brand', 'popularity'],
                      title='Popularity Analysis for Products upto Brand Level', color='Brand', values='popularity')
     fig.update_traces(root_color="lightgrey")
     fig.update_layout(margin=dict(t=50, l=25, r=25, b=25))
+    # fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
     return graphJSON
 
+# treemap_popularity_for_product(2021)
 
-def treemap_popularity_for_product_upto_design():
+def treemap_popularity_for_product_upto_design(final_year=2022):
+    data_2022 = sub_data[sub_data['year'] == str(final_year)]
     fig = px.treemap(data_frame=data_2022,
                      path=['PC', 'Department', 'Product', 'Brand', 'Design', 'Color', 'popularity'],
                      title='Popularity Analysis for Products upto Design Level', color='Brand', values='popularity')
     fig.update_traces(root_color="lightgrey")
     fig.update_layout(margin=dict(t=50, l=25, r=25, b=25))
+    # fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
     return graphJSON
+# treemap_popularity_for_product_upto_design(2021)
+# treemap_popularity_for_brand_upto_design(2021)
 
-
-def treemap_popularity_for_brand():
+def treemap_popularity_for_brand(final_year=2022):
+    data_2022 = sub_data[sub_data['year'] == str(final_year)]
     fig = px.treemap(data_frame=data_2022, color='Brand',
                      path=['PC', 'Department', 'Brand', 'Product', 'popularity'],
                      title='Popularity Analysis for Brands upto Product level', values='popularity')
     fig.update_traces(root_color="lightgrey")
     fig.update_layout(margin=dict(t=50, l=25, r=25, b=25))
+    # fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
     return graphJSON
+# treemap_popularity_for_brand(2020)
 
-
-def treemap_popularity_for_brand_upto_design():
+def treemap_popularity_for_brand_upto_design(final_year=2022):
+    data_2022 = sub_data[sub_data['year'] == str(final_year)]
     fig = px.treemap(data_frame=data_2022, color='Brand',
                      path=['PC', 'Department', 'Brand', 'Product', 'Design', 'Color', 'popularity'],
                      title='Popularity Analysis for Brands upto Design level', values='popularity')
     fig.update_traces(root_color="lightgrey")
     fig.update_layout(margin=dict(t=50, l=25, r=25, b=25))
+    # fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
     return graphJSON
+# treemap_popularity_for_brand_upto_design(2018)
 
-
-def treemap_margin():
+def treemap_margin(final_year=2022):
+    data_2022 = sub_data[sub_data['year'] == str(final_year)]
     fig = px.treemap(data_frame=data_2022, color='Brand', title='Margin Analysis for Brands upto Design level',
                      path=['PC', 'Department', 'Product', 'Brand', 'margin'])
     fig.update_traces(root_color="lightgrey")
@@ -410,7 +421,8 @@ def treemap_margin():
     return graphJSON
 
 
-def treemap_margin_upto_design():
+def treemap_margin_upto_design(final_year=2022):
+    data_2022 = sub_data[sub_data['year'] == str(final_year)]
     fig = px.treemap(data_frame=data_2022, color='Brand', title='Margin Analysis for Brands upto Design level',
                      path=['PC', 'Department', 'Product', 'Brand', 'Design', 'Color', 'margin'])
     fig.update_traces(root_color="lightgrey")
@@ -420,7 +432,8 @@ def treemap_margin_upto_design():
     return graphJSON
 
 
-def treemap_margin_2():
+def treemap_margin_2(final_year=2022):
+    data_2022 = sub_data[sub_data['year'] == str(final_year)]
     fig = px.treemap(data_frame=data_2022, title='Margin Analysis for Brands upto Product Level',
                      path=['PC', 'Department', 'Brand', 'Product', 'margin'], color='Brand')
     fig.update_traces(root_color="lightgrey")
@@ -430,7 +443,8 @@ def treemap_margin_2():
     return graphJSON
 
 
-def treemap_margin_2_upto_design():
+def treemap_margin_2_upto_design(final_year=2022):
+    data_2022 = sub_data[sub_data['year'] == str(final_year)]
     fig = px.treemap(data_frame=data_2022, title='Margin Analysis for Brands upto Product Level',
                      path=['PC', 'Department', 'Brand', 'Product', 'Design', 'Color', 'margin'], color='Brand')
     fig.update_traces(root_color="lightgrey")

@@ -54,7 +54,7 @@ def Option_func(var):
 
 def Data_Route(id):
         if(id==1):
-            return [ry.summary_all_years(), ry.summary_month_margin(), ry.summary_month_sales()]
+            return [ry.summary_all_years(2018, 2022), ry.summary_month_margin(), ry.summary_month_sales()]
         elif(id==2):
              return [ry.monthwise_summary(2016, 2022), ry.animated_monthwise_summary()]
 def Margin_Route(id):

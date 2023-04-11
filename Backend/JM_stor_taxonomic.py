@@ -77,31 +77,31 @@ def Overall_treemap(initial=2014,final=2022):
     new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
     
     fig3 = px.treemap(new_dff, path=['Product Category','Department','Brand','product','Design','Color','size'],title="Overall Treemap")
-    fig3.show()
+    # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
-Overall_treemap()
+# Overall_treemap()
 
 
 def treemap_brand_similar_product_with_color_design(initial=2014,final=2022):
     new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
 
     fig3 = px.treemap(new_dff, path=['Product Category','Department','product','Design','Brand'], color='Brand')
-    fig3.show()
+    # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
-treemap_brand_similar_product_with_color_design()
+# treemap_brand_similar_product_with_color_design()
 
 def treemap_brand_similar_product_with_design(initial=2014,final=2022):
     new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
     fig3 = px.treemap(new_dff, path=['Product Category','Department','product','Design','Brand'], color='Brand')
-    fig3.show()
+    # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
-treemap_brand_similar_product_with_design()
+# treemap_brand_similar_product_with_design()
 
 # treemap_brand_similar_product()
 
@@ -178,13 +178,16 @@ df6 = df6.reset_index(name = 'counts')
 
 # Treemap year -> product -> design -> color
 
-def Treemap_year_product_design_color():
-    fig3 = px.treemap(df6, path=['year','product','Design','Color'],values = 'counts')
+def Treemap_year_product_design_color(initial=2019,final=2020):
+    # print(df6)
+    df = df6[(df6['year'] >= (initial) ) & (df6['year'] <= (final) )]
+    # print(df)
+    fig3 = px.treemap(df, path=['year','product','Design','Color'],values = 'counts')
     # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
-# Treemap_year_product_design_color()
+Treemap_year_product_design_color()
 
 
 # TAXONOMIC ANALYSIS
