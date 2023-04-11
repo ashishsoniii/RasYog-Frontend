@@ -200,7 +200,7 @@ df2 = df2.value_counts()
 df2=df2.reset_index(name = 'counts')
 df10 = df2
 df10['counts'] = 1
-
+# print(type(df10['year']))
 def year_brand_product():
     fig3 = px.treemap(df10, path=['year','Brand','product'],values = 'counts')
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
@@ -287,7 +287,7 @@ df7 = dff[['product','Design','Color']]
 df7 = df7.value_counts()
 df7 = df7.reset_index(name = 'counts')
 df7['counts']=1
-
+print(df7)
 def color_desing_product():
     fig3 = px.treemap(df7, path=['product','Design','Color'],values = 'counts')
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)

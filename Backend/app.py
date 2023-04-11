@@ -93,8 +93,7 @@ Tree_maps_taxonomic_dict={
     1:[jmt.Treemap_brand_product_design_color()],
     2:[jmt.Treemap_brand_product_design()],
     3:[jmt.Treemap_brand_product()],
-    4:[jmt.Treemap_year_brand_product()],
-    5:[jmt.Treemap_year_brand_product()]
+    4:[jmt.Treemap_year_brand_product()]
 }
 
 @app.route('/')
