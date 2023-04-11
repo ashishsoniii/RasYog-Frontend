@@ -440,24 +440,33 @@ def treemap_margin_2_upto_design():
     return graphJSON
 
 
-def scatter_product():
-    fig = px.scatter(data_2022, y="Brand", x="margin", color="Product",
+def scatter_product(final=2022):
+    data_year_wise = sub_data[sub_data['year'] == str(final)]
+    # print(data_year_wise)
+    fig = px.scatter(data_year_wise, y="Brand", x="margin", color="Product",
                      title="Effective Margin Distribution wrt Brand and Product")
+    # fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
     return graphJSON
 
+# scatter_product(2014)
+# scatter_product(2015)
 
-def scatter_margin():
-    fig = px.scatter(data_2022, x="popularity", y="Brand", color="Product",
+def scatter_margin(final=2022):
+
+    data_year_wise = sub_data[sub_data['year'] == str(final)]
+    fig = px.scatter(data_year_wise, x="popularity", y="Brand", color="Product",
                      title="Effective Popularity Distribution wrt Brand and Product")
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
     return graphJSON
 
 
-def scatter_sales():
-    fig = px.scatter(data_2022, x="sales", y='Brand', color='Product',
+def scatter_sales(final=2022):
+    data_year_wise = sub_data[sub_data['year'] == str(final)]
+
+    fig = px.scatter(data_year_wise, x="sales", y='Brand', color='Product',
                      title="Effective Sales Distribution")
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
@@ -501,13 +510,15 @@ party_sub = pd.DataFrame(party_sub)
 # party_sub.head()
 
 
-def payment_method():
-    fig = px.sunburst(party_sub, path=['Year', 'Payment'], color='Payment', values='Sale',
+def payment_method(initial=2014,final=2020):
+    # print(party_sub)
+    new_party_sub = party_sub[(party_sub['Year'] >= str(initial) ) & (party_sub['Year'] <= str(final) )]
+    fig = px.sunburst(new_party_sub, path=['Year', 'Payment'], color='Payment', values='Sale',
                       title='Different payment methods and their distribution')
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-
+    # fig.show()
     return graphJSON
-
+payment_method()
 
 # Department
 def groupby_details(category, name, from_year, to_year):
