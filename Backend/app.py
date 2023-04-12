@@ -14,41 +14,41 @@ CORS(app)
 def Option_func(var):
     if(var=="data"):
         return [
-        {"plot":"Bar Plot : Margin , Sales and Effcost","id":1},
-        {"plot":'Facets : Bar Plot with months and year',"id":2}
+        {"plot":"Bar Plot : Margin , Sales and Effcost","id":1,"YearChange":False,"SingleYear":False},
+        {"plot":'Facets : Bar Plot with months and year',"id":2,"YearChange":True,"SingleYear":False}
         ]
     elif(var=="margin"):
         return [
-        {"plot":'Generalized Analysis : Sunbust',"id":1},
-        {"plot":'Brand Vs Product Analysis',"id":2},
-        {"plot":'Different Payment Methods',"id":3}
+        {"plot":'Generalized Analysis : Sunbust',"id":1,"YearChange":True,"SingleYear":False},
+        {"plot":'Brand Vs Product Analysis',"id":2,"YearChange":True,"SingleYear":True},
+        {"plot":'Different Payment Methods',"id":3,"YearChange":True,"SingleYear":False}
         ]
     elif(var=="maps"):
-        return [{"plot": 'Brand and popularity', "id": 1},
-                 {"plot": 'Product and popularity', "id": 2},
-                 {"plot": 'Brand and Margin', "id": 3},
-                 {"plot": 'Product and Margin', "id": 4}
+        return [{"plot": 'Brand and popularity', "id": 1,"YearChange":True,"SingleYear":True},
+                 {"plot": 'Product and popularity', "id": 2,"YearChange":True,"SingleYear":True},
+                 {"plot": 'Brand and Margin', "id": 3,"YearChange":True,"SingleYear":True},
+                 {"plot": 'Product and Margin', "id": 4,"YearChange":True,"SingleYear":True}
                  ]
     elif(var=="datataxonomic"):
         return [
         # {"plot":"Number of Items in each topic Category","id":1}
-        {"plot":'Sunburst Charts',"id":1},
-        {"plot":'Tree Map Plots',"id":2}
+        {"plot":'Sunburst Charts',"id":1,"YearChange":True,"SingleYear":False},
+        {"plot":'Tree Map Plots',"id":2,"YearChange":True,"SingleYear":False}
     ]
     elif(var=="taxonomic"):
         return [
-        {"plot": "Taxonomic Analysis with year", "id":1},
-        {"plot": "Taxonomic Analysis with year of product design color and size", "id":2},
-        {"plot": "Taxonomic Analysis without year", "id":3},
-        {"plot": "Taxonomic Analysis without year product color and design", "id":4}
+        {"plot": "Taxonomic Analysis with year", "id":1,"YearChange":False,"SingleYear":False},
+        {"plot": "Taxonomic Analysis with year of product design color and size", "id":2,"YearChange":False,"SingleYear":False},
+        {"plot": "Taxonomic Analysis without year", "id":3,"YearChange":False,"SingleYear":False},
+        {"plot": "Taxonomic Analysis without year product color and design", "id":4,"YearChange":False,"SingleYear":False}
     ]
     elif(var=="mapstaxonomic"):
         return [
-        {"plot":"Brand -> Product -> Design -> Color","id":1},
-        {"plot":'Brand -> Product -> Design',"id":2},
-        {"plot":'Brand -> Product',"id":3},
-        {"plot":'Year -> Brand -> Product -> Design',"id":4},
-        {"plot":'Year -> Product -> Design -> Color',"id":5}
+        {"plot":"Brand -> Product -> Design -> Color","id":1,"YearChange":False,"SingleYear":False},
+        {"plot":'Brand -> Product -> Design',"id":2,"YearChange":False,"SingleYear":False},
+        {"plot":'Brand -> Product',"id":3,"YearChange":False,"SingleYear":False},
+        {"plot":'Year -> Brand -> Product -> Design',"id":4,"YearChange":True,"SingleYear":False},
+        {"plot":'Year -> Product -> Design -> Color',"id":5,"YearChange":True,"SingleYear":False}
     ]
 
 
@@ -103,25 +103,6 @@ def TreeMap_Taxonomic_Route(id,start,end):
         elif(id==5):
             return [jmt.Treemap_year_product_design_color(start,end)]
 
-
-
-
-# Data_Anyalsis_Dict={
-#     1:[jmt.sunburst_particular_brand_for_product(),jmt.Overall_Sunbust()],
-#     2:[jmt.treemap_particular_brand_for_product(),jmt.treemap_brand_similar_product_with_color_design(),jmt.treemap_brand_similar_product_with_design(),jmt.Overall_treemap()],
-# }
-# Taxonomic_analysis_dict={
-#     1:[jmt.year_brand_product(), jmt.product_category_year(), jmt.product_desing_year()],
-#     2:[jmt.product_year_brand(), jmt.year_product_desing_color(), jmt.year_size()],
-#     3:[jmt.brand_product_design_color(), jmt.color_desing_product(), jmt.product_size()],
-#     4:[jmt.product_color(), jmt.product_brand_design(), jmt.brand_product()]
-# }
-# Tree_maps_taxonomic_dict={
-#     1:[jmt.Treemap_brand_product_design_color()],
-#     2:[jmt.Treemap_brand_product_design()],
-#     3:[jmt.Treemap_brand_product()],
-#     4:[jmt.Treemap_year_brand_product()]
-# }
 
 @app.route('/')
 def home():
