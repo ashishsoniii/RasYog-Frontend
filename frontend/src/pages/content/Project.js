@@ -6,7 +6,7 @@ import "./Content.css";
 function Project() {
   return (
     <>
-      {/* <LiveSearch /> */}
+        {/* <LiveSearch /> */}
     </>
   );
 }

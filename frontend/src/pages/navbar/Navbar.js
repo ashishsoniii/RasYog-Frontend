@@ -3,6 +3,7 @@ import "./Navbar.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../../assets/logo/logo-no-background.png";
 import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export const UserContext = React.createContext();
 
@@ -33,7 +34,16 @@ const Navbar = (props) => {
       <nav className="main-nav">
         <div className="logo">
           <NavLink to="/">
-            <img className="logo-img" src={logo} alt="" />
+            <motion.img
+              whileHover={{
+                scale: 1.2,
+                transition: { duration: 1 },
+              }}
+              whileTap={{ scale: 0.9 }}
+              className="logo-img"
+              src={logo}
+              alt=""
+            ></motion.img>{" "}
           </NavLink>
         </div>
 
@@ -48,8 +58,7 @@ const Navbar = (props) => {
               <NavLink
                 className="nav-link nav-link-ltr"
                 to="/dataAnalysis"
-                                activeClassName="active"
-
+                activeClassName="active"
                 onClick={() => {
                   props.onTopicChange("data");
                   props.onAcitiveTopicChange("Data Analysis");
@@ -63,8 +72,7 @@ const Navbar = (props) => {
               <NavLink
                 className="nav-link nav-link-ltr"
                 to="/dataAnalysis"
-                                activeClassName="active"
-
+                activeClassName="active"
                 onClick={() => {
                   props.onTopicChange("margin");
                   props.onAcitiveTopicChange("Popularity and Margin Analysis");
@@ -78,8 +86,7 @@ const Navbar = (props) => {
               <NavLink
                 className="nav-link nav-link-ltr"
                 to="/dataAnalysis"
-                                activeClassName="active"
-
+                activeClassName="active"
                 onClick={() => {
                   props.onTopicChange("maps");
                   props.onAcitiveTopicChange("Tree Maps");
@@ -95,8 +102,7 @@ const Navbar = (props) => {
               <NavLink
                 className="nav-link nav-link-ltr"
                 to="/dataAnalysis"
-                                activeClassName="active"
-
+                activeClassName="active"
                 onClick={() => {
                   props.onTopicChange("mapstaxonomic");
                   props.onAcitiveTopicChange("mapstaxonomic");
@@ -107,11 +113,10 @@ const Navbar = (props) => {
               </NavLink>
             </li>
             <li>
-              <NavLink 
+              <NavLink
                 className="nav-link nav-link-ltr"
                 to="/dataAnalysis"
-                                activeClassName="active"
-
+                activeClassName="active"
                 onClick={() => {
                   props.onTopicChange("taxonomic");
                   props.onAcitiveTopicChange("taxonomic");
@@ -125,8 +130,7 @@ const Navbar = (props) => {
               <NavLink
                 className="nav-link nav-link-ltr"
                 to="/dataAnalysis"
-                                activeClassName="active"
-
+                activeClassName="active"
                 onClick={() => {
                   props.onTopicChange("datataxonomic");
                   props.onAcitiveTopicChange("datataxonomic");

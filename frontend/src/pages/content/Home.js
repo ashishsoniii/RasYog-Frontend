@@ -4,6 +4,7 @@ import "./Content.css";
 import Buttonz from "./components/Button.js";
 import Button_2 from "./components/Button_2.js";
 import ReactSlider from "./components/ReactSlider.js";
+import DialogBox from "./components/DialogGraph.js";
 
 const Home = () => {
   const [activeState, setActiveState] = useState("Data Analysis");
@@ -137,6 +138,7 @@ const Home = () => {
                 </p>
               </div>
             )}
+            {/* <DialogBox /> */}
           </div>
         </div>
       </div>
