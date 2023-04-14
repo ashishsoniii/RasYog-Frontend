@@ -36,7 +36,7 @@ function Graph(props) {
 
           plotsArray.push({
             data,
-            layout: { ...layout, title: { text: title } },
+            layout: { ...layout, title: { text: title }, dragmode: "pan" },
             frames,
           });
         }
@@ -59,7 +59,7 @@ function Graph(props) {
       fetchData();
     }
     // eslint-disable-next-line
-  }, [props.selectedOptionId , props.valueStart , props.valueEnd]);
+  }, [props.selectedOptionId, props.valueStart, props.valueEnd]);
 
   useEffect(() => {
     setLoading(false);
