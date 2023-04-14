@@ -103,24 +103,10 @@ const Home = () => {
                   <h2 className="Center">{activeState2}</h2>
                 </h2>
                 <p>
-                  Advanced data analysis of sales, <br /> margin, and cost to
-                  the company <br />
-                  with comprehensive month wise <br /> and year wise
-                  visualization charts.
-                </p>
-              </div>
-            )}
-
-            {activeState2 === "Taxonomic" && (
-              <div className="Show data">
-                <h2 className="heading-footer ">
-                  {/* <img className="footer-logo" src={logo} alt="" /> */}
-                  <h2 className="Center">{activeState2}</h2>
-                </h2>
-                <p>
-                  Comprehensive insights into products <br /> and brands
-                  performance based on raw data,
-                  <br /> using advanced animated charts
+                  a graphical representation of the relationships <br /> between
+                  Brands, Products, Design, Size, and Color, <br /> showing how
+                  each level relates to the others and <br /> how they are
+                  organized within the taxonomy.{" "}
                 </p>
               </div>
             )}
@@ -132,9 +118,13 @@ const Home = () => {
                   <h2 className="Center">{activeState2}</h2>
                 </h2>
                 <p>
-                  Detailed view of distribution based <br /> on popularity,
-                  sales, and margin <br /> with our informative and visually{" "}
-                  <br /> appealing tree map.{" "}
+                  Includes the different brands available, the various products
+                  offered under each brand, the design options available for
+                  each product, the different sizes available, and the various
+                  colors in which each product is available. This data is used
+                  to create a taxonomy or hierarchy of the products, which makes
+                  it easier for customers to find what they are looking for and
+                  for store owners to manage their inventory effectively.{" "}
                 </p>
               </div>
             )}

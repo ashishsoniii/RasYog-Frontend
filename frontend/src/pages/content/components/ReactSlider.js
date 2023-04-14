@@ -5,8 +5,10 @@ import img1 from "../../../assets/card-img/Barplot.png";
 import img2 from "../../../assets/card-img/popularity.png";
 import img3 from "../../../assets/card-img/facets.png";
 import img4 from "../../../assets/card-img/sunbust.png";
-import img5 from "../../../assets/card-img/Barplot.png";
-import img6 from "../../../assets/card-img/popularity.png";
+import img5 from "../../../assets/card-img/103_brand_popularity.png";
+import img6 from "../../../assets/card-img/106_sunburst.png";
+import img7 from "../../../assets/card-img/105_maps_t.png";
+import img8 from "../../../assets/card-img/102_payments.png";
 
 const slides = [
   {
@@ -16,7 +18,7 @@ const slides = [
   },
   {
     image: img2,
-    title: "Popularity Vs Margin    ",
+    title: "Popularity And Margin    ",
     description: "Popularity Vs Margin for Brands    ",
   },
   {
@@ -27,17 +29,27 @@ const slides = [
   {
     image: img4,
     title: "Generalized Analysis",
-    description: "Analysis",
+    description: "Analysis for different brands, yearwise",
+  },
+  {
+    image: img8,
+    title: "Different Payments Methods",
+    description: "Popularity & Margin analysis",
   },
   {
     image: img5,
-    title: "Bar Plot",
-    description: "Margin ,Sales and Effcost",
+    title: "Tree Maps",
+    description: "Popularity Analysis for Products upto Brand Level",
   },
   {
     image: img6,
-    title: "Popularity Vs Margin ",
-    description: "Tree Maps",
+    title: "Data Taxonomic ",
+    description: "Sunburst Charts",
+  },
+  {
+    image: img7,
+    title: "Maps Taxonomic ",
+    description: "Brand -> Product -> Design -> Color",
   },
   //   {
   //     image: "https://picsum.photos/800/900",

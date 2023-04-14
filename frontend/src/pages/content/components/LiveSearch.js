@@ -5,6 +5,8 @@ function LiveSearch(props) {
   const [plotName, setPlotName] = useState([]);
   // eslint-disable-next-line
   const [displayOption, setDisplayOption] = useState(false);
+  // const [displayStart, setDisplayStart] = useState(false);
+  // const [displayEnd, setDisplayEnd] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Select your option");
@@ -16,6 +18,9 @@ function LiveSearch(props) {
   const handleOptionClick = (item) => {
     setSelectedOption(item.plot);
     setSelectedOptionId(item.id);
+    props.setDisplayStart(item.SingleYear);
+    props.setDisplayEnd(item.YearChange);
+
     props.handleOptionClick(item);
     setIsOpen(false);
   };
@@ -35,7 +40,7 @@ function LiveSearch(props) {
         );
         // const response = await axios.get(
         //   `http://127.0.0.1:5000/store?id=${props.topic}`,
-        // ); 
+        // );
         const { plot_name, display_option } = response.data;
         setPlotName(plot_name);
         setDisplayOption(display_option);

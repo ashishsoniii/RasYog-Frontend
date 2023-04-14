@@ -33,7 +33,7 @@ const ButtonGroup = styled.div`
   display: block;
   justify-content: centre;
 `;
-const types = ["Maps Taxonomic", "Taxonomic", "Data Taxonomic"];
+const types = ["Maps Taxonomic", "Data Taxonomic"];
 
 function ToggleGroup(props) {
   const [active, setActive] = useState(types[0]);
