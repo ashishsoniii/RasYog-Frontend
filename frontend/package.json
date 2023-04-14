@@ -16,6 +16,7 @@
     "plotly.js": "^2.20.0",
     "react": "^18.2.0",
     "react-card-slider-component": "^1.0.9",
+    "react-compound-slider": "^3.4.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-plotly.js": "^2.6.0",

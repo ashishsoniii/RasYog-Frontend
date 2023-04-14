@@ -29,6 +29,7 @@ function DataAnalysis(props) {
           alias vel consequatur necessitatibus, atque quos provident.
         </div>
         <LiveSearch topic={props.topic} handleOptionClick={handleOptionClick} />
+
         <Graph
           selectedOption={selectedOption}
           selectedOptionId={selectedOptionId}

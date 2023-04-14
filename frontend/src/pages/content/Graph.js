@@ -25,13 +25,15 @@ function Graph(props) {
 
       const plotsArray = [];
       for (let i = 1; i <= 4; i++) {
+        console.log(response.data[`plot${i}`]);
         if (response.data[`plot${i}`]) {
-          const { data, layout } = JSON.parse(response.data[`plot${i}`]);
+          const { data, layout,frames } = JSON.parse(response.data[`plot${i}`]);
           const title = layout?.title?.text || `Plot ${i}`; // set a default title if no title is found
 
           plotsArray.push({
             data,
             layout: { ...layout, title: { text: title } },
+            frames ,
           });
         }
       }
@@ -89,9 +91,11 @@ function Graph(props) {
             plots.length > 0 &&
             plots.map((plot, index) => (
               <div key={index} className="plotlyi">
+              {console.log(plot.frames)}
                 <Plot
                   data={plot.data}
                   layout={plot.layout}
+                  frames= {plot.frames}
                   useResizeHandler={true}
                   style={{
                     width: "80%",
