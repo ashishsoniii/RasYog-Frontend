@@ -41,7 +41,7 @@ def Overall_Sunbust(initial=2014,final=2022):
     new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
     # print(new_dff)
 
-    fig=px.sunburst(data_frame=new_dff,path=['Product Category','Brand','product','Design','Color','size'],maxdepth=2,width=700, height=700,title="Overall Sunburst")
+    fig=px.sunburst(data_frame=new_dff,path=['Product Category','Brand','product','Design','Color','size'],title = "Various Attributes distributed according to Heirarchy",maxdepth=2,width=700, height=700,title="Overall Sunburst")
     # fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -52,7 +52,7 @@ def sunburst_particular_brand_for_product(initial=2014,final=2022):
 
     new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
     # print(new_dff)
-    fig=px.sunburst(data_frame=new_dff,path=['Product Category','product','Brand'],maxdepth=2,width=700, height=700,title=" Sunburst Plot for Particular Brand for a Product ")
+    fig=px.sunburst(data_frame=new_dff,path=['Product Category','product','Brand'],title = "Relationship between Brands based on Common products",maxdepth=2,width=700, height=700,title=" Sunburst Plot for Particular Brand for a Product ")
     # fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -66,7 +66,7 @@ def treemap_particular_brand_for_product(initial=2014,final=2022):
     # print(dff)
     new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
     # print(new_dff)
-    fig3 = px.treemap(new_dff, path=['product','Brand'], color='Brand',title="Treemap for Particular Brand for a Product ")
+    fig3 = px.treemap(new_dff, path=['product','Brand'], color='Brand',title = "Distribution of products by different brands")
     # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -76,7 +76,7 @@ def treemap_particular_brand_for_product(initial=2014,final=2022):
 def Overall_treemap(initial=2014,final=2022):
     new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
     
-    fig3 = px.treemap(new_dff, path=['Product Category','Department','Brand','product','Design','Color','size'],title="Overall Treemap")
+    fig3 = px.treemap(new_dff, path=['Product Category','Department','Brand','product','Design','Color','size'],title = "Tree map displaying various attributes by Heirarchy")
     # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -87,7 +87,7 @@ def Overall_treemap(initial=2014,final=2022):
 def treemap_brand_similar_product_with_color_design(initial=2014,final=2022):
     new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
 
-    fig3 = px.treemap(new_dff, path=['Product Category','Department','product','Design','Brand'], color='Brand')
+    fig3 = px.treemap(new_dff, path=['Product Category','Department','product','Design', 'Color','Brand'], color='Brand', title = "Relationship between Brands based on common Products with Design and color")
     # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -96,7 +96,7 @@ def treemap_brand_similar_product_with_color_design(initial=2014,final=2022):
 
 def treemap_brand_similar_product_with_design(initial=2014,final=2022):
     new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
-    fig3 = px.treemap(new_dff, path=['Product Category','Department','product','Design','Brand'], color='Brand')
+    fig3 = px.treemap(new_dff, path=['Product Category','Department','product','Design','Brand'], color='Brand', title = "Relationship between Brands based on common Products with Design")
     # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -118,7 +118,7 @@ dd1=dd1.reset_index(name = 'counts')
 # Treemap brand -> product -> design -> color
 
 def Treemap_brand_product_design_color():
-    fig3 = px.treemap(dd1, path=['Brand','product','Design','Color'],values = 'counts')
+    fig3 = px.treemap(dd1, path=['Brand','product','Design','Color'],values = 'counts', title = "Products provided by Brands based on Design & Color")
     # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -134,7 +134,7 @@ dd2=dd2.reset_index(name = 'counts')
 # Treemap brand -> product -> design
 
 def Treemap_brand_product_design():
-    fig3 = px.treemap(dd2, path=['Brand','product','Design'],values = 'counts')
+    fig3 = px.treemap(dd2, path=['Brand','product','Design'],values = 'counts', title = "Products provided by Brands based on different designs")
     # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -149,7 +149,7 @@ dd3=dd3.reset_index(name = 'counts')
 # Treemap brand -> product
 
 def Treemap_brand_product():
-    fig3 = px.treemap(dd3, path=['Brand','product'],values = 'counts',title="Tree Map for Brand & Product")
+    fig3 = px.treemap(dd3, path=['Brand','product'],values = 'counts',title = "Products provided by different Designs")
     # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -165,7 +165,7 @@ df5 = df5.reset_index(name = 'counts')
 
 def Treemap_year_brand_product(initial=2014,final=2022):
     df = df5[(df5['year'] >= (initial) ) & (df5['year'] <= (final) )]
-    fig3 = px.treemap(df, path=['year','Brand','product'],values = 'counts')
+    fig3 = px.treemap(df, path=['year','Brand','product'],values = 'counts', title = "Year-wise products provided by different brands")
     # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -183,7 +183,7 @@ def Treemap_year_product_design_color(initial=2014,final=2020):
     # print(df6)
     df = df6[(df6['year'] >= (initial) ) & (df6['year'] <= (final) )]
     # print(df)
-    fig3 = px.treemap(df, path=['year','product','Design','Color'],values = 'counts')
+    fig3 = px.treemap(df, path=['year','product','Design','Color'],values = 'counts', title = "Year-wise products distributed by Design and Color")
     # fig3.show()
     graphJSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
