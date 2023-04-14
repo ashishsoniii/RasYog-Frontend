@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import { GiHamburgerMenu } from "react-icons/gi";
-import logo from "../../assets/logo/logo-no-background.png";
+// import logo from "../../assets/logo/logo-no-background.png";
+// import logo from "../../assets/logo/rasyog-logo-yog.png";
+import logo from "../../assets/logo/YOGLABS-logo.png";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -36,7 +38,7 @@ const Navbar = (props) => {
           <NavLink to="/">
             <motion.img
               whileHover={{
-                scale: 1.2,
+                scale: 1.3,
                 transition: { duration: 1 },
               }}
               whileTap={{ scale: 0.9 }}

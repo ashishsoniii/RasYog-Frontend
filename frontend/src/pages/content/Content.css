@@ -432,3 +432,22 @@
     font-weight: 400;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+
+/* slider */
+
+.MuiSlider-sizeMedium {
+    color: #52104f !important;
+}
+
+.css-eg0mwd-MuiSlider-thumb {
+    color: black !important;
+    /* background-color: #00d744 !important; */
+    background-image: url("../../assets/logo/YOGLABS-logo.png") !important;
+
+
+}
+
+.MuiSlider-rail {
+    opacity: 1 !important;
+}

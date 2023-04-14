@@ -105,6 +105,8 @@ function Graph(props) {
                     width: "80%",
                     height: "70%",
                     overflowWrap: "break-word",
+                    color:"warning", // Set color to primary
+
                     wordWrap: "break-word",
                     hyphens: "auto",
                   }}

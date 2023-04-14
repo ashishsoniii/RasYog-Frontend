@@ -40,11 +40,11 @@ function DataAnalysis(props) {
         <div className="main-home-text">{props.activeTopic}</div>
         <div className="main-home-sub-text">
           {props.topic === "data"
-            ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            ? "Want to know what's selling in our store? Our Data Analysis section can help. By analyzing data on our product categories, you'll be able to see which ones are most popular with our customers, and make informed decisions about how to stock your inventory."
             : props.topic === "margin"
-            ? "Praesent vel sapien sed elit cursus elementum."
+            ? "Want to know what's hot and what's not? Our Popularity and Margin Analysis section offers a comprehensive look at the margins and profitability of our products. By exploring our categories for brands, products, and more, you'll be able to see which items are driving profits and which may need to be adjusted to improve your bottom line."
             : props.topic === "maps"
-            ? "Nam ullamcorper justo id velit varius, nec luctus lectus lobortis."
+            ? "Enter the captivating world of interactive Tree Maps! Analyze your data effortlessly with our taxonomic and margin analysis visualization tools. Discover hidden insights and patterns in a user-friendly interface. Explore your data like never before and unlock its full potential with us!"
             : props.topic === "mapstaxonomic"
             ? "Welcome to our taxonomic maps, the aerial view of our product universe. Zoom in and explore the hidden connections between our categories, and discover new products along the way."
             : props.topic === "taxonomic"
