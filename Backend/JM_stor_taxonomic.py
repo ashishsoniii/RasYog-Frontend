@@ -41,7 +41,7 @@ def Overall_Sunbust(initial=2014,final=2022):
     new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
     # print(new_dff)
 
-    fig=px.sunburst(data_frame=new_dff,path=['Product Category','Brand','product','Design','Color','size'],title = "Various Attributes distributed according to Heirarchy",maxdepth=2,width=700, height=700,title="Overall Sunburst")
+    fig=px.sunburst(data_frame=new_dff,path=['Product Category','Brand','product','Design','Color','size'],title = "Various Attributes distributed according to Heirarchy",maxdepth=2,width=700, height=700)
     # fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -52,7 +52,7 @@ def sunburst_particular_brand_for_product(initial=2014,final=2022):
 
     new_dff = dff[(dff['Date'].dt.year >= (initial) ) & (dff['Date'].dt.year<= (final) )]
     # print(new_dff)
-    fig=px.sunburst(data_frame=new_dff,path=['Product Category','product','Brand'],title = "Relationship between Brands based on Common products",maxdepth=2,width=700, height=700,title=" Sunburst Plot for Particular Brand for a Product ")
+    fig=px.sunburst(data_frame=new_dff,path=['Product Category','product','Brand'],title = "Relationship between Brands based on Common products",maxdepth=2,width=700, height=700)
     # fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON

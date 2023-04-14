@@ -218,11 +218,11 @@ def Tree_Maps_Taxonomic():
     if request.method == 'POST':
         graphInfo= (request.get_json())
         graph_id=int(graphInfo["graph"])
-        # from_year=int(graphInfo['starting'])
-        # to_year=int(graphInfo['end'])
+        from_year=int(graphInfo['starting'])
+        to_year=int(graphInfo['end'])
         plot1,plot2,plot3,plot4 = None,None,None,None
         if graph_id in [1,2,3,4,5]:
-            plot1=TreeMap_Taxonomic_Route(graph_id)[0]
+            plot1=TreeMap_Taxonomic_Route(graph_id,from_year,to_year)[0]
         else:
             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
@@ -246,9 +246,9 @@ def Taxonomic_analysis():
         to_year=int(graphInfo['end'])
         plot1,plot2,plot3,plot4 = None,None,None,None
         if graph_id in [1,2,3,4]:
-            plot1=Taxonomic_Route(graph_id,from_year,to_year)[0]
-            plot2=Taxonomic_Route(graph_id,from_year,to_year)[1]
-            plot3=Taxonomic_Route(graph_id,from_year,to_year)[2]
+            plot1=Taxonomic_Route(graph_id)[0]
+            plot2=Taxonomic_Route(graph_id)[1]
+            plot3=Taxonomic_Route(graph_id)[2]
         else:
             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
