@@ -47,8 +47,8 @@ def Option_func(var):
         {"plot":"Brand -> Product -> Design -> Color","id":1,"YearChange":False,"SingleYear":False},
         {"plot":'Brand -> Product -> Design',"id":2,"YearChange":False,"SingleYear":False},
         {"plot":'Brand -> Product',"id":3,"YearChange":False,"SingleYear":False},
-        {"plot":'Year -> Brand -> Product -> Design',"id":4,"YearChange":True,"SingleYear":False},
-        {"plot":'Year -> Product -> Design -> Color',"id":5,"YearChange":True,"SingleYear":False}
+        {"plot":'Year -> Brand -> Product -> Design',"id":4,"YearChange":False,"SingleYear":False},
+        {"plot":'Year -> Product -> Design -> Color',"id":5,"YearChange":False,"SingleYear":False}
     ]
 
 
@@ -56,7 +56,7 @@ def Data_Route(id,start,end):
         if(id==1):
             return [ry.summary_all_years(), ry.summary_month_margin(), ry.summary_month_sales()]
         elif(id==2):
-             return [ry.monthwise_summary(start,end), ry.animated_monthwise_summary(start,end)]
+             return [ry.monthwise_summary(start,end), ry.animated_monthwise_summary()]
 def Margin_Route(id,start,end):
         if(id==1):
             return [ry.popularity_yearwise(start,end), ry.compare_popularity_yearwise(['JAIPUR MODERN', '11.11', 'OH LA LA'],start,end), ry.margin_brands(start,end), ry.popularity_brands(start,end)]
@@ -91,7 +91,7 @@ def Taxonomic_Route(id):
         elif(id==4):
             return [jmt.product_color(), jmt.product_brand_design(), jmt.brand_product()]
 
-def TreeMap_Taxonomic_Route(id,start,end):
+def TreeMap_Taxonomic_Route(id):
         if(id==1):
             return [jmt.Treemap_brand_product_design_color()]
         elif(id==2):
@@ -99,9 +99,9 @@ def TreeMap_Taxonomic_Route(id,start,end):
         elif(id==3):
             return [jmt.Treemap_brand_product()]
         elif(id==4):
-            return [jmt.Treemap_year_brand_product(start,end)]
+            return [jmt.Treemap_year_brand_product()]
         elif(id==5):
-            return [jmt.Treemap_year_product_design_color(start,end)]
+            return [jmt.Treemap_year_product_design_color()]
 
 
 @app.route('/')
@@ -222,7 +222,7 @@ def Tree_Maps_Taxonomic():
         to_year=int(graphInfo['end'])
         plot1,plot2,plot3,plot4 = None,None,None,None
         if graph_id in [1,2,3,4,5]:
-            plot1=TreeMap_Taxonomic_Route(graph_id,from_year,to_year)[0]
+            plot1=TreeMap_Taxonomic_Route(graph_id)[0]
         else:
             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
