@@ -75,21 +75,24 @@ def Tree_Route(id,end):
             return [ry.treemap_margin_2(final_year=end), ry.treemap_margin_2_upto_design(final_year=end)]
 
 
-def Data_Taxonomic_Route(id,start,end):
-        if(id==1):
-            return [jmt.sunburst_particular_brand_for_product(start,end),jmt.Overall_Sunbust(start,end)]
-        elif(id==2):
-             return [jmt.treemap_particular_brand_for_product(start,end),jmt.treemap_brand_similar_product_with_color_design(start,end),jmt.treemap_brand_similar_product_with_design(start,end),jmt.Overall_treemap(start,end)]
+# def Data_Taxonomic_Route(id,start,end):
+#         if(id==1):
+#             return [jmt.sunburst_particular_brand_for_product(start,end),jmt.Overall_Sunbust(start,end)]
+#         elif(id==2):
+#              return [jmt.treemap_particular_brand_for_product(start,end),jmt.treemap_brand_similar_product_with_color_design(start,end),jmt.treemap_brand_similar_product_with_design(start,end),jmt.Overall_treemap(start,end)]
         
-def Taxonomic_Route(id):
-        if(id==1):
-            return [jmt.year_brand_product(), jmt.product_category_year(), jmt.product_desing_year()]
-        elif(id==2):
-             return [jmt.product_year_brand(), jmt.year_product_desing_color(), jmt.year_size()]
-        elif(id==3):
-            return [jmt.brand_product_design_color(), jmt.color_desing_product(), jmt.product_size()]
-        elif(id==4):
-            return [jmt.product_color(), jmt.product_brand_design(), jmt.brand_product()]
+# def Taxonomic_Route(id):
+#         if(id==1):
+#             plot1=jmt.year_brand_product()
+#             plot2=jmt.product_category_year()
+#             plot3=jmt.product_desing_year()
+#             return plot1,plot2,plot3
+#         elif(id==2):
+#              return [jmt.product_year_brand(), jmt.year_product_desing_color(), jmt.year_size()]
+#         elif(id==3):
+#             return [jmt.brand_product_design_color(), jmt.color_desing_product(), jmt.product_size()]
+#         elif(id==4):
+#             return [jmt.product_color(), jmt.product_brand_design(), jmt.brand_product()]
 
 def TreeMap_Taxonomic_Route(id):
         if(id==1):
@@ -242,13 +245,28 @@ def Taxonomic_analysis():
     if request.method == 'POST':
         graphInfo= (request.get_json())
         graph_id=int(graphInfo["graph"])
-        from_year=int(graphInfo['starting'])
+        from_year=(int(graphInfo['starting']))
         to_year=int(graphInfo['end'])
         plot1,plot2,plot3,plot4 = None,None,None,None
-        if graph_id in [1,2,3,4]:
-            plot1=Taxonomic_Route(graph_id)[0]
-            plot2=Taxonomic_Route(graph_id)[1]
-            plot3=Taxonomic_Route(graph_id)[2]
+        if graph_id==1:
+            # plot1=Taxonomic_Route(graph_id)[0]
+            # plot2=Taxonomic_Route(graph_id)[1]
+            # plot3=Taxonomic_Route(graph_id)[2]
+            plot1=jmt.year_brand_product()
+            plot2=jmt.product_category_year()
+            plot3=jmt.product_desing_year()
+        elif graph_id==2:
+            plot1=jmt.product_year_brand()
+            plot2=jmt.year_product_desing_color()
+            plot3=jmt.year_size()
+        elif graph_id==3:
+            plot1=jmt.brand_product_design_color()
+            plot2=jmt.color_desing_product()
+            plot3=jmt.product_size()
+        elif graph_id==4:
+            plot1=jmt.product_color()
+            plot2=jmt.product_brand_design()
+            plot3=jmt.brand_product()
         else:
             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
@@ -273,13 +291,19 @@ def Data_Anaylsis_Taxonomic():
         to_year=int(graphInfo['end'])
         plot1,plot2,plot3,plot4 = None,None,None,None
         if graph_id==1:
-            plot1=Data_Taxonomic_Route(graph_id,from_year,to_year)[0]
-            plot2=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
+            # plot1=Data_Taxonomic_Route(graph_id,from_year,to_year)[0]
+            # plot2=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
+            plot1=jmt.sunburst_particular_brand_for_product()
+            plot2=jmt.Overall_Sunbust()
         elif graph_id==2:
-            plot1=Data_Taxonomic_Route(graph_id,from_year,to_year)[0]
-            plot2=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
-            plot3=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
-            plot4=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
+            # plot1=Data_Taxonomic_Route(graph_id,from_year,to_year)[0]
+            # plot2=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
+            # plot3=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
+            # plot4=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
+            plot1=jmt.treemap_particular_brand_for_product(from_year,to_year)
+            plot2=jmt.treemap_brand_similar_product_with_color_design(from_year,to_year)
+            plot3=jmt.treemap_brand_similar_product_with_design(from_year,to_year)
+            plot4=jmt.Overall_treemap(from_year,to_year)
         else:
             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
