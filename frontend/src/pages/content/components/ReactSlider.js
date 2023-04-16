@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactCardSlider from "react-card-slider-component";
-// import { Carousel } from "@trendyol-js/react-carousel";
 import img1 from "../../../assets/card-img/Barplot.png";
 import img2 from "../../../assets/card-img/popularity.png";
 import img3 from "../../../assets/card-img/facets.png";
@@ -9,124 +8,156 @@ import img5 from "../../../assets/card-img/103_brand_popularity.png";
 import img6 from "../../../assets/card-img/106_sunburst.png";
 import img7 from "../../../assets/card-img/105_maps_t.png";
 import img8 from "../../../assets/card-img/102_payments.png";
+import DialogGraph from "./DialogGraph";
+import { useEffect } from "react";
+import "../Content.css"
+const Baz = (props) => {
+  const [diagOpen, setDiagOpen] = useState(false);
 
-const slides = [
-  {
-    image: img1,
-    title: "Bar Plot",
-    description: "Margin ,Sales and Effcost",
-  },
-  {
-    image: img2,
-    title: "Popularity And Margin    ",
-    description: "Popularity Vs Margin for Brands    ",
-  },
-  {
-    image: img3,
-    title: "Facets",
-    description: "Facets : Bar Plot with months and year    ",
-  },
-  {
-    image: img4,
-    title: "Generalized Analysis",
-    description: "Analysis for different brands, yearwise",
-  },
-  {
-    image: img8,
-    title: "Different Payments Methods",
-    description: "Popularity & Margin analysis",
-  },
-  {
-    image: img5,
-    title: "Tree Maps",
-    description: "Popularity Analysis for Products upto Brand Level",
-  },
-  {
-    image: img6,
-    title: "Data Taxonomic ",
-    description: "Sunburst Charts",
-  },
-  {
-    image: img7,
-    title: "Maps Taxonomic ",
-    description: "Brand -> Product -> Design -> Color",
-  },
-  //   {
-  //     image: "https://picsum.photos/800/900",
-  //     title: "This is a seventh title",
-  //     description: "This is a seventh description",
-  //   },
-];
+  const [selectedOptionId, setselectedOptionId] = useState(false);
+  const [valueStart, setvalueStart] = useState(0);
+  const [valueEnd, setvalueEnd] = useState(0);
+  const [topic, settopic] = useState("");
+  const [description, setdescription] = useState("Hi");
 
-const Baz = () => {
+  // selectedOptionId={2}
+  // valueStart={2014}
+  // valueEnd={2017}
+  // topic={"data"}
+
+  const slides = [
+    {
+      image: img1,
+      title: "Bar Plot",
+      description: "Margin, Sales, and Effcost",
+      clickEvent: () => {
+        settopic("data");
+        setselectedOptionId(1);
+        setvalueStart(2014);
+        setvalueEnd(2022);
+        setDiagOpen(true);
+        setdescription("Margin, Sales, and Effcost");
+      },
+    },
+    {
+      image: img2,
+      title: "Popularity And Margin",
+      description: "Popularity Vs Margin for Brands",
+      clickEvent: () => {
+        settopic("margin");
+        setselectedOptionId(1);
+        setvalueStart(2014);
+        setvalueEnd(2022);
+        setDiagOpen(true);
+        setdescription("Popularity Vs Margin for Brands");
+      },
+    },
+    {
+      image: img3,
+      title: "Facets",
+      description: "Facets: Bar Plot with months and year",
+      clickEvent: () => {
+        settopic("data");
+        setselectedOptionId(2);
+        setvalueStart(2014);
+        setvalueEnd(2022);
+        setDiagOpen(true);
+        setdescription("Facets: Bar Plot with months and year");
+      },
+    },
+    {
+      image: img4,
+      title: "Generalized Analysis",
+      description: "Analysis for different brands, yearwise",
+      clickEvent: () => {
+        settopic("margin");
+        setselectedOptionId(1);
+        setvalueStart(2014);
+        setvalueEnd(2022);
+        setDiagOpen(true);
+        setdescription("Analysis for different brands, yearwise");
+      },
+    },
+    {
+      image: img8,
+      title: "Different Payments Methods",
+      description: "Popularity & Margin analysis",
+      clickEvent: () => {
+        settopic("margin");
+        setselectedOptionId(3);
+        setvalueStart(2014);
+        setvalueEnd(2022);
+        setDiagOpen(true);
+        setdescription("Different Payments Methods");
+      },
+    },
+    {
+      image: img5,
+      title: "Tree Maps",
+      description: "Popularity Analysis for Products upto Brand Level",
+      clickEvent: () => {
+        settopic("maps");
+        setselectedOptionId(1);
+        setvalueStart(2014);
+        setvalueEnd(2022);
+        setDiagOpen(true);
+        setdescription("Tree Maps : Popularity Analysis for Products upto Brand Level");
+      },
+    },
+    {
+      image: img6,
+      title: "Data Taxonomic",
+      description: "Sunburst Charts",
+      clickEvent: () => {
+        settopic("datataxonomic");
+        setselectedOptionId(1);
+        setvalueStart(2014);
+        setvalueEnd(2022);
+        setDiagOpen(true);
+        setdescription("Sunburst Charts");
+      },
+    },
+    {
+      image: img7,
+      title: "Maps Taxonomic",
+      description: "Brand -> Product -> Design -> Color",
+      clickEvent: () => {
+        settopic("mapstaxonomic");
+        setselectedOptionId(5);
+        setvalueStart(2014);
+        setvalueEnd(2022);
+        setDiagOpen(true);
+        setdescription("Maps Taxonomic: Brand -> Product -> Design -> Color");
+      },
+    },
+  ];
+
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        marginTop: "5em",
-        marginBottom: "3em",
-      }}
-    >
-      <ReactCardSlider slides={slides}   />
-    </div>
+    <>
+      <DialogGraph
+        diagOpen={diagOpen}
+        setDiagOpen={setDiagOpen}
+        topic={topic}
+        selectedOptionId={selectedOptionId}
+        valueStart={valueStart}
+        valueEnd={valueEnd}
+        setselectedOptionId={setselectedOptionId}
+        description={description}
+        onClose={() => setDiagOpen(false)}
+      />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "5em",
+          marginBottom: "3em",
+        }}
+      >
+        <ReactCardSlider slides={slides} />
+      </div>
+      {/* {diagOpen && <DialogGraph  />} */}
+    </>
   );
 };
 
 export default Baz;
-
-
-
-// import React from "react";
-
-// export default function CardComponent() {
-//     const posts = [
-//         {
-//             title: "React Tailwind Card with Grid 1",
-//             img: "https://cdn.pixabay.com/photo/2019/12/17/14/43/christmas-4701783__340.png",
-//             content: "react tailwind css card with image It is a long established fact that a reader will be distracted by the readable content"
-//         },
-//         {
-//             title: "React Tailwind Card with Grid 2",
-//             img: "https://cdn.pixabay.com/photo/2019/12/17/14/43/christmas-4701783__340.png",
-//             content: "react tailwind css card with image It is a long established fact that a reader will be distracted by the readable content"
-//         },
-//         {
-//             title: "React Tailwind Card with Grid 3",
-//             img: "https://cdn.pixabay.com/photo/2019/12/17/14/43/christmas-4701783__340.png",
-//             content: "react tailwind css card with image It is a long established fact that a reader will be distracted by the readable content"
-//         },
-//         {
-//             title: "React Tailwind Card with Grid 4",
-//             img: "https://cdn.pixabay.com/photo/2019/12/17/14/43/christmas-4701783__340.png",
-//             content: "react tailwind css card with image It is a long established fact that a reader will be distracted by the readable content"
-//         },
-//     ];
-//     return (
-//         <>
-//             <div className="grid gap-2 lg:grid-cols-4">
-//                 {posts.map((items, key) => (
-//                     <div className="w-full rounded-lg shadow-md lg:max-w-sm" key={key}>
-//                         <img
-//                             className="object-cover w-full h-48"
-//                             src={items.img}
-//                             alt="image"
-//                         />
-//                         <div className="p-4">
-//                             <h4 className="text-xl font-semibold text-blue-600">
-                                
-//                                 {items.title}
-//                             </h4>
-//                             <p className="mb-2 leading-normal">
-//                             {items.content}
-//                             </p>
-//                             <button className="px-4 py-2 text-sm text-blue-100 bg-blue-500 rounded shadow">
-//                                 Read more
-//                             </button>
-//                         </div>
-//                     </div>
-//                 ))}
-//             </div>
-//         </>
-//     );
-// }

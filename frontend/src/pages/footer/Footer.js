@@ -15,21 +15,20 @@ function Footer() {
               {/* <img className="footer-logo" src={logo} alt="" /> */}
               <h2 className="Center">RASYOG</h2>
             </h2>
-            <p>
-              Our team conducted a taxonomic and sales analysis <br /> of a
-              departmental store, organizing data into categories <br /> and
-              providing insights into product popularity and availability.{" "}
-              <br /> The results are presented in a user-friendly interface that
-              can <br /> enhance decision-making for store managers and
-              customers.
-            </p>
+            Our team conducted a taxonomic and sales analysis <br /> of a
+            departmental store, organizing data into categories <br /> and
+            providing insights into product popularity and availability. <br />{" "}
+            The results are presented in a user-friendly interface that can{" "}
+            <br /> enhance decision-making for store managers and customers.
           </div>
-          <div className="column">
-            <h2>Something Here</h2>
-            <p>Some text..</p>
-            <p>Some text..</p>
-            <p>Some text..</p>
-            <p>Some text..</p>
+          <div className="column right-col">
+            <h2>Powered by YogLabs</h2>
+            <a className="footer-links-f1" href="mailto:info.ras@yoglabs.ai">
+              info.ras@yoglabs.ai
+            </a>
+            <a className="footer-links-f2" href="https://yoglabs.ai">
+              yoglabs.ai
+            </a>
           </div>
         </div>
         <hr />

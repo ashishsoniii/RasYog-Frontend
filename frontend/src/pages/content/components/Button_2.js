@@ -38,10 +38,10 @@ const types = ["Maps Taxonomic", "Data Taxonomic"];
 function ToggleGroup(props) {
   const [active, setActive] = useState(types[0]);
   return (
-    <ButtonGroup className="column">
+    <ButtonGroup className="column col-home-r ">
       {types.map((type) => (
         <ButtonToggle
-          className="row"
+          className="row col-inside"
           key={type}
           active={active === type}
           onClick={() => {

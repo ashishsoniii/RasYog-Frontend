@@ -1,64 +1,115 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import Graph from "../Graph";
+import Slide from "@mui/material/Slide";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import LiveSearch from "./LiveSearch";
+import CloseIcon from "@mui/icons-material/Close";
+import { motion } from "framer-motion";
 
-const DialogContainer = styled.div`
-  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+// import CloseIcon from '@mui/icons-material/Close';
 
-const DialogBox = styled.div`
-  background-color: #fff; /* white */
-  position: relative;
-  padding: 2rem;
-  max-width: 90%;
-  max-height: 90%;
-  overflow: auto;
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
-  .close-button {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    cursor: pointer;
-  }
-`;
-
-const CloseButton = styled.span`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #999;
-`;
-
-const TransparentDialog = () => {
-  const [showDialog, setShowDialog] = useState(true);
-
-  const openDialog = () => setShowDialog(true);
-  const closeDialog = () => setShowDialog(true);
+export default function DialogGraph(props) {
+  const handleClose = () => {
+    props.setDiagOpen(false);
+  };
+  const [dialogLoad, setdialogLoad] = React.useState(true);
 
   return (
-    <>
-      <button onClick={openDialog}>Open dialog</button>
+    <React.Fragment>
+      {/* <Button variant="outlined" onClick={handleClickOpen}>
+        Open dialog
+      </Button> */}
+      <Dialog
+        fullScreen
+        open={props.diagOpen}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+      >
+        {/* <DialogTitle>Optional sizes</DialogTitle> */}
+        <DialogContent>
+          {/* <AppBar
+            sx={{
+              position: "sticky",
+              top: 0,
+              backgroundImage: "url( #947add, #e85555)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          > */}{" "}
+          {/* <Toolbar> */}
+          <IconButton
+            sx={{ position: "sticky", top: 0 }}
+            edge="start"
+            color="inherit"
+            onClick={handleClose}
+            aria-label="close"
+            fontSize="large"
+          >
+            <CloseIcon />
+          </IconButton>
+          <Typography
+            sx={{ ml: 2, flex: 1, textAlign: "center" }}
+            variant="h3"
+            component="div"
+          >
+            {props.description}
+          </Typography>
+          <DialogContent>
+            {/* <LiveSearch
+              topic={props.topic}
+              setselectedOptionId={props.setselectedOptionId}
+              // handleOptionClick={props.selectedOptionId}
+              // setDisplayStart={props.valueStart}
+              // setDisplayEnd={props.valueEnd}
+            /> */}
 
-      {showDialog && (
-        <DialogContainer onClick={closeDialog}>
-          <DialogBox onClick={(event) => event.stopPropagation()}>
-            <CloseButton className="close-button" onClick={closeDialog}>
-              &times;
-            </CloseButton>
-            <h2>Dialog Title</h2>
-            <p>Dialog content goes here...</p>
-            <button onClick={closeDialog}>Close dialog</button>
-          </DialogBox>
-        </DialogContainer>
-      )}
-    </>
+            {/* {dialogLoad && (
+              <div className="parent-container">
+                <motion.div
+                  className="boxi"
+                  animate={{
+                    scale: [1, 1.6, 1.6, 1, 1],
+                    rotate: [0, 0, 180, 180, 0],
+                    borderRadius: ["10%", "10%", "50%", "50%", "10%"],
+                  }}
+                  transition={{
+                    duration: 2,
+                    ease: "easeInOut",
+                    times: [0, 0.2, 0.5, 0.8, 1],
+                    repeat: Infinity,
+                    repeatDelay: 0,
+                  }}
+                ></motion.div>
+              </div>
+            )} */}
+
+            <Graph
+              selectedOptionId={props.selectedOptionId}
+              valueStart={props.valueStart}
+              valueEnd={props.valueEnd}
+              topic={props.topic}
+              dialogLoad={dialogLoad}
+              setdialogLoad={setdialogLoad}
+            />
+          </DialogContent>
+        </DialogContent>
+        <DialogActions>
+          {/* <Button onClick={handleClose}>Close</Button> */}
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
   );
-};
-
-export default TransparentDialog;
+}

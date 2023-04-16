@@ -30,7 +30,7 @@ const Home = () => {
 
       <div className="section1">
         <div className="row white-area">
-          <div className="column">
+          <div className="column col-home-l">
             {activeState === "Data Analysis" && (
               <div className="Show data">
                 <h2 className="heading-footer ">
@@ -46,7 +46,7 @@ const Home = () => {
               </div>
             )}
 
-            {activeState === "Popularity" && (
+            {activeState === "Popularity & Margin" && (
               <div className="Show data">
                 <h2 className="heading-footer ">
                   {/* <img className="footer-logo" src={logo} alt="" /> */}
@@ -74,7 +74,7 @@ const Home = () => {
               </div>
             )}
           </div>
-          <div className="column">
+          <div className="column col-home-r">
             <Buttonz setActiveState={setActiveState} />
           </div>
         </div>
@@ -89,13 +89,18 @@ const Home = () => {
       {/*  */}
       {/* new section  */}
       {/*  */}
+
+
+
+      <div className="main-home-text white-area tax-data" style={{marginBottom:0}}>{"Taxonomic"}</div>
+
       <div className="section2">
         <div className="row white-area">
-          <div className="column">
+          <div className="column col-home-l">
             <Button_2 setActiveState={setActiveState2} />
           </div>
 
-          <div className="column">
+          <div className="column col-home-r">
             {activeState2 === "Maps Taxonomic" && (
               <div className="Show data">
                 <h2 className="heading-footer ">
@@ -118,17 +123,19 @@ const Home = () => {
                   <h2 className="Center">{activeState2}</h2>
                 </h2>
                 <p>
-                  Includes the different brands available, the various products
-                  offered under each brand, the design options available for
-                  each product, the different sizes available, and the various
-                  colors in which each product is available. This data is used
-                  to create a taxonomy or hierarchy of the products, which makes
-                  it easier for customers to find what they are looking for and
-                  for store owners to manage their inventory effectively.{" "}
+                  Includes the different brands available, <br/> the various products
+                  offered under each brand, <br/> the design options available for
+                  each product,<br/> the different sizes available, and  the various
+                  colors in <br/>which each product is available. .{" "}
                 </p>
               </div>
             )}
-            {/* <DialogBox /> */}
+            {/* <DialogBox
+              selectedOptionId={2}
+              valueStart={2014}
+              valueEnd={2017}
+              topic={"data"}
+            /> */}
           </div>
         </div>
       </div>

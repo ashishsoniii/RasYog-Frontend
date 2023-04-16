@@ -30,6 +30,9 @@ function DataAnalysis(props) {
     setSelectedOptionId(0);
     setDisplayStart(true);
     setDisplayEnd(false);
+    setValueStart(2014);
+
+    setValueEnd(2022);
   }, [props.topic]);
 
   return (
@@ -57,12 +60,12 @@ function DataAnalysis(props) {
           setDisplayStart={setDisplayStart}
           setDisplayEnd={setDisplayEnd}
         />
-        {!(displayStart == false && displayEnd == false) && (
+        {!(displayStart === false && displayEnd === false) && (
           <div>
             {!displayStart && (
               <>
+                <div className="slider-label">Start Year: {valueStart}</div>
                 <div className="slider-select">
-                  <div className="slider-label">Start Year</div>
                   <br />
                   <Slider onChange={handleSliderChange} />
                   {/* <div>Selected valueStart: {valueStart}</div> */}
@@ -71,13 +74,13 @@ function DataAnalysis(props) {
             )}
             {displayEnd && (
               <>
+                {!displayStart && (
+                  <div className="slider-label">End Year: {valueEnd}</div>
+                )}
+                {displayStart && (
+                  <div className="slider-label">Select Year: {valueEnd}</div>
+                )}
                 <div className="slider-select">
-                  {!displayStart && (
-                    <div className="slider-label">End Year</div>
-                  )}
-                  {displayStart && (
-                    <div className="slider-label">Select Year</div>
-                  )}
                   <br />
                   <SliderReverse
                     onChange={handleSliderEndChange}
@@ -85,6 +88,15 @@ function DataAnalysis(props) {
                   />
                   {/* <p>Selected valueStart: {valueEnd}</p> */}
                 </div>
+                <br />
+                {!displayStart && displayEnd && (
+                  <div className="main-home-sub-text year-text">
+                    {valueStart} - {valueEnd}
+                  </div>
+                )}
+                {displayStart && (
+                  <div className="main-home-sub-text year-text">{valueEnd}</div>
+                )}
               </>
             )}
           </div>
