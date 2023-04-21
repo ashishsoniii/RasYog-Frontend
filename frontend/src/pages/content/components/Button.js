@@ -27,7 +27,7 @@ const ButtonGroup = styled.div`
   display: block;
   justify-content: centre;
 `;
-const types = ["Data Analysis", "Popularity & Margin", "Tree Map"];
+const types = ["Sales Insights", "Popularity & Margin", "Sales Distribution"];
 
 function ToggleGroup(props) {
   const [active, setActive] = useState(types[0]);

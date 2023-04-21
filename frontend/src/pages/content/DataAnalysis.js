@@ -43,7 +43,7 @@ function DataAnalysis(props) {
         <div className="main-home-text">{props.activeTopic}</div>
         <div className="main-home-sub-text">
           {props.topic === "data"
-            ? "Want to know what's selling in our store? Our Data Analysis section can help. By analyzing data on our product categories, you'll be able to see which ones are most popular with our customers, and make informed decisions about how to stock your inventory."
+            ? "Welcome to our Temporal Sales Analysis section! Here, we provide valuable insights into the performance of our products based on their sales, margin and cost to company data over different months and years. Explore various Barplots for Comprehensive Sales Analysis and Facet Section for Monthly Insights by Year - Customize Year Range for In-Depth Temporal Sales Analysis!"
             : props.topic === "margin"
             ? "Want to know what's hot and what's not? Our Popularity and Margin Analysis section offers a comprehensive look at the margins and profitability of our products. By exploring our categories for brands, products, and more, you'll be able to see which items are driving profits and which may need to be adjusted to improve your bottom line."
             : props.topic === "maps"
@@ -78,7 +78,7 @@ function DataAnalysis(props) {
                   <div className="slider-label">End Year: {valueEnd}</div>
                 )}
                 {displayStart && (
-                  <div className="slider-label">Select Year: {valueEnd}</div>
+                  <div className="slider-label">Selected Year: {valueEnd}</div>
                 )}
                 <div className="slider-select">
                   <br />
@@ -94,9 +94,9 @@ function DataAnalysis(props) {
                     {valueStart} - {valueEnd}
                   </div>
                 )}
-                {displayStart && (
+                {/* {displayStart && (
                   <div className="main-home-sub-text year-text">{valueEnd}</div>
-                )}
+                )} */}
               </>
             )}
           </div>

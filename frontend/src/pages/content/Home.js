@@ -7,7 +7,7 @@ import ReactSlider from "./components/ReactSlider.js";
 import DialogBox from "./components/DialogGraph.js";
 
 const Home = () => {
-  const [activeState, setActiveState] = useState("Data Analysis");
+  const [activeState, setActiveState] = useState("Sales Insights");
   const [activeState2, setActiveState2] = useState("Maps Taxonomic");
   return (
     <>
@@ -31,17 +31,16 @@ const Home = () => {
       <div className="section1">
         <div className="row white-area">
           <div className="column col-home-l">
-            {activeState === "Data Analysis" && (
+            {activeState === "Sales Insights" && (
               <div className="Show data">
                 <h2 className="heading-footer ">
                   {/* <img className="footer-logo" src={logo} alt="" /> */}
                   <h2 className="Center">{activeState}</h2>
                 </h2>
                 <p>
-                  Advanced data analysis of sales, <br /> margin, and cost to
-                  the company <br />
-                  with comprehensive month wise <br /> and year wise
-                  visualization charts.
+                  Explore our website's sales analysis with <br /> charts and
+                  graphs to uncover insights on <br /> sales, cost to company,
+                  and margin <br /> for business optimization!
                 </p>
               </div>
             )}
@@ -53,23 +52,23 @@ const Home = () => {
                   <h2 className="Center">{activeState}</h2>
                 </h2>
                 <p>
-                  Comprehensive insights into products <br /> and brands
-                  performance based on raw data,
-                  <br /> using advanced animated charts
+                  Visualizing Popularity and Margin of Our <br />{" "}
+                  Products/Brands Over the Years! Explore Our <br /> Graphical
+                  Insights for Informed Business Decisions
                 </p>
               </div>
             )}
 
-            {activeState === "Tree Map" && (
+            {activeState === "Sales Distribution" && (
               <div className="Show data">
                 <h2 className="heading-footer ">
                   {/* <img className="footer-logo" src={logo} alt="" /> */}
                   <h2 className="Center">{activeState}</h2>
                 </h2>
                 <p>
-                  Detailed view of distribution based <br /> on popularity,
-                  sales, and margin <br /> with our informative and visually{" "}
-                  <br /> appealing tree map.{" "}
+                  Detailed view of distribution based on <br /> popularity,
+                  sales, and margin with our <br /> informative and visually
+                  appealing tree map.
                 </p>
               </div>
             )}
@@ -90,9 +89,12 @@ const Home = () => {
       {/* new section  */}
       {/*  */}
 
-
-
-      <div className="main-home-text white-area tax-data" style={{marginBottom:0}}>{"Taxonomic"}</div>
+      <div
+        className="main-home-text white-area tax-data"
+        style={{ marginBottom: 0 }}
+      >
+        {"Taxonomic"}
+      </div>
 
       <div className="section2">
         <div className="row white-area">
@@ -123,10 +125,12 @@ const Home = () => {
                   <h2 className="Center">{activeState2}</h2>
                 </h2>
                 <p>
-                  Includes the different brands available, <br/> the various products
-                  offered under each brand, <br/> the design options available for
-                  each product,<br/> the different sizes available, and  the various
-                  colors in <br/>which each product is available. .{" "}
+                  Includes the different brands available, <br /> the various
+                  products offered under each brand, <br /> the design options
+                  available for each product,
+                  <br /> the different sizes available, and the various colors
+                  in <br />
+                  which each product is available. .{" "}
                 </p>
               </div>
             )}
