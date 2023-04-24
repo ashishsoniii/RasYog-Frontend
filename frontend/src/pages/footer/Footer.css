@@ -1,33 +1,38 @@
-* {
+html {
   box-sizing: border-box;
+}
 
-
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 .footer-main {
-  /* border-top-left-radius: 2em; */
-  /* border-top-right-radius: 2em; */
+  /* position: fixed; */
+  left: 0;
+  bottom: 0;
+  width: 100%;
   background-color: black;
   color: beige;
   padding-left: 2rem;
   padding-right: 1.5rem;
-  /* position: relative; */
 }
 
 .yoglabs {
   font-size: 1.5rem;
   font-weight: 400;
   text-transform: uppercase;
-  background: -webkit-linear-gradient(#eee, rgb(224 191 8));
+  background: linear-gradient(#eee, rgb(224 191 8));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-
+  text-fill-color: transparent;
 }
 
 .yoglabs span {
   font-size: 2.5rem;
   color: #c32aa3;
-  background-color: #00000000;
 }
 
 .footer-main hr {
@@ -39,17 +44,16 @@
 .row {
   display: flex;
   flex-wrap: wrap;
-
 }
 
-/* Create four equal columns */
+/* Create two equal columns */
 .column {
-  flex: 25%;
-  padding: 20px;
+  flex-basis: 50%;
+  padding: 10px;
   justify-content: center;
   display: grid;
   font-size: 2rem;
-
+  align-items: center;
 }
 
 .heading-footer {
@@ -58,26 +62,39 @@
   font-size: xx-large;
   font-weight: bolder;
 }
-.Center{
-justify-content: center;
-margin: 12px;
 
-}
-
-.footer-logo {
-  width: 2em;
-}
-
-/* On screens that are 992px wide or less, go from four columns to two columns */
+/* On screens that are 992px wide or less, go from two columns to one column */
 @media screen and (max-width: 992px) {
+  .footer-main hr {
+    margin-left: 10rem;
+    margin-right: 10rem;
+  }
+  
   .column {
-    flex: 50%;
+    flex-basis: 100%;
   }
 }
 
-/* On screens that are 600px wide or less, make the columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .row {
-    flex-direction: column;
-  }
+.footer-links-f1 {
+  color: #60bb49;
+  justify-content: center;
+  display: flex;
+
+}
+
+.footer-links-f2 {
+  justify-content: center;
+  display: flex;
+  color: #94d2bf;
+}
+
+.right-col {
+  justify-content: center;
+  align-items: end;
+}
+
+.right-col h2 {
+  justify-content: center;
+  display: flex;
+  font-size: 2.5rem;
 }

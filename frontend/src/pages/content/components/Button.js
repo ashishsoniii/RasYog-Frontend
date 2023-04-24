@@ -27,15 +27,15 @@ const ButtonGroup = styled.div`
   display: block;
   justify-content: centre;
 `;
-const types = ["Data Analysis", "Popularity", "Tree Map"];
+const types = ["Sales Insights", "Popularity & Margin", "Sales Distribution"];
 
 function ToggleGroup(props) {
   const [active, setActive] = useState(types[0]);
   return (
-    <ButtonGroup className="column">
+    <ButtonGroup className="column col-home-l ">
       {types.map((type) => (
         <ButtonToggle
-          className="row"
+          className="row col-inside"
           key={type}
           active={active === type}
           onClick={() => {
