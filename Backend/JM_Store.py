@@ -12,7 +12,7 @@ import plotly
 
 # sckit learn
 from sklearn.impute import SimpleImputer
-
+from upload import df1 as df
 # matplotlib lib and seaborn imports
 import matplotlib.pyplot as plt
 # %matplotlib inline
@@ -20,9 +20,12 @@ import seaborn as sns
 
 from plotly.subplots import make_subplots
 
-df = pd.read_excel('Store_data_v2.xlsx')
-# df = pd.read_excel('/home/yoglabs/mysite/Files/Store_data_v2.xlsx')
+Starting_Year=2014
+End_Year=2022
 
+# df = pd.read_excel('Store_data_v2.xlsx')
+# df = pd.read_excel('/home/yoglabs/mysite/Files/Store_data_v2.xlsx')
+# print(df)
 df['year'] = df['Date'].dt.year
 df['month'] = df['Date'].dt.month
 # print(df)
@@ -188,7 +191,7 @@ def monthwise_summary(from_year, to_year):
     df = monthwise_sub_data[(monthwise_sub_data['year'] >= from_year) & (monthwise_sub_data['year'] <= to_year)]
     fig = px.bar(df, x='month', y=['margin', 'cost', 'sale'], facet_row="year", facet_row_spacing=0.01, height=800,
                  width=800, barmode='group',
-                 title=f'Summary of sale,margin and cost for every year ( ${from_year} to ${to_year} ) ')
+                 title=f'Summary of sale,margin and cost for every year ( {from_year} to {to_year} ) ')
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     # fig.show()
     return graphJSON
@@ -204,7 +207,7 @@ def animated_monthwise_summary():
 
     return graphJSON
 
-
+# animated_monthwise_summary()
 # popularity dataframe
 # x-axis : margin
 # yaxis : popularity
@@ -237,12 +240,12 @@ sub_data_1 = pd.DataFrame(sub_data_1)
 # popularity
 
 
-def popularity_yearwise(initial=2014,final=2022):
+def popularity_yearwise(initial=Starting_Year,final=End_Year):
     new_sub_data_1 = sub_data_1[(sub_data_1['year'] >= str(initial) ) & (sub_data_1['year'] <= str(final) )]
     # print(new_sub_data_1)
     fig2 = px.scatter(new_sub_data_1, x="margin", y="popularity", animation_frame="year", animation_group="brand",
                       color="brand", hover_name="brand", size='popularity', text='brand', height=700,
-                      log_x=True, size_max=100, title=f"Popularity vs Margin for different brands, yearwise ( from ${initial} to ${final} )")
+                      log_x=True, size_max=100, title=f"Popularity vs Margin for different brands, yearwise ( from {initial} to {final} )")
     # fig2.show()
     graphJSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
 
@@ -250,13 +253,13 @@ def popularity_yearwise(initial=2014,final=2022):
 
 # popularity_yearwise()
 
-def compare_popularity_yearwise(brands,initial=2014,final=2022):
+def compare_popularity_yearwise(brands,initial=Starting_Year,final=End_Year):
     df = sub_data_1[sub_data_1['brand'].isin(brands)]
     new_df = df[(df['year'] >= str(initial) ) & (df['year'] <= str(final) )]
     # print(new_df)
     fig2 = px.scatter(new_df, x="margin", y="popularity", animation_frame="year", animation_group="brand",
                       color="brand", hover_name="brand", size='popularity', text='brand',
-                      log_x=True, size_max=100, title=f"Popularity vs Margin for different brands, yearwise ( from ${initial} to ${final} )")
+                      log_x=True, size_max=100, title=f"Popularity vs Margin for different brands, yearwise ( from {initial} to {final} )")
     # fig2.show()
     graphJSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -271,12 +274,12 @@ sub_data_1['margin_format'] = sub_data_1.apply(lambda x: numerizer(x), axis=1)
 pos_sub_data = sub_data_1[sub_data_1['margin'] > -1]
 # print("Pos sub data",pos_sub_data)
 
-def margin_brands(initial=2014,final=2022):
+def margin_brands(initial=Starting_Year,final=End_Year):
     new_pos_sub_data = pos_sub_data[(pos_sub_data['year'] >= str(initial) ) & (pos_sub_data['year'] <= str(final) )]
     fig = px.sunburst(new_pos_sub_data, path=['year', 'brand', 'margin_format'], color='brand',
-                      title=f"Yearwise Brands with Margin  ( from ${initial} to ${final} )", values="margin")
-    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+                      title=f"Yearwise Brands with Margin  ( from {initial} to {final} )", values="margin")
     # fig.show()
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
 # margin_brands()
@@ -285,15 +288,17 @@ def margin_brands(initial=2014,final=2022):
 sub_data_1['popularity'] = sub_data_1['popularity'].astype(int)
 # print("Sub data 1",sub_data_1)
 
-def popularity_brands(initial=2014,final=2022):
+def popularity_brands(initial=Starting_Year,final=End_Year):
+    # print("Sub data",sub_data_1)
     new_sub_data_1 = sub_data_1[(sub_data_1['year'] >= str(initial) ) & (sub_data_1['year'] <= str(final) )]
+    # print(sub_data_1[sub_data_1['year'] ==str(2023)])
     fig = px.sunburst(new_sub_data_1, path=['year', 'brand', 'popularity'], color='brand',
-                      title=f"Yearwise Brands with Popularity ( from ${initial} to ${final} )", values='popularity')
-    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+                      title=f"Yearwise Brands with Popularity ( from {initial} to {final} )", values='popularity')
     # fig.show()
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
-
+# popularity_brands()
 # TREE MAP
 
 # hierarchical level data set
@@ -365,12 +370,12 @@ data_2022 = sub_data[sub_data['year'] == str(2020)]
 # print(data_2022)
 
 
-def treemap_popularity_for_product(final_year=2022):
+def treemap_popularity_for_product(final_year=End_Year):
     # print(type(sub_data['year'][0]))
     year_wise_data = sub_data[sub_data['year'] == (final_year)]
     # print(final_year)
     fig = px.treemap(data_frame=year_wise_data, path=['PC', 'Department', 'Product', 'Brand', 'popularity'],
-                     title=f'Popularity Analysis for Products upto Brand Level ( Year ${final_year}  )', color='Brand', values='popularity')
+                     title=f'Popularity Analysis for Products upto Brand Level ( Year {final_year}  )', color='Brand', values='popularity')
     fig.update_traces(root_color="lightgrey")
     fig.update_layout(margin=dict(t=50, l=25, r=25, b=25))
     # fig.show()
@@ -378,14 +383,14 @@ def treemap_popularity_for_product(final_year=2022):
 
     return graphJSON
 
-# treemap_popularity_for_product(2016)
+# treemap_popularity_for_product()
 
-def treemap_popularity_for_product_upto_design(final_year=2022):
+def treemap_popularity_for_product_upto_design(final_year=End_Year):
     year_wise_data = sub_data[sub_data['year'] == (final_year)]
     # print(year_wise_data)
     fig = px.treemap(data_frame=year_wise_data,
                      path=['PC', 'Department', 'Product', 'Brand', 'Design', 'Color', 'popularity'],
-                     title=f'Popularity Analysis for Products upto Design Level ( Year ${final_year}  )', color='Brand', values='popularity')
+                     title=f'Popularity Analysis for Products upto Design Level ( Year {final_year}  )', color='Brand', values='popularity')
     fig.update_traces(root_color="lightgrey")
     fig.update_layout(margin=dict(t=50, l=25, r=25, b=25))
     # fig.show()
@@ -395,12 +400,12 @@ def treemap_popularity_for_product_upto_design(final_year=2022):
 # treemap_popularity_for_product_upto_design(2021)
 # treemap_popularity_for_brand_upto_design(2021)
 
-def treemap_popularity_for_brand(final_year=2022):
+def treemap_popularity_for_brand(final_year=End_Year):
     # print(final_year)
     year_wise_data = sub_data[sub_data['year'] == (final_year)]
     fig = px.treemap(data_frame=year_wise_data, color='Brand',
                      path=['PC', 'Department', 'Brand', 'Product', 'popularity'],
-                     title=f'Popularity Analysis for Brands upto Product level ( Year ${final_year}  )', values='popularity')
+                     title=f'Popularity Analysis for Brands upto Product level ( Year {final_year}  )', values='popularity')
     fig.update_traces(root_color="lightgrey")
     fig.update_layout(margin=dict(t=50, l=25, r=25, b=25))
     # fig.show()
@@ -409,11 +414,11 @@ def treemap_popularity_for_brand(final_year=2022):
     return graphJSON
 # treemap_popularity_for_brand(2020)
 
-def treemap_popularity_for_brand_upto_design(final_year=2022):
+def treemap_popularity_for_brand_upto_design(final_year=End_Year):
     year_wise_data = sub_data[sub_data['year'] == (final_year)]
     fig = px.treemap(data_frame=year_wise_data, color='Brand',
                      path=['PC', 'Department', 'Brand', 'Product', 'Design', 'Color', 'popularity'],
-                     title=f'Popularity Analysis for Brands upto Design level ( Year ${final_year}  )', values='popularity')
+                     title=f'Popularity Analysis for Brands upto Design level ( Year {final_year}  )', values='popularity')
     fig.update_traces(root_color="lightgrey")
     fig.update_layout(margin=dict(t=50, l=25, r=25, b=25))
     # fig.show()
@@ -422,9 +427,9 @@ def treemap_popularity_for_brand_upto_design(final_year=2022):
     return graphJSON
 # treemap_popularity_for_brand_upto_design(2018)
 
-def treemap_margin(final_year=2022):
+def treemap_margin(final_year=End_Year):
     year_wise_data = sub_data[sub_data['year'] == (final_year)]
-    fig = px.treemap(data_frame=year_wise_data, color='Brand', title=f'Margin Analysis for Brands upto Design level ( Year ${final_year}  )',
+    fig = px.treemap(data_frame=year_wise_data, color='Brand', title=f'Margin Analysis for Brands upto Design level ( Year {final_year}  )',
                      path=['PC', 'Department', 'Product', 'Brand', 'margin'])
     fig.update_traces(root_color="lightgrey")
     fig.update_layout(margin=dict(t=50, l=25, r=25, b=25))
@@ -433,9 +438,9 @@ def treemap_margin(final_year=2022):
     return graphJSON
 
 
-def treemap_margin_upto_design(final_year=2022):
+def treemap_margin_upto_design(final_year=End_Year):
     year_wise_data = sub_data[sub_data['year'] == (final_year)]
-    fig = px.treemap(data_frame=year_wise_data, color='Brand', title=f'Margin Analysis for Brands upto Design level ( Year ${final_year}  )',
+    fig = px.treemap(data_frame=year_wise_data, color='Brand', title=f'Margin Analysis for Brands upto Design level ( Year {final_year}  )',
                      path=['PC', 'Department', 'Product', 'Brand', 'Design', 'Color', 'margin'])
     fig.update_traces(root_color="lightgrey")
     fig.update_layout(margin=dict(t=50, l=25, r=25, b=25))
@@ -445,9 +450,9 @@ def treemap_margin_upto_design(final_year=2022):
     return graphJSON
 
 
-def treemap_margin_2(final_year=2022):
+def treemap_margin_2(final_year=End_Year):
     year_wise_data = sub_data[sub_data['year'] == (final_year)]
-    fig = px.treemap(data_frame=year_wise_data, title=f'Margin Analysis for Brands upto Product Level ( Year ${final_year}  )',
+    fig = px.treemap(data_frame=year_wise_data, title=f'Margin Analysis for Brands upto Product Level ( Year {final_year}  )',
                      path=['PC', 'Department', 'Brand', 'Product', 'margin'], color='Brand')
     fig.update_traces(root_color="lightgrey")
     fig.update_layout(margin=dict(t=50, l=25, r=25, b=25))
@@ -458,9 +463,9 @@ def treemap_margin_2(final_year=2022):
     return graphJSON
 
 
-def treemap_margin_2_upto_design(final_year=2022):
+def treemap_margin_2_upto_design(final_year=End_Year):
     year_wise_data = sub_data[sub_data['year'] == (final_year)]
-    fig = px.treemap(data_frame=year_wise_data, title=f'Margin Analysis for Brands upto Product Level ( Year ${final_year}  )',
+    fig = px.treemap(data_frame=year_wise_data, title=f'Margin Analysis for Brands upto Product Level ( Year {final_year}  )',
                      path=['PC', 'Department', 'Brand', 'Product', 'Design', 'Color', 'margin'], color='Brand')
     fig.update_traces(root_color="lightgrey")
     fig.update_layout(margin=dict(t=50, l=25, r=25, b=25))
@@ -471,11 +476,11 @@ def treemap_margin_2_upto_design(final_year=2022):
     return graphJSON
 
 
-def scatter_product(final=2022):
+def scatter_product(final=End_Year):
     data_year_wise = sub_data[sub_data['year'] == (final)]
     # print(data_year_wise)
     fig = px.scatter(data_year_wise, y="Brand", x="margin", color="Product",
-                     title=f"Effective Margin Distribution wrt Brand and Product ( Year ${final}  )")
+                     title=f"Effective Margin Distribution wrt Brand and Product ( Year {final}  )")
     # fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
@@ -484,23 +489,23 @@ def scatter_product(final=2022):
 # scatter_product(2016)
 # scatter_product(2015)
 # print("sub data ",sub_data)
-def scatter_margin(final=2022):
+def scatter_margin(final=End_Year):
 
     data_year_wise = sub_data[sub_data['year'] == (final)]
 
     fig = px.scatter(data_year_wise, x="popularity", y="Brand", color="Product",
-                     title=f"Effective Popularity Distribution wrt Brand and Product ( Year ${final}  )")
+                     title=f"Effective Popularity Distribution wrt Brand and Product ( Year {final}  )")
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     # fig.show()
     return graphJSON
 
 # scatter_margin(2015)
 
-def scatter_sales(final=2022):
+def scatter_sales(final=End_Year):
     data_year_wise = sub_data[sub_data['year'] == (final)]
     # print(data_year_wise)
     fig = px.scatter(data_year_wise, x="sales", y='Brand', color='Product',
-                     title=f"Effective Sales Distribution ( Year ${final}  )")
+                     title=f"Effective Sales Distribution ( Year {final}  )")
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     # fig.show()
     return graphJSON
@@ -543,11 +548,11 @@ party_sub = pd.DataFrame(party_sub)
 # party_sub.head()
 
 
-def payment_method(initial=2014,final=2020):
+def payment_method(initial=Starting_Year,final=End_Year):
     # print(party_sub)
     new_party_sub = party_sub[(party_sub['Year'] >= str(initial) ) & (party_sub['Year'] <= str(final) )]
     fig = px.sunburst(new_party_sub, path=['Year', 'Payment'], color='Payment', values='Sale',
-                      title=f'Different payment methods and their distribution ( from ${initial} to ${final} )')
+                      title=f'Different payment methods and their distribution ( from {initial} to {final} )')
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     # fig.show()
     return graphJSON
