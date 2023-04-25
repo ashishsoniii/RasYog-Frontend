@@ -1,10 +1,10 @@
-from flask import Flask, render_template, request,jsonify
+from flask import Flask, request,jsonify,make_response
 import JM_Store as ry
 import JM_stor_taxonomic as jmt
 import warnings
 from flask_api import status
 from flask_cors import CORS
-
+import gzip,json
 
 warnings.filterwarnings('ignore')
 
@@ -21,7 +21,8 @@ def Option_func(var):
         return [
         {"plot":'Generalized Analysis : Sunbust',"id":1,"YearChange":True,"SingleYear":False},
         {"plot":'Brand Vs Product Analysis',"id":2,"YearChange":True,"SingleYear":True},
-        {"plot":'Different Payment Methods',"id":3,"YearChange":True,"SingleYear":False}
+        {"plot":'Different Payment Methods',"id":3,"YearChange":True,"SingleYear":False},
+        {"plot":'Popularity Vs Margin',"id":4,"YearChange":False,"SingleYear":False}
         ]
     elif(var=="maps"):
         return [{"plot": 'Brand and popularity', "id": 1,"YearChange":True,"SingleYear":True},
@@ -33,7 +34,8 @@ def Option_func(var):
         return [
         # {"plot":"Number of Items in each topic Category","id":1}
         {"plot":'Sunburst Charts',"id":1,"YearChange":True,"SingleYear":False},
-        {"plot":'Tree Map Plots',"id":2,"YearChange":True,"SingleYear":False}
+        {"plot":'Tree Map Plots',"id":2,"YearChange":True,"SingleYear":False},
+        {"plot":'Common Products with Design or color : Tree Map Plots',"id":3,"YearChange":True,"SingleYear":False}
     ]
     elif(var=="taxonomic"):
         return [
@@ -59,11 +61,13 @@ def Data_Route(id,start,end):
              return [ry.monthwise_summary(start,end), ry.animated_monthwise_summary()]
 def Margin_Route(id,start,end):
         if(id==1):
-            return [ry.popularity_yearwise(start,end), ry.compare_popularity_yearwise(['JAIPUR MODERN', '11.11', 'OH LA LA'],start,end), ry.margin_brands(start,end), ry.popularity_brands(start,end)]
+            return [ry.margin_brands(start,end), ry.popularity_brands(start,end)]
         elif(id==2):
              return [ry.scatter_product(end), ry.scatter_margin(end), ry.scatter_sales(end)]
         elif(id==3):
             return [ry.payment_method(start,end)]
+        elif(id==4):
+            return [ry.popularity_yearwise(), ry.compare_popularity_yearwise(['JAIPUR MODERN', '11.11', 'OH LA LA'])]
 def Tree_Route(id,end):
         if(id==1):
             return[ry.treemap_popularity_for_product(final_year=end), ry.treemap_popularity_for_product_upto_design(final_year=end)]
@@ -126,7 +130,7 @@ def Choose_Option():
     graph_data={
             "plot_name":options,
             "Topic":Fun['id'],
-            "display_option":True
+            # "display_option":True
         }
     return jsonify(graph_data),status.HTTP_200_OK
 
@@ -154,7 +158,7 @@ def data_graph():
             'plot4':plot4,
             'Topic':'data',
             'Options':Option_func("data"),
-            'display_option':True
+            # 'display_option':True
         }
         return jsonify(JSON_Data),status.HTTP_200_OK
 
@@ -170,11 +174,13 @@ def margin_graph():
         to_year=int(graphInfo['end'])
         plot1,plot2,plot3,plot4 = None,None,None,None
         if graph_id == 1:
-            plot1,plot2,plot3,plot4=Margin_Route(1,start=from_year,end=to_year)
+            plot1,plot2=Margin_Route(1,start=from_year,end=to_year)
         elif graph_id == 2:
             plot1,plot2,plot3=Margin_Route(2,start=from_year,end=to_year)
         elif graph_id == 3:
             plot1=Margin_Route(3,start=from_year,end=to_year)
+        elif graph_id==4:
+            plot1,plot2=Margin_Route(4,start=from_year,end=to_year)
         else:
             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
@@ -184,7 +190,7 @@ def margin_graph():
             'plot4':plot4,
             'Topic':'margin',
             'Option':Option_func('margin'),
-            'display_option':True
+            # 'display_option':True
         }
         return jsonify(JSON_Data),status.HTTP_200_OK
 
@@ -210,7 +216,7 @@ def TreeMaps_graph():
             'plot4':plot4,
             'Topic':'maps',
             'Option':Option_func('maps'),
-            'display_option':True
+            # 'display_option':True
         }
         return jsonify(JSON_Data),status.HTTP_200_OK
 
@@ -235,7 +241,7 @@ def Tree_Maps_Taxonomic():
             'plot4':plot4,
             'Topic':'mapstaxonomic',
             'Option':Option_func('mapstaxonomic'),
-            'display_option':True
+            # 'display_option':True
         }
         return jsonify(JSON_Data),status.HTTP_200_OK
     
@@ -276,9 +282,18 @@ def Taxonomic_analysis():
             'plot4':plot4,
             'Topic':'taxonomic',
             'Option':Option_func('taxonomic'),
-            'display_option':True
+            # 'display_option':True
         }
-        return jsonify(JSON_Data),status.HTTP_200_OK
+
+        # content = gzip.compress(json.dumps(JSON_Data).encode('utf8'), 5)
+        # response = make_response(content)
+        # response.headers['Content-length'] = len(content)
+        # response.headers['Content-Encoding'] = 'gzip'
+        # return response
+        # json_str = json.dumps(JSON_Data)
+        # compressed_data = gzip.compress(json_str.encode('utf-8'))
+
+        return (JSON_Data),status.HTTP_200_OK
 
 
 # Route for Data in Taxonomic Analysis
@@ -301,9 +316,10 @@ def Data_Anaylsis_Taxonomic():
             # plot3=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
             # plot4=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
             plot1=jmt.treemap_particular_brand_for_product(from_year,to_year)
-            plot2=jmt.treemap_brand_similar_product_with_color_design(from_year,to_year)
-            plot3=jmt.treemap_brand_similar_product_with_design(from_year,to_year)
-            plot4=jmt.Overall_treemap(from_year,to_year)
+            plot2=jmt.Overall_treemap(from_year,to_year)
+        elif graph_id==3:
+            plot1=jmt.treemap_brand_similar_product_with_color_design(from_year,to_year)
+            plot2=jmt.treemap_brand_similar_product_with_design(from_year,to_year)
         else:
             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
         JSON_Data={
@@ -313,9 +329,9 @@ def Data_Anaylsis_Taxonomic():
             'plot4':plot4,
             'Topic':'datataxonomic',
             'Option':Option_func('datataxonomic'),
-            'display_option':True
+            # 'display_option':True
         }
-        return jsonify(JSON_Data),status.HTTP_200_OK
+        return (JSON_Data),status.HTTP_200_OK
 
 
 if __name__ == '__main__':
