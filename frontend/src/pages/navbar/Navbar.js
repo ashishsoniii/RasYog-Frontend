@@ -100,7 +100,7 @@ const Navbar = (props) => {
             </li>
 
             {/* new routes */}
-            <li>
+            {/* <li>
               <NavLink
                 className="nav-link nav-link-ltr"
                 to="/dataAnalysis"
@@ -113,7 +113,7 @@ const Navbar = (props) => {
               >
                 Taxonomic
               </NavLink>
-            </li>
+            </li> */}
 
             <li>
               <NavLink
@@ -129,7 +129,7 @@ const Navbar = (props) => {
                 Maps Taxonomic
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink
                 className="nav-link nav-link-ltr"
                 to="/dataAnalysis"
@@ -142,7 +142,7 @@ const Navbar = (props) => {
               >
                 Data Taxonomic
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </div>
 

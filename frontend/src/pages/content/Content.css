@@ -294,6 +294,93 @@
     font-size: 4.5rem;
 }
 
+
+
+
+
+
+
+
+
+
+/* Content css */
+
+.team {
+    display: grid;
+    justify-content: center;
+    border-radius: 3rem;
+    margin-top: 8%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 8%;
+    /* min-height: 25rem; */
+    /* background-color: #947add; */
+    /* font-style: italic; */
+    /* position: relative; */
+}
+
+.main-text-team {
+    color: #8c3009 !important;
+    display: flex;
+    justify-content: center;
+    color: black;
+    font-size: 3rem;
+    font-weight: 600;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-top: 1%;
+
+}
+
+.btn-team {
+    color: #52104f !important;
+    font-style: italic;
+    font-weight: 500;
+    background-color: #c1d0db;
+    border-radius: 3rem;
+    cursor: pointer;
+    margin-left: 7rem;
+    margin-right: 7rem;
+    margin-top: 2rem;
+
+
+}
+
+.btn-team:hover {
+    font-style: italic;
+    font-weight: 500;
+    background-color: #86bedb;
+    border-radius: 3rem;
+    cursor: pointer;
+}
+
+
+.main-home-sub-text_about-US {
+    font-size: 2rem;
+}
+
+/* .full-team{
+    background-image: linear-gradient(45deg, #947add, #e85555);
+    min-height: 700px;
+
+
+} */
+
+.white-bg {
+    padding-top: 3%;
+    padding-bottom: 4%;
+    background-color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
 /* responsiveness */
 
 @media (max-width: 1400px) {
@@ -321,6 +408,12 @@
 }
 
 @media (max-width: 991px) {
+    .card__collection {
+
+        display: grid !important;
+        justify-content: center;
+    }
+
     .on-home-bg {
 
         margin-top: -68%;
@@ -370,6 +463,34 @@
     .gtitle {
         font-size: 1.4rem !important;
     }
+
+    .main-text-team {
+
+        font-size: 2.5rem;
+        font-weight: 500;
+
+
+    }
+
+    /* .btn-team{
+        font-style: italic;
+        font-weight: 300;
+        background-color: #0073d7;
+        border-radius: 3rem;
+        cursor: pointer;
+        margin-left: 7rem;
+        margin-right: 7rem;
+        margin-top: 2rem;
+    
+    
+    }
+    .btn-team:hover{
+        font-style: italic;
+        font-weight: 500;
+        background-color: #00d756;
+        border-radius: 3rem;
+        cursor: pointer;
+    } */
 }
 
 @media (max-width: 653px) {
@@ -378,6 +499,14 @@
         /* display: flex; */
         text-align: center;
         /* justify-content: center; */
+    }
+
+    .main-text-team {
+
+        font-size: 2rem;
+        font-weight: 500;
+
+
     }
 
     .main-home-text {
@@ -455,6 +584,18 @@
     }
 
 
+
+
+}
+
+@media (max-width: 513px) {
+    .main-text-team {
+
+        font-size: 1.5rem;
+        font-weight: 500;
+
+
+    }
 }
 
 @media (max-width: 485px) {
@@ -486,6 +627,13 @@
         margin-top: 100px !important;
     }
 
+    .main-text-team {
+
+        font-size: 1.5rem;
+        font-weight: 400;
+
+
+    }
 
     /* .bg{
         min-height: 600px;
@@ -494,7 +642,49 @@
 
 }
 
+@media (max-width: 440px) {
+
+    .main-text-team {
+
+        font-size: 1.6rem;
+        font-weight: 400;
+
+
+    }
+
+    .btn-team {
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        /* margin-top: 2rem; */
+
+    }
+
+
+}
+
 @media (max-width: 400px) {
+    .main-text-team {
+
+        font-size: 1.3rem;
+        font-weight: 400;
+
+
+    }
+
+    .btn-team {
+        font-size: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        padding-left: -1rem;
+        padding-right: -1rem;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        /* margin-top: 2rem; */
+
+    }
 
     .on-home-bg {
 
@@ -511,6 +701,14 @@
 }
 
 @media (max-width: 375px) {
+
+    .main-text-team {
+
+        font-size: 9px;
+        font-weight: 200;
+
+
+    }
 
     .on-home-bg {
 

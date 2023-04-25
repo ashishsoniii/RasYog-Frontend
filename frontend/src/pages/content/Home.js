@@ -4,7 +4,8 @@ import "./Content.css";
 import Buttonz from "./components/Button.js";
 import Button_2 from "./components/Button_2.js";
 import ReactSlider from "./components/ReactSlider.js";
-import DialogBox from "./components/DialogGraph.js";
+import Team from "./components/Team";
+import { NavLink } from "react-router-dom";
 
 const Home = () => {
   const [activeState, setActiveState] = useState("Sales Insights");
@@ -145,6 +146,15 @@ const Home = () => {
       </div>
 
       <ReactSlider />
+
+      <section className="team">
+        <div className="main-text-team">Your Partner in Business Analysis </div>
+        <NavLink to="/team">
+          <div className="main-text-team btn-team">Discover Our Team!</div>
+        </NavLink>
+
+        {/* <Cards /> */}
+      </section>
     </>
   );
 };
