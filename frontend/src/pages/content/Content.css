@@ -160,7 +160,7 @@
 .main-home-sub-text {
     display: flex;
     justify-content: center;
-    font-size: 1.3rem;
+    font-size: 2rem;
     text-align: center;
     margin-left: 10%;
     margin-right: 10%;
@@ -200,6 +200,7 @@
     /* max-width: 800px; */
 
 }
+
 
 .plotlyi {
     display: flex;
@@ -373,6 +374,94 @@
 
 
 
+/* card on tem */
+
+
+/* CSS styles */
+.card {
+    flex-direction: row;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.card-text-new {
+    display: grid;
+    justify-content: center;
+}
+
+.image-container {
+    display: grid;
+    justify-content: center;
+    width: 20rem;
+    height: 20rem;
+    /* margin-bottom: 20px; */
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.image-container img {
+    width: 100%;
+    /* height: 100%; */
+    object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+    .card {
+        /* flex-direction: row; */
+        justify-content: space-between;
+        max-width: 600px;
+    }
+
+    .image-container {
+        width: 10rem;
+        height:10rem;
+        margin-right: 20px;
+    }
+}
+
+.cards-on-team {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* flex-direction: column; */
+    padding: 20px;
+    width: 100%;
+/* 
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px; */
+}
+.cards-middle{
+    margin:3%;
+}
+
+.cards__list {
+    padding-top: 15px ;
+    margin-bottom: -25px ;
+}
+.cards__list li{
+    padding-right: 5px ;
+}
+
+
+/*  */
+.text-xl {
+    font-size: 2rem;
+    line-height: 1.75rem;
+}
+.tracking-wide {
+    letter-spacing: 0.025em;
+    font-size: 1.7rem;
+    padding-top: 3%;
+}
 
 
 
@@ -447,15 +536,43 @@
         margin-left: 1% !important;
         font-size: 1.5rem !important;
     }
+    .card {
+        /* flex-direction: row; */
+        justify-content: space-between;
+        max-width: 600px;
+    }
+
+    .image-container {
+        width: 13rem;
+        height:13rem;
+        margin-right: 20px;
+    }
 }
 
-
+@media (max-width: 813px) {
+    .image-container {
+        width: 8rem;
+        height:8rem;
+        margin-right: 20px;
+    }
+}
 @media (max-width: 756px) {
     .on-home-bg {
 
         margin-top: -63rem;
         margin-bottom: 2%;
 
+    }
+    .card {
+        /* flex-direction: row; */
+        justify-content: space-between;
+        max-width: 600px;
+    }
+
+    .image-container {
+        width: 8rem;
+        height:8rem;
+        margin-right: 20px;
     }
 }
 
@@ -471,6 +588,16 @@
 
 
     }
+    .text-xl {
+        font-size: 1.5rem;
+        line-height: 1.75rem;
+    }
+    .tracking-wide {
+        letter-spacing: 0.025em;
+        font-size: 1rem;
+        padding-top: 3%;
+    }
+    
 
     /* .btn-team{
         font-style: italic;
@@ -492,7 +619,14 @@
         cursor: pointer;
     } */
 }
+@media (max-width: 678px) {
 
+    .image-container {
+        width: 5rem;
+        height:5rem;
+        margin-right: 20px;
+    }
+}
 @media (max-width: 653px) {
     .no-graph {
         font-size: 2.5rem;
@@ -588,6 +722,39 @@
 
 }
 
+
+@media (max-width: 543px) {
+    .cards-on-team {
+        
+    
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        /* max-width: 400px; */
+    }
+    .image-container {
+        width: 16rem;
+        height:16rem;
+        margin-right: 20px;
+    }
+    .text-xl {
+        font-size: 2rem;
+        line-height: 1.75rem;
+    }
+    .tracking-wide {
+        letter-spacing: 0.025em;
+        font-size: 1.6rem;
+        padding-top: 3%;
+    }
+    
+}
+
+.fab svg{
+    font-size: 2rem;
+}
+
 @media (max-width: 513px) {
     .main-text-team {
 
@@ -605,6 +772,10 @@
 
     .cPsKcu {
         padding: 3px 19px !important;
+    }
+    .main-home-sub-text {
+        font-size: 1.5rem;
+    
     }
 }
 
@@ -724,6 +895,13 @@
 
 }
 
+@media (max-width: 332px) {
+    .image-container {
+        width: 10rem;
+        height:10rem;
+        margin-right: 20px;
+    }
+}
 @media (max-width: 332px) {
 
     .on-home-bg {
@@ -871,3 +1049,5 @@
     /* align-items: center;
     flex-direction: column; */
 }
+
+

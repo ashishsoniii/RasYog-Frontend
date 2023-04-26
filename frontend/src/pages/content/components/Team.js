@@ -5,7 +5,7 @@ import UserCards2 from "./UserCards2";
 import { GrLinkedinOption } from "react-icons/gr";
 import { GrGithub } from "react-icons/gr";
 import { CgWebsite } from "react-icons/cg";
-import pranav from "../../../assets/developer/pranav.png";
+import pranav from "../../../assets/developer/pranav1.png";
 import shreyansh from "../../../assets/developer/shreyansh.jpeg";
 import sameer from "../../../assets/developer/sameer.jpeg";
 import ashish from "../../../assets/developer/ashish.jpg";
@@ -13,7 +13,7 @@ import tanya from "../../../assets/developer/tanya.jpeg";
 import anjali from "../../../assets/developer/anjali.jpeg";
 
 function Team() {
-  const cardsData = [
+  const cardsData1 = [
     {
       content: "Ashish Soni",
       post: "Frontend Developer",
@@ -27,6 +27,8 @@ function Team() {
         icon: <GrGithub />,
       },
     },
+  ];
+  const cardsData3 = [
     {
       content: "Pranav Malpani",
       post: "Backend Developer",
@@ -44,6 +46,8 @@ function Team() {
         icon: <CgWebsite />,
       },
     },
+  ];
+  const cardsData4 = [
     {
       content: "Shreyansh Goyal",
       post: "Backend Developer",
@@ -60,19 +64,6 @@ function Team() {
   ];
   const cardsData2 = [
     {
-      content: "Tanya Garg",
-      post: "Data Science Engineer",
-      imageSrc: tanya,
-      link1: {
-        url: "https://www.linkedin.com/in/tanya-garg14/",
-        icon: <GrLinkedinOption />,
-      },
-      link2: {
-        url: "https://github.com/tngarg5",
-        icon: <GrGithub />,
-      },
-    },
-    {
       content: "Anjali Yadav",
       post: "Data Science Engineer",
       imageSrc: anjali,
@@ -85,40 +76,77 @@ function Team() {
         icon: <GrGithub />,
       },
     },
-    // {
-    //   content: "Sameer Saifi",
-    //   post: "Sameer Saifi",
-    //   imageSrc: sameer,
-    //   link1: {
-    //     url: "https://www.linkedin.com/in/sameer-saifi-88297420b/",
-    //     icon: <GrLinkedinOption />,
-    //   },
-    //   link2: {
-    //     url: "https://github.com/Sameersaifi1512/",
-    //     icon: <GrGithub />,
-    //   },
-    // },
   ];
+  const cardsData5 = [
+    {
+      content: "Tanya Garg",
+      post: "Data Science Engineer",
+      imageSrc: tanya,
+      link1: {
+        url: "https://www.linkedin.com/in/tanya-garg14/",
+        icon: <GrLinkedinOption />,
+      },
+      link2: {
+        url: "https://github.com/tngarg5",
+        icon: <GrGithub />,
+      },
+    },
+  ];
+  // {
+  //   content: "Anjali Yadav",
+  //   post: "Data Science Engineer",
+  //   imageSrc: anjali,
+  //   link1: {
+  //     url: "https://www.linkedin.com/in/anjali-yadav23/",
+  //     icon: <GrLinkedinOption />,
+  //   },
+  //   link2: {
+  //     url: "https://github.com/Anjali2303/",
+  //     icon: <GrGithub />,
+  //   },
+  // },
+  // // {
+  //   content: "Sameer Saifi",
+  //   post: "Sameer Saifi",
+  //   imageSrc: sameer,
+  //   link1: {
+  //     url: "https://www.linkedin.com/in/sameer-saifi-88297420b/",
+  //     icon: <GrLinkedinOption />,
+  //   },
+  //   link2: {
+  //     url: "https://github.com/Sameersaifi1512/",
+  //     icon: <GrGithub />,
+  //   },
+  // },
 
   return (
     <div className="full-team">
       <div className="on-home-bg ">
         <div className="main-home-text"> About Us! </div>
         <div className="main-home-sub-text main-home-sub-text_about-US">
-          This is a comprehensive taxonomic and sales analysis of a departmental
-          store. Our team has analyzed and organized the store's data into
-          various categories based on similarities and differences, including
-          product categories, brand categories, and price categories. We have
-          also analyzed sales data to provide insights into product popularity
-          and availability. .{" "}
+          Welcome to RASYOG, featured by YOGLABS. Our team has conducted a
+          taxonomic and sales analysis of a departmental store, organized into
+          categories based on similarities and differences. Our aim is to
+          provide valuable insights for store managers and customers, using
+          data-driven insights to enhance decision-making. Powered by YogLabs,
+          our user-friendly interface makes it easy to navigate and understand.
+          <br />
+          Contact us to learn more!
         </div>
       </div>
       <div className="white-bg">
         <div className="main-home-text"> Meet The Team! </div>
         <div className="cards-on-team">
-          <UserCards1 cardsData={cardsData2} />
-          <UserCards1 cardsData={cardsData} />
+          <UserCards2 cardsData={cardsData2} />
+          <UserCards2 cardsData={cardsData5} />
+          <UserCards2 cardsData={cardsData1} />
         </div>
+        <div className="cards-on-team">
+          <UserCards2 cardsData={cardsData3} />
+          <UserCards2 cardsData={cardsData4} />
+        </div>
+        {/* <UserCards1 cardsData={cardsData} />
+          <UserCards1 cardsData={cardsData} /> */}
       </div>
       {/* <UserCards2 cardsData={cardsData} /> */}
     </div>

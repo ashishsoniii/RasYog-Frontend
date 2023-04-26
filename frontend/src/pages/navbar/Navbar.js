@@ -63,11 +63,11 @@ const Navbar = (props) => {
                 activeClassName="active"
                 onClick={() => {
                   props.onTopicChange("data");
-                  props.onAcitiveTopicChange("Sales Insights");
+                  props.onAcitiveTopicChange("Temporal Sales Insights");
                   handleMenuClick();
                 }}
               >
-                Sales Insights
+                Temporal Sales Insights
               </NavLink>
             </li>
             <li>
@@ -91,7 +91,7 @@ const Navbar = (props) => {
                 activeClassName="active"
                 onClick={() => {
                   props.onTopicChange("maps");
-                  props.onAcitiveTopicChange("Tree Maps");
+                  props.onAcitiveTopicChange("Sales Distribution ");
                   handleMenuClick();
                 }}
               >
