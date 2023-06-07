@@ -1,12 +1,12 @@
-from flask import Flask, request,jsonify,make_response
+from flask import Flask, request,jsonify
 import JM_Store as ry
 import JM_stor_taxonomic as jmt
-import warnings
+# import lazy_imports
+# import warnings
 from flask_api import status
 from flask_cors import CORS
-import gzip,json
-
-warnings.filterwarnings('ignore')
+import os
+# warnings.filterwarnings('ignore')
 
 app = Flask(__name__)
 CORS(app)
@@ -55,6 +55,7 @@ def Option_func(var):
 
 
 def Data_Route(id,start,end):
+        # ry=lazy_imports.
         if(id==1):
             return [ry.summary_all_years(), ry.summary_month_margin(), ry.summary_month_sales()]
         elif(id==2):
@@ -332,6 +333,25 @@ def Data_Anaylsis_Taxonomic():
             # 'display_option':True
         }
         return (JSON_Data),status.HTTP_200_OK
+
+@app.route("/upload",methods=['POST'])
+def File_Upload():
+    if(request.method=='POST'):
+        File1=request.files['File1']
+        File2=request.files['File2']
+        File1.save(File1.filename)
+        File2.save(File2.filename)
+        old_name_file1=File1.filename
+        old_name_file2=File2.filename
+        new_name_file1 = 'PranavMalpani.xlsx'
+        new_name_file2 = 'PranavMalpani2.xlsx'
+
+        if os.path.exists(old_name_file1) and os.path.exists(old_name_file2):
+            os.rename(old_name_file1, new_name_file1)
+            os.rename(old_name_file2,new_name_file2)
+            return 'Files uploaded successfully',status.HTTP_200_OK
+        else:
+            return 'File not found, upload failed'
 
 
 if __name__ == '__main__':
