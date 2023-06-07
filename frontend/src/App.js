@@ -5,6 +5,7 @@ import "./App.css";
 import Footer from "./pages/footer/Footer";
 import Home from "./pages/content/Home";
 import DataAnalysis from "./pages/content/DataAnalysis.js";
+import Team from "./pages/content/components/Team";
 
 const App = () => {
   const [topic, setTopic] = useState("data");
@@ -30,6 +31,11 @@ const App = () => {
           exact
           path="/dataAnalysis"
           element={<DataAnalysis topic={topic} activeTopic={activeTopic} />}
+        />
+        <Route
+          exact
+          path="/team"
+          element={<Team topic={topic} activeTopic={activeTopic} />}
         />
       </Routes>
       <Footer />
