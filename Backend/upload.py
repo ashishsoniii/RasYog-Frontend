@@ -42,8 +42,11 @@ df1 =read_excel(io.BytesIO(obj1['Body'].read()))
 
 # s3.put_object(Bucket=bucket_name, Key=('/total_data_file.csv'))
 # s3.put_object(Bucket=bucket_name, Key=('/Store_data_v2.xlsx'))
-
-if __name__=="__main__":
-    s3.Bucket(bucket_name).upload_file(Filename='total_data_file.csv',Key='total_data_file.csv')
+def Upload_File():
     s3.Bucket(bucket_name).upload_file(Filename='Store_data_v2.xlsx',Key='Store_data_v2.xlsx')
+    s3.Bucket(bucket_name).upload_file(Filename='total_data_file.csv',Key='total_data_file.csv')
+
+    # s3.Bucket(bucket_name).upload_file(Filename='PranavMalpani2.xlsx',Key='PranavMalpani2.xlsx')
     # print(df)
+
+# if __name__=="__main__"

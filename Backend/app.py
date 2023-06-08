@@ -6,6 +6,7 @@ import JM_stor_taxonomic as jmt
 from flask_api import status
 from flask_cors import CORS
 import os
+from upload import Upload_File
 # warnings.filterwarnings('ignore')
 
 app = Flask(__name__)
@@ -343,12 +344,14 @@ def File_Upload():
         File2.save(File2.filename)
         old_name_file1=File1.filename
         old_name_file2=File2.filename
-        new_name_file1 = 'PranavMalpani.xlsx'
-        new_name_file2 = 'PranavMalpani2.xlsx'
+        new_name_file1 = 'Store_data_v2.xlsx'
+        new_name_file2 = 'tryfile.xlsx'
 
         if os.path.exists(old_name_file1) and os.path.exists(old_name_file2):
             os.rename(old_name_file1, new_name_file1)
             os.rename(old_name_file2,new_name_file2)
+            Upload_File()
+        
             return 'Files uploaded successfully',status.HTTP_200_OK
         else:
             return 'File not found, upload failed'
