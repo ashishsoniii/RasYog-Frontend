@@ -1,8 +1,9 @@
-from flask import Flask, request,jsonify
+from flask import Flask, request,jsonify,session
 import JM_Store as ry
 import JM_stor_taxonomic as jmt
 # import lazy_imports
 # import warnings
+import shutil
 from flask_api import status
 from flask_cors import CORS
 import os
@@ -11,6 +12,8 @@ from upload import Upload_File
 
 app = Flask(__name__)
 CORS(app)
+
+app.secret_key="Login"
 
 def Option_func(var):
     if(var=="data"):
@@ -120,49 +123,55 @@ def home():
 # Route for Option in Select box
 @app.route('/store')
 def Choose_Option():
-    Fun=(dict(request.args))
-    Fun_id=Fun['id'].replace(" ","").lower()
-    # print(Fun)
+    # if('username' in session and session['username']=="pranav"):
+        Fun=(dict(request.args))
+        Fun_id=Fun['id'].replace(" ","").lower()
+        # print(Fun)
 
-    if(Fun_id in ["data","margin","maps","taxonomic","mapstaxonomic","datataxonomic"]):
-        options=Option_func(Fun['id'])
-    else:
-        return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
-    
-    graph_data={
-            "plot_name":options,
-            "Topic":Fun['id'],
-            # "display_option":True
-        }
-    return jsonify(graph_data),status.HTTP_200_OK
+        if(Fun_id in ["data","margin","maps","taxonomic","mapstaxonomic","datataxonomic"]):
+            options=Option_func(Fun['id'])
+        else:
+            return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
+        
+        graph_data={
+                "plot_name":options,
+                "Topic":Fun['id'],
+                # "display_option":True
+            }
+        return jsonify(graph_data),status.HTTP_200_OK
+    # else:
+    #     return "Unauthorized",status.HTTP_401_UNAUTHORIZED 
 
 # Route for Data Analysis        
 @app.route('/data', methods=['POST'])
 def data_graph():
     if request.method == 'POST':
-        graphInfo= (request.get_json())
-        graph_id=graphInfo["graph"]
-        from_year=int(graphInfo['starting'])
-        to_year=int(graphInfo['end'])
-        plot1,plot2,plot3,plot4 = None,None,None,None
-        if graph_id == 1:
-            # plot1,plot2,plot3=Data_dict[1]
-            plot1,plot2,plot3=Data_Route(1,from_year,to_year)
-        elif graph_id == 2:
-            plot1,plot2=Data_Route(2,from_year,to_year)
+        if('username' in session and session['username']=="pranav"):
+            graphInfo= (request.get_json())
+            graph_id=graphInfo["graph"]
+            from_year=int(graphInfo['starting'])
+            to_year=int(graphInfo['end'])
+            plot1,plot2,plot3,plot4 = None,None,None,None
+            if graph_id == 1:
+                # plot1,plot2,plot3=Data_dict[1]
+                plot1,plot2,plot3=Data_Route(1,from_year,to_year)
+            elif graph_id == 2:
+                plot1,plot2=Data_Route(2,from_year,to_year)
+            else:
+                return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
+            
+            JSON_Data={
+                'plot1':plot1,
+                'plot2':plot2,
+                'plot3':plot3,
+                'plot4':plot4,
+                'Topic':'data',
+                'Options':Option_func("data"),
+                # 'display_option':True
+            }
+            return jsonify(JSON_Data),status.HTTP_200_OK
         else:
-             return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
-        
-        JSON_Data={
-            'plot1':plot1,
-            'plot2':plot2,
-            'plot3':plot3,
-            'plot4':plot4,
-            'Topic':'data',
-            'Options':Option_func("data"),
-            # 'display_option':True
-        }
-        return jsonify(JSON_Data),status.HTTP_200_OK
+            return "Unauthorized",status.HTTP_401_UNAUTHORIZED 
 
 
 
@@ -340,21 +349,39 @@ def File_Upload():
     if(request.method=='POST'):
         File1=request.files['File1']
         File2=request.files['File2']
-        File1.save(File1.filename)
-        File2.save(File2.filename)
         old_name_file1=File1.filename
         old_name_file2=File2.filename
         new_name_file1 = 'Store_data_v2.xlsx'
         new_name_file2 = 'tryfile.xlsx'
+        File1.save(new_name_file1)
+        File2.save(new_name_file2)
+        # File2.save(File2.filename)
+        # File1.save(File1.filename)
+        # if os.path.exists(old_name_file1) and os.path.exists(old_name_file2):
+            # os.rename(old_name_file1, new_name_file1)
+            # os.rename(old_name_file2,new_name_file2)
+        # Upload_File()
 
-        if os.path.exists(old_name_file1) and os.path.exists(old_name_file2):
-            os.rename(old_name_file1, new_name_file1)
-            os.rename(old_name_file2,new_name_file2)
-            Upload_File()
+        return 'Files uploaded successfully',status.HTTP_200_OK
+        # else:
+            # return 'File not found, upload failed'
+
+@app.route("/login",methods=["POST"])
+def login():
+    userdata=request.get_json()
+    if(userdata["usernm"]=="pranav" and userdata["password"]=="12345"):
+            session["username"]="pranav"
+            return "Suceesfully Login"
+    return "Invalid credentials"
+
+@app.route("/logout")
+def logout():
+    session.pop("username",None)
+    return "Successfully logout"
+
+
         
-            return 'Files uploaded successfully',status.HTTP_200_OK
-        else:
-            return 'File not found, upload failed'
+
 
 
 if __name__ == '__main__':
