@@ -13,7 +13,7 @@ from upload import Upload_File
 app = Flask(__name__)
 CORS(app)
 
-app.secret_key="Login"
+# app.secret_key="Login"
 
 def Option_func(var):
     if(var=="data"):
@@ -146,7 +146,7 @@ def Choose_Option():
 @app.route('/data', methods=['POST'])
 def data_graph():
     if request.method == 'POST':
-        if('username' in session and session['username']=="pranav"):
+        # if('username' in session and session['username']=="pranav"):
             graphInfo= (request.get_json())
             graph_id=graphInfo["graph"]
             from_year=int(graphInfo['starting'])
@@ -170,8 +170,8 @@ def data_graph():
                 # 'display_option':True
             }
             return jsonify(JSON_Data),status.HTTP_200_OK
-        else:
-            return "Unauthorized",status.HTTP_401_UNAUTHORIZED 
+        # else:
+        #     return "Unauthorized",status.HTTP_401_UNAUTHORIZED 
 
 
 
@@ -347,11 +347,11 @@ def Data_Anaylsis_Taxonomic():
 @app.route("/upload",methods=['POST'])
 def File_Upload():
     if(request.method=='POST'):
-        File1=request.files['File1']
-        File2=request.files['File2']
-        old_name_file1=File1.filename
-        old_name_file2=File2.filename
-        new_name_file1 = 'Store_data_v2.xlsx'
+        File1=request.files['File1']  #store_data_v2
+        File2=request.files['File2']  #total_data
+        # old_name_file1=File1.filename
+        # old_name_file2=File2.filename
+        new_name_file1 = 'Store_data_v3.xlsx'
         new_name_file2 = 'tryfile.xlsx'
         File1.save(new_name_file1)
         File2.save(new_name_file2)
@@ -361,23 +361,23 @@ def File_Upload():
             # os.rename(old_name_file1, new_name_file1)
             # os.rename(old_name_file2,new_name_file2)
         # Upload_File()
-
+        
         return 'Files uploaded successfully',status.HTTP_200_OK
         # else:
             # return 'File not found, upload failed'
 
-@app.route("/login",methods=["POST"])
-def login():
-    userdata=request.get_json()
-    if(userdata["usernm"]=="pranav" and userdata["password"]=="12345"):
-            session["username"]="pranav"
-            return "Suceesfully Login"
-    return "Invalid credentials"
+# @app.route("/login",methods=["POST"])
+# def login():
+#     userdata=request.get_json()
+#     if(userdata["usernm"]=="pranav" and userdata["password"]=="12345"):
+#             session["username"]="pranav"
+#             return "Suceesfully Login"
+#     return "Invalid credentials"
 
-@app.route("/logout")
-def logout():
-    session.pop("username",None)
-    return "Successfully logout"
+# @app.route("/logout")
+# def logout():
+#     session.pop("username",None)
+#     return "Successfully logout"
 
 
         
