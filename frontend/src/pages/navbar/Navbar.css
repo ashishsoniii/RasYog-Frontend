@@ -244,7 +244,20 @@ li {
 }
 
 /* responsive css style  */
+@media (max-width: 1292px) {
+
+    .menu-link ul li a {
+
+        font-size: 1.3rem;
+    }
+
+    /* .nav-link-ltr {
+        font-size: 1.7rem;
+    } */
+}
+
 @media (max-width: 1080px) {
+
     .main-nav {
         height: 8rem;
         grid-template-columns: 2rem 3fr 3fr 1fr 2rem;

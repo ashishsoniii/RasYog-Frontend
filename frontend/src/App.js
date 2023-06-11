@@ -6,6 +6,7 @@ import Footer from "./pages/footer/Footer";
 import Home from "./pages/content/Home";
 import DataAnalysis from "./pages/content/DataAnalysis.js";
 import Team from "./pages/content/components/Team";
+import UploadFile from "./pages/content/UploadFile";
 
 const App = () => {
   const [topic, setTopic] = useState("data");
@@ -37,6 +38,7 @@ const App = () => {
           path="/team"
           element={<Team topic={topic} activeTopic={activeTopic} />}
         />
+        <Route exact path="/upload" element={<UploadFile />} />
       </Routes>
       <Footer />
     </>

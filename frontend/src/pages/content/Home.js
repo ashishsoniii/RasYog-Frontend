@@ -155,6 +155,14 @@ const Home = () => {
 
         {/* <Cards /> */}
       </section>
+      <section className="team">
+        <div className="main-text-team">Update Content </div>
+        <NavLink to="/upload">
+          <div className="main-text-team btn-team">Upload Files!</div>
+        </NavLink>
+
+        {/* <Cards /> */}
+      </section>
     </>
   );
 };
