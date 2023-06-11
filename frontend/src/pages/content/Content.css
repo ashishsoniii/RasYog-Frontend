@@ -342,6 +342,8 @@
     margin-left: 7rem;
     margin-right: 7rem;
     margin-top: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 
 
 }
@@ -488,9 +490,10 @@
     cursor: pointer;
     border-radius: 2.5rem;
 }
+
 .drop-area input:hover {
     background-color: #00513352;
-    
+
 }
 
 
@@ -500,8 +503,9 @@
         display: flex;
         flex-direction: column;
         margin-top: -64rem;
-    }    
+    }
 }
+
 @media screen and (max-width: 768px) {
     .card {
         /* flex-direction: row; */
