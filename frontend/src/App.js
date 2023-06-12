@@ -25,6 +25,7 @@ const App = () => {
           onTopicChange={handleTopicChange}
           onAcitiveTopicChange={handleActiveTopicChange}
         />
+        
       </div>
       <Routes>
         <Route exact path="/" element={<Home />} />

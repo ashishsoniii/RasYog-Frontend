@@ -235,6 +235,8 @@
 
 .white-area {
     background-color: #F2F2F2;
+    padding-top: 5rem;
+    padding-bottom: 1rem;
 
 }
 
@@ -307,17 +309,27 @@
 /* Content css */
 
 .team {
-    display: grid;
+    display: flex;
     justify-content: center;
-    border-radius: 3rem;
-    margin-top: 8%;
+    flex-direction: column;
+    /* border-radius: 3rem;
     margin-left: 20%;
-    margin-right: 20%;
-    margin-bottom: 8%;
+    margin-right: 20%; */
+    padding-top: 4%;
+    padding-bottom: 7%;
     /* min-height: 25rem; */
     /* background-color: #947add; */
     /* font-style: italic; */
     /* position: relative; */
+}
+
+.team {
+    background-color: #F2F2F2
+}
+
+.team a {
+    display: flex;
+    justify-content: center;
 }
 
 .main-text-team {
@@ -344,6 +356,8 @@
     margin-top: 2rem;
     padding-left: 1rem;
     padding-right: 1rem;
+    display: flex;
+    justify-content: center;
 
 
 }

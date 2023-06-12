@@ -147,6 +147,14 @@ const Home = () => {
 
       <ReactSlider />
 
+      <section className="team bg-add">
+        <div className="main-text-team">Update Data </div>
+        <NavLink to="/upload">
+          <div className="main-text-team btn-team">Upload Files!</div>
+        </NavLink>
+      </section>
+
+
       <section className="team">
         <div className="main-text-team">Your Partner in Business Analysis </div>
         <NavLink to="/team">
@@ -154,12 +162,6 @@ const Home = () => {
         </NavLink>
 
         {/* <Cards /> */}
-      </section>
-      <section className="team">
-        <div className="main-text-team">Update Data </div>
-        <NavLink to="/upload">
-          <div className="main-text-team btn-team">Upload Files!</div>
-        </NavLink>
 
         {/* <Cards /> */}
       </section>
