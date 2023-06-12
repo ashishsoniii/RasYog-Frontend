@@ -464,12 +464,20 @@
 
 .drop-area {
     border: 2px solid rgb(0, 0, 0);
-    padding: 1rem;
+    padding: 2rem;
     text-align: center;
     margin: 2rem;
     border-radius: 2.5rem;
     background-color: #4d615a5e;
+}
 
+
+
+.drop-area img {
+    display: block;
+    width: 42px;
+    margin: 1rem auto;
+    pointer-events: none;
 }
 
 .drop-area p {
@@ -494,8 +502,38 @@
     background-color: #45a049;
 }
 
-.drop-area input {
-    /* background-color: #04aa6d5e; */
+.hidden-file-input {
+    display: none;
+    /* cursor: pointer; */
+
+  }
+  
+  .file-input-image {
+    /* Add your desired styles for the image as an input */
+    /* For example: */
+    width: 150px;
+    height: auto;
+    /* cursor: pointer; */
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    padding: 5px;
+    /* cursor: pointer; */
+  }
+
+  .custom-file-label{
+    cursor: pointer;
+  }
+
+  
+  .file-input-image:hover {
+    border-color: #888;
+    cursor: pointer;
+
+  }
+
+  
+/* .drop-area input {
+    background-color: #04aa6d5e;
     border: none;
     color: rgb(0, 0, 0);
     padding: 16px 32px;
@@ -503,12 +541,13 @@
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 2.5rem;
-}
+    display: none;
+} */
 
-.drop-area input:hover {
+/* .drop-area input:hover {
     background-color: #00513352;
 
-}
+} */
 
 
 @media screen and (max-width: 670px) {
