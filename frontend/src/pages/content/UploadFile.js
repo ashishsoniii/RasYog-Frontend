@@ -1,16 +1,31 @@
 import React, { useState } from "react";
 import axios from "axios";
+import excel from "../../assets/excel.png";
 
 function UploadFile() {
   const [file1, setFile1] = useState(null);
   const [file2, setFile2] = useState(null);
+  const [selectedFileName1, setSelectedFileName1] = useState(
+    "Select an Excel File"
+  );
+  const [selectedFileName2, setSelectedFileName2] = useState(
+    "Select an Excel File"
+  );
 
   const handleFile1Change = (event) => {
-    setFile1(event.target.files[0]);
+    const selectedFile = event.target.files[0];
+    setFile1(selectedFile);
+    setSelectedFileName1(
+      selectedFile ? selectedFile.name : "Select an Excel File"
+    );
   };
 
   const handleFile2Change = (event) => {
-    setFile2(event.target.files[0]);
+    const selectedFile = event.target.files[0];
+    setFile2(selectedFile);
+    setSelectedFileName2(
+      selectedFile ? selectedFile.name : "Select an Excel File"
+    );
   };
 
   const handleDragOver = (event) => {
@@ -43,7 +58,7 @@ function UploadFile() {
           console.error(error);
         });
     } else {
-        window.alert("Please upload both files");
+      window.alert("Please upload both files");
     }
   };
 
@@ -55,16 +70,47 @@ function UploadFile() {
           onDragOver={handleDragOver}
           onDrop={(event) => handleDrop(event, handleFile1Change)}
         >
-          <p>Upload Store_data_v2:</p>
-          <input type="file" onChange={handleFile1Change} />
+          <p>Upload store_data_v2:</p>
+          <label className="custom-file-label">
+            <img
+              className="file-input-image"
+              src={excel}
+              alt="logo-excel"
+              onClick={() => document.getElementById("file-input1").click()}
+            />
+            <input
+              id="file-input1"
+              className="hidden-file-input"
+              type="file"
+              accept=".xlsx, .xls, .csv"
+              onChange={handleFile1Change}
+            />
+            <p className="selected-file-name">{selectedFileName1}</p>
+          </label>
         </div>
+
         <div
           className="drop-area"
           onDragOver={handleDragOver}
           onDrop={(event) => handleDrop(event, handleFile2Change)}
         >
           <p>Upload total_data_file:</p>
-          <input type="file" onChange={handleFile2Change} />
+          <label className="custom-file-label">
+            <img
+              className="file-input-image"
+              src={excel}
+              alt="logo-excel"
+              onClick={() => document.getElementById("file-input2").click()}
+            />
+            <input
+              id="file-input2"
+              className="hidden-file-input"
+              type="file"
+              accept=".xlsx, .xls, .csv"
+              onChange={handleFile2Change}
+            />
+            <p className="selected-file-name">{selectedFileName2}</p>
+          </label>
         </div>
       </div>
       <div className="container-btn">

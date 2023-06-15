@@ -7,7 +7,7 @@ import { GrGithub } from "react-icons/gr";
 import { CgWebsite } from "react-icons/cg";
 import pranav from "../../../assets/developer/pranav1.png";
 import shreyansh from "../../../assets/developer/shreyansh.jpeg";
-import sameer from "../../../assets/developer/sameer.jpeg";
+// import sameer from "../../../assets/developer/sameer.jpeg";
 import ashish from "../../../assets/developer/ashish.jpg";
 import tanya from "../../../assets/developer/tanya.jpeg";
 import anjali from "../../../assets/developer/anjali.jpeg";

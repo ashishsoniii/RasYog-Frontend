@@ -235,6 +235,8 @@
 
 .white-area {
     background-color: #F2F2F2;
+    padding-top: 5rem;
+    padding-bottom: 1rem;
 
 }
 
@@ -307,17 +309,27 @@
 /* Content css */
 
 .team {
-    display: grid;
+    display: flex;
     justify-content: center;
-    border-radius: 3rem;
-    margin-top: 8%;
+    flex-direction: column;
+    /* border-radius: 3rem;
     margin-left: 20%;
-    margin-right: 20%;
-    margin-bottom: 8%;
+    margin-right: 20%; */
+    padding-top: 4%;
+    padding-bottom: 7%;
     /* min-height: 25rem; */
     /* background-color: #947add; */
     /* font-style: italic; */
     /* position: relative; */
+}
+
+.team {
+    background-color: #F2F2F2
+}
+
+.team a {
+    display: flex;
+    justify-content: center;
 }
 
 .main-text-team {
@@ -342,6 +354,10 @@
     margin-left: 7rem;
     margin-right: 7rem;
     margin-top: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    justify-content: center;
 
 
 }
@@ -448,12 +464,20 @@
 
 .drop-area {
     border: 2px solid rgb(0, 0, 0);
-    padding: 1rem;
+    padding: 2rem;
     text-align: center;
     margin: 2rem;
     border-radius: 2.5rem;
     background-color: #4d615a5e;
+}
 
+
+
+.drop-area img {
+    display: block;
+    width: 42px;
+    margin: 1rem auto;
+    pointer-events: none;
 }
 
 .drop-area p {
@@ -478,8 +502,38 @@
     background-color: #45a049;
 }
 
-.drop-area input {
-    /* background-color: #04aa6d5e; */
+.hidden-file-input {
+    display: none;
+    /* cursor: pointer; */
+
+  }
+  
+  .file-input-image {
+    /* Add your desired styles for the image as an input */
+    /* For example: */
+    width: 150px;
+    height: auto;
+    /* cursor: pointer; */
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    padding: 5px;
+    /* cursor: pointer; */
+  }
+
+  .custom-file-label{
+    cursor: pointer;
+  }
+
+  
+  .file-input-image:hover {
+    border-color: #888;
+    cursor: pointer;
+
+  }
+
+  
+/* .drop-area input {
+    background-color: #04aa6d5e;
     border: none;
     color: rgb(0, 0, 0);
     padding: 16px 32px;
@@ -487,11 +541,13 @@
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 2.5rem;
-}
-.drop-area input:hover {
+    display: none;
+} */
+
+/* .drop-area input:hover {
     background-color: #00513352;
-    
-}
+
+} */
 
 
 @media screen and (max-width: 670px) {
@@ -500,8 +556,9 @@
         display: flex;
         flex-direction: column;
         margin-top: -64rem;
-    }    
+    }
 }
+
 @media screen and (max-width: 768px) {
     .card {
         /* flex-direction: row; */
