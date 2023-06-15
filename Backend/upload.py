@@ -45,7 +45,9 @@ df1 =read_excel(io.BytesIO(obj1['Body'].read()))
 def Upload_File():
     s3.Bucket(bucket_name).upload_file(Filename='Store_data_v2.xlsx',Key='Store_data_v2.xlsx')
     s3.Bucket(bucket_name).upload_file(Filename='total_data_file.csv',Key='total_data_file.csv')
+    # s3.Bucket(bucket_name).upload_file(Filename='Files/Store_data_combined_raw.xlsx',Key='Store_data_combined_raw.xlsx')
 
+# Upload_File()
     # s3.Bucket(bucket_name).upload_file(Filename='PranavMalpani2.xlsx',Key='PranavMalpani2.xlsx')
     # print(df)
 

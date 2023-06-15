@@ -1,19 +1,38 @@
-from flask import Flask, request,jsonify,session
+from flask import Flask, request,jsonify
 import JM_Store as ry
 import JM_stor_taxonomic as jmt
-# import lazy_imports
-# import warnings
-import shutil
 from flask_api import status
 from flask_cors import CORS
-import os
 from upload import Upload_File
 # warnings.filterwarnings('ignore')
-
+from Reload_API import Reload
+from werkzeug.security import generate_password_hash,check_password_hash
+import pymongo
+# from werkzeug.serving import make_server, shutdown_server
+# import os
+from jsonschema import validate
+# import sys
 app = Flask(__name__)
 CORS(app)
 
-# app.secret_key="Login"
+
+app.secret_key="rasyog"
+
+client=pymongo.MongoClient("URL_OF_MONGODB")
+db=client.get_database('DATABASE_NAME')
+# users=db.user_collection
+
+
+schema = {
+            "type": "object",
+            "properties": {
+                "name": {"type" : "string"},  
+                "username": {"type" : "string"},  
+                "password": {"type" : "string"},  
+            },
+            "required":["name","username","password"],
+}
+
 
 def Option_func(var):
     if(var=="data"):
@@ -347,37 +366,73 @@ def Data_Anaylsis_Taxonomic():
 @app.route("/upload",methods=['POST'])
 def File_Upload():
     if(request.method=='POST'):
+        if 'File1' not in request.files or 'File2' not in request.files:
+            return 'Files not found in the request', status.HTTP_400_BAD_REQUEST
+         
         File1=request.files['File1']  #store_data_v2
         File2=request.files['File2']  #total_data
+        
+        if File1.filename == '' or File2.filename == '':
+            return 'Invalid filenames', status.HTTP_400_BAD_REQUEST
         # old_name_file1=File1.filename
         # old_name_file2=File2.filename
         new_name_file1 = 'Store_data_v3.xlsx'
         new_name_file2 = 'tryfile.xlsx'
         File1.save(new_name_file1)
         File2.save(new_name_file2)
-        # File2.save(File2.filename)
-        # File1.save(File1.filename)
-        # if os.path.exists(old_name_file1) and os.path.exists(old_name_file2):
-            # os.rename(old_name_file1, new_name_file1)
-            # os.rename(old_name_file2,new_name_file2)
-        # Upload_File()
-        
+        Upload_File()
+        Reload()
         return 'Files uploaded successfully',status.HTTP_200_OK
         # else:
             # return 'File not found, upload failed'
 
-# @app.route("/login",methods=["POST"])
-# def login():
-#     userdata=request.get_json()
-#     if(userdata["usernm"]=="pranav" and userdata["password"]=="12345"):
-#             session["username"]="pranav"
-#             return "Suceesfully Login"
-#     return "Invalid credentials"
+@app.route("/register",methods=["POST"])
+def register():
+    userData=request.get_json()
+    if(userData['email']=='' or userData['name']=='' or userData['password']==''):
+        return 'Please Choose Correct Choice'
+    else:
+        validationError=validate(instance=userData,schema=schema)
+        if(not validationError):
+            userExist=db.users.find_one({'email':userData['email']})
+            if(len(userExist)):
+                return "User already exist Choose another email id"
+            else:
+                # userPassword=userData['password']
+                userData['password']=generate_password_hash(password=userData['password'])
+                resultUser=db.users.insert_one(document=userData)
+                if(resultUser.inserted_id):
+                    return "User Successfully Inserted"
+                else:
+                    return 'User Cannot be Added'
+        else:
+            return "Please Choose Correct Choice"
+                
 
-# @app.route("/logout")
-# def logout():
-#     session.pop("username",None)
-#     return "Successfully logout"
+
+@app.route("login",methods=["POST"])
+def login():
+    userData=request.get_json()
+    if(userData['email']=='' or userData['password']==''):
+        return 'Please Choose Correct Choice'
+    else:
+        userData_in_Database=db.users.find_one({'email':userData['email']})
+        if(len(userData_in_Database)==0):
+            return "User doesnot exist"
+        else:
+            # userPassword=userData['password']
+            passwordCheck=check_password_hash(userData_in_Database['password'],userData['password'])
+            if(passwordCheck==True):
+                return "Successfully Login"
+            else:
+                return "Incorrect Password"
+            
+
+
+@app.route("/logout")
+def logout():
+    # session.pop("username",None)
+    return "Successfully logout"
 
 
         
