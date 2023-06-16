@@ -1,9 +1,9 @@
-from flask import Flask, request,jsonify
+from flask import Flask, request,jsonify,session
 import JM_Store as ry
 import JM_stor_taxonomic as jmt
 from flask_api import status
 from flask_cors import CORS
-from upload import Upload_File
+# from upload import Upload_File
 # warnings.filterwarnings('ignore')
 from Reload_API import Reload
 from werkzeug.security import generate_password_hash,check_password_hash
@@ -18,8 +18,10 @@ CORS(app)
 
 app.secret_key="rasyog"
 
-client=pymongo.MongoClient("URL_OF_MONGODB")
-db=client.get_database('DATABASE_NAME')
+client=pymongo.MongoClient("mongodb://localhost:27017/Rasyog")
+db=client.get_database('Rasyog')
+
+# print(db)
 # users=db.user_collection
 
 
@@ -27,10 +29,10 @@ schema = {
             "type": "object",
             "properties": {
                 "name": {"type" : "string"},  
-                "username": {"type" : "string"},  
+                "email": {"type" : "string"},  
                 "password": {"type" : "string"},  
             },
-            "required":["name","username","password"],
+            "required":["name","email","password"], 
 }
 
 
@@ -66,7 +68,7 @@ def Option_func(var):
         {"plot": "Taxonomic Analysis with year of product design color and size", "id":2,"YearChange":False,"SingleYear":False},
         {"plot": "Taxonomic Analysis without year", "id":3,"YearChange":False,"SingleYear":False},
         {"plot": "Taxonomic Analysis without year product color and design", "id":4,"YearChange":False,"SingleYear":False}
-    ]
+    ] 
     elif(var=="mapstaxonomic"):
         return [
         {"plot":"Brand -> Product -> Design -> Color","id":1,"YearChange":False,"SingleYear":False},
@@ -143,6 +145,8 @@ def home():
 @app.route('/store')
 def Choose_Option():
     # if('username' in session and session['username']=="pranav"):
+    # print(session)
+    if "userid" in session:
         Fun=(dict(request.args))
         Fun_id=Fun['id'].replace(" ","").lower()
         # print(Fun)
@@ -158,14 +162,15 @@ def Choose_Option():
                 # "display_option":True
             }
         return jsonify(graph_data),status.HTTP_200_OK
-    # else:
-    #     return "Unauthorized",status.HTTP_401_UNAUTHORIZED 
+    else:
+        return "Please Login First",status.HTTP_401_UNAUTHORIZED 
 
 # Route for Data Analysis        
 @app.route('/data', methods=['POST'])
 def data_graph():
     if request.method == 'POST':
         # if('username' in session and session['username']=="pranav"):
+        if "userid" in session:
             graphInfo= (request.get_json())
             graph_id=graphInfo["graph"]
             from_year=int(graphInfo['starting'])
@@ -189,8 +194,8 @@ def data_graph():
                 # 'display_option':True
             }
             return jsonify(JSON_Data),status.HTTP_200_OK
-        # else:
-        #     return "Unauthorized",status.HTTP_401_UNAUTHORIZED 
+        else:
+            return "Please Login First",status.HTTP_401_UNAUTHORIZED 
 
 
 
@@ -198,241 +203,266 @@ def data_graph():
 @app.route('/margin', methods=['POST'])
 def margin_graph():
     if request.method == 'POST':
-        graphInfo= (request.get_json())
-        graph_id=int(graphInfo["graph"])
-        from_year=int(graphInfo['starting'])
-        to_year=int(graphInfo['end'])
-        plot1,plot2,plot3,plot4 = None,None,None,None
-        if graph_id == 1:
-            plot1,plot2=Margin_Route(1,start=from_year,end=to_year)
-        elif graph_id == 2:
-            plot1,plot2,plot3=Margin_Route(2,start=from_year,end=to_year)
-        elif graph_id == 3:
-            plot1=Margin_Route(3,start=from_year,end=to_year)
-        elif graph_id==4:
-            plot1,plot2=Margin_Route(4,start=from_year,end=to_year)
+        if "userid" in session:
+
+            graphInfo= (request.get_json())
+            graph_id=int(graphInfo["graph"])
+            from_year=int(graphInfo['starting'])
+            to_year=int(graphInfo['end'])
+            plot1,plot2,plot3,plot4 = None,None,None,None
+            if graph_id == 1:
+                plot1,plot2=Margin_Route(1,start=from_year,end=to_year)
+            elif graph_id == 2:
+                plot1,plot2,plot3=Margin_Route(2,start=from_year,end=to_year)
+            elif graph_id == 3:
+                plot1=Margin_Route(3,start=from_year,end=to_year)
+            elif graph_id==4:
+                plot1,plot2=Margin_Route(4,start=from_year,end=to_year)
+            else:
+                return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
+            JSON_Data={
+                'plot1':plot1,
+                'plot2':plot2,
+                'plot3':plot3,
+                'plot4':plot4,
+                'Topic':'margin',
+                'Option':Option_func('margin'),
+                # 'display_option':True
+            }
+            return jsonify(JSON_Data),status.HTTP_200_OK
         else:
-            return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
-        JSON_Data={
-            'plot1':plot1,
-            'plot2':plot2,
-            'plot3':plot3,
-            'plot4':plot4,
-            'Topic':'margin',
-            'Option':Option_func('margin'),
-            # 'display_option':True
-        }
-        return jsonify(JSON_Data),status.HTTP_200_OK
+            return "Please Login First",status.HTTP_401_UNAUTHORIZED 
+
 
 
 # Route for Tree Maps
 @app.route('/maps', methods=['POST'])
 def TreeMaps_graph():
     if request.method == 'POST':
-        graphInfo=(request.get_json())
-        graph_id=int(graphInfo["graph"])
-        from_year=int(graphInfo['starting'])
-        to_year=int(graphInfo['end'])
-        plot1,plot2,plot3,plot4 = None,None,None,None
-        if graph_id in [1,2,3,4]:
-            plot1=Tree_Route(graph_id,to_year)[0]
-            plot2=Tree_Route(graph_id,to_year)[1]
+        if "userid" in session:
+            graphInfo=(request.get_json())
+            graph_id=int(graphInfo["graph"])
+            from_year=int(graphInfo['starting'])
+            to_year=int(graphInfo['end'])
+            plot1,plot2,plot3,plot4 = None,None,None,None
+            if graph_id in [1,2,3,4]:
+                plot1=Tree_Route(graph_id,to_year)[0]
+                plot2=Tree_Route(graph_id,to_year)[1]
+            else:
+                return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
+            JSON_Data={
+                'plot1':plot1,
+                'plot2':plot2,
+                'plot3':plot3,
+                'plot4':plot4,
+                'Topic':'maps',
+                'Option':Option_func('maps'),
+                # 'display_option':True
+            }
+            return jsonify(JSON_Data),status.HTTP_200_OK
         else:
-           return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
-        JSON_Data={
-            'plot1':plot1,
-            'plot2':plot2,
-            'plot3':plot3,
-            'plot4':plot4,
-            'Topic':'maps',
-            'Option':Option_func('maps'),
-            # 'display_option':True
-        }
-        return jsonify(JSON_Data),status.HTTP_200_OK
+            return "Please Login First",status.HTTP_401_UNAUTHORIZED 
+
 
 # 
 # Route for Tree Maps in Taxonomic Analysis
 @app.route('/mapstaxonomic', methods=['POST', 'GET'])
 def Tree_Maps_Taxonomic():
     if request.method == 'POST':
-        graphInfo= (request.get_json())
-        graph_id=int(graphInfo["graph"])
-        from_year=int(graphInfo['starting'])
-        to_year=int(graphInfo['end'])
-        plot1,plot2,plot3,plot4 = None,None,None,None
-        if graph_id in [1,2,3,4,5]:
-            plot1=TreeMap_Taxonomic_Route(graph_id)[0]
+        if "userid" in session:
+         
+            graphInfo= (request.get_json())
+            graph_id=int(graphInfo["graph"])
+            from_year=int(graphInfo['starting'])
+            to_year=int(graphInfo['end'])
+            plot1,plot2,plot3,plot4 = None,None,None,None
+            if graph_id in [1,2,3,4,5]:
+                plot1=TreeMap_Taxonomic_Route(graph_id)[0]
+            else:
+                return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
+            JSON_Data={
+                'plot1':plot1,
+                'plot2':plot2,
+                'plot3':plot3,
+                'plot4':plot4,
+                'Topic':'mapstaxonomic',
+                'Option':Option_func('mapstaxonomic'),
+                # 'display_option':True
+            }
+            return jsonify(JSON_Data),status.HTTP_200_OK
         else:
-            return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
-        JSON_Data={
-            'plot1':plot1,
-            'plot2':plot2,
-            'plot3':plot3,
-            'plot4':plot4,
-            'Topic':'mapstaxonomic',
-            'Option':Option_func('mapstaxonomic'),
-            # 'display_option':True
-        }
-        return jsonify(JSON_Data),status.HTTP_200_OK
+            return "Please Login First",status.HTTP_401_UNAUTHORIZED 
+
     
 # Route for Taxonomic Analysis
 @app.route('/taxonomic', methods=['POST', 'GET'])
 def Taxonomic_analysis():
     if request.method == 'POST':
-        graphInfo= (request.get_json())
-        graph_id=int(graphInfo["graph"])
-        from_year=(int(graphInfo['starting']))
-        to_year=int(graphInfo['end'])
-        plot1,plot2,plot3,plot4 = None,None,None,None
-        if graph_id==1:
-            # plot1=Taxonomic_Route(graph_id)[0]
-            # plot2=Taxonomic_Route(graph_id)[1]
-            # plot3=Taxonomic_Route(graph_id)[2]
-            plot1=jmt.year_brand_product()
-            plot2=jmt.product_category_year()
-            plot3=jmt.product_desing_year()
-        elif graph_id==2:
-            plot1=jmt.product_year_brand()
-            plot2=jmt.year_product_desing_color()
-            plot3=jmt.year_size()
-        elif graph_id==3:
-            plot1=jmt.brand_product_design_color()
-            plot2=jmt.color_desing_product()
-            plot3=jmt.product_size()
-        elif graph_id==4:
-            plot1=jmt.product_color()
-            plot2=jmt.product_brand_design()
-            plot3=jmt.brand_product()
+        if "userid" in session:
+
+            graphInfo= (request.get_json())
+            graph_id=int(graphInfo["graph"])
+            from_year=(int(graphInfo['starting']))
+            to_year=int(graphInfo['end'])
+            plot1,plot2,plot3,plot4 = None,None,None,None
+            if graph_id==1:
+                # plot1=Taxonomic_Route(graph_id)[0]
+                # plot2=Taxonomic_Route(graph_id)[1]
+                # plot3=Taxonomic_Route(graph_id)[2]
+                plot1=jmt.year_brand_product()
+                plot2=jmt.product_category_year()
+                plot3=jmt.product_desing_year()
+            elif graph_id==2:
+                plot1=jmt.product_year_brand()
+                plot2=jmt.year_product_desing_color()
+                plot3=jmt.year_size()
+            elif graph_id==3:
+                plot1=jmt.brand_product_design_color()
+                plot2=jmt.color_desing_product()
+                plot3=jmt.product_size()
+            elif graph_id==4:
+                plot1=jmt.product_color()
+                plot2=jmt.product_brand_design()
+                plot3=jmt.brand_product()
+            else:
+                return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
+            JSON_Data={
+                'plot1':plot1,
+                'plot2':plot2,
+                'plot3':plot3,
+                'plot4':plot4,
+                'Topic':'taxonomic',
+                'Option':Option_func('taxonomic'),
+                # 'display_option':True
+            }
+            return (JSON_Data),status.HTTP_200_OK
         else:
-            return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
-        JSON_Data={
-            'plot1':plot1,
-            'plot2':plot2,
-            'plot3':plot3,
-            'plot4':plot4,
-            'Topic':'taxonomic',
-            'Option':Option_func('taxonomic'),
-            # 'display_option':True
-        }
+                return "Please Login First",status.HTTP_401_UNAUTHORIZED 
 
-        # content = gzip.compress(json.dumps(JSON_Data).encode('utf8'), 5)
-        # response = make_response(content)
-        # response.headers['Content-length'] = len(content)
-        # response.headers['Content-Encoding'] = 'gzip'
-        # return response
-        # json_str = json.dumps(JSON_Data)
-        # compressed_data = gzip.compress(json_str.encode('utf-8'))
-
-        return (JSON_Data),status.HTTP_200_OK
 
 
 # Route for Data in Taxonomic Analysis
 @app.route('/datataxonomic', methods=['POST', 'GET'])
 def Data_Anaylsis_Taxonomic():
     if request.method == 'POST':
-        graphInfo= (request.get_json())
-        graph_id=int(graphInfo["graph"])
-        from_year=int(graphInfo['starting'])
-        to_year=int(graphInfo['end'])
-        plot1,plot2,plot3,plot4 = None,None,None,None
-        if graph_id==1:
-            # plot1=Data_Taxonomic_Route(graph_id,from_year,to_year)[0]
-            # plot2=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
-            plot1=jmt.sunburst_particular_brand_for_product()
-            plot2=jmt.Overall_Sunbust()
-        elif graph_id==2:
-            # plot1=Data_Taxonomic_Route(graph_id,from_year,to_year)[0]
-            # plot2=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
-            # plot3=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
-            # plot4=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
-            plot1=jmt.treemap_particular_brand_for_product(from_year,to_year)
-            plot2=jmt.Overall_treemap(from_year,to_year)
-        elif graph_id==3:
-            plot1=jmt.treemap_brand_similar_product_with_color_design(from_year,to_year)
-            plot2=jmt.treemap_brand_similar_product_with_design(from_year,to_year)
+        if "userid" in session:
+            graphInfo= (request.get_json())
+            graph_id=int(graphInfo["graph"])
+            from_year=int(graphInfo['starting'])
+            to_year=int(graphInfo['end'])
+            plot1,plot2,plot3,plot4 = None,None,None,None
+            if graph_id==1:
+                # plot1=Data_Taxonomic_Route(graph_id,from_year,to_year)[0]
+                # plot2=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
+                plot1=jmt.sunburst_particular_brand_for_product()
+                plot2=jmt.Overall_Sunbust()
+            elif graph_id==2:
+                # plot1=Data_Taxonomic_Route(graph_id,from_year,to_year)[0]
+                # plot2=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
+                # plot3=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
+                # plot4=Data_Taxonomic_Route(graph_id,from_year,to_year)[1]
+                plot1=jmt.treemap_particular_brand_for_product(from_year,to_year)
+                plot2=jmt.Overall_treemap(from_year,to_year)
+            elif graph_id==3:
+                plot1=jmt.treemap_brand_similar_product_with_color_design(from_year,to_year)
+                plot2=jmt.treemap_brand_similar_product_with_design(from_year,to_year)
+            else:
+                return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
+            JSON_Data={
+                'plot1':plot1,
+                'plot2':plot2,
+                'plot3':plot3,
+                'plot4':plot4,
+                'Topic':'datataxonomic',
+                'Option':Option_func('datataxonomic'),
+                # 'display_option':True
+            }
+            return (JSON_Data),status.HTTP_200_OK
         else:
-            return jsonify(message='Invalid Input'),status.HTTP_404_NOT_FOUND
-        JSON_Data={
-            'plot1':plot1,
-            'plot2':plot2,
-            'plot3':plot3,
-            'plot4':plot4,
-            'Topic':'datataxonomic',
-            'Option':Option_func('datataxonomic'),
-            # 'display_option':True
-        }
-        return (JSON_Data),status.HTTP_200_OK
+            return "Please Login First",status.HTTP_401_UNAUTHORIZED 
+
 
 @app.route("/upload",methods=['POST'])
 def File_Upload():
     if(request.method=='POST'):
-        if 'File1' not in request.files or 'File2' not in request.files:
-            return 'Files not found in the request', status.HTTP_400_BAD_REQUEST
-         
-        File1=request.files['File1']  #store_data_v2
-        File2=request.files['File2']  #total_data
-        
-        if File1.filename == '' or File2.filename == '':
-            return 'Invalid filenames', status.HTTP_400_BAD_REQUEST
-        # old_name_file1=File1.filename
-        # old_name_file2=File2.filename
-        new_name_file1 = 'Store_data_v3.xlsx'
-        new_name_file2 = 'tryfile.xlsx'
-        File1.save(new_name_file1)
-        File2.save(new_name_file2)
-        Upload_File()
-        Reload()
-        return 'Files uploaded successfully',status.HTTP_200_OK
-        # else:
-            # return 'File not found, upload failed'
+        if "userid" in session:
+            if 'File1' not in request.files or 'File2' not in request.files:
+                return 'Files not found in the request', status.HTTP_400_BAD_REQUEST
+            
+            File1=request.files['File1']  #store_data_v2
+            File2=request.files['File2']  #total_data
+            
+            if File1.filename == '' or File2.filename == '':
+                return 'Invalid filenames', status.HTTP_400_BAD_REQUEST
+            # old_name_file1=File1.filename
+            # old_name_file2=File2.filename
+            new_name_file1 = 'Store_data_v3.xlsx'
+            new_name_file2 = 'tryfile.xlsx'
+            File1.save(new_name_file1)
+            File2.save(new_name_file2)
+            # Upload_File()
+            # Reload()
+            return 'Files uploaded successfully',status.HTTP_200_OK
+        else:
+                return "Please Login First",status.HTTP_401_UNAUTHORIZED 
 
 @app.route("/register",methods=["POST"])
 def register():
-    userData=request.get_json()
-    if(userData['email']=='' or userData['name']=='' or userData['password']==''):
-        return 'Please Choose Correct Choice'
-    else:
-        validationError=validate(instance=userData,schema=schema)
-        if(not validationError):
-            userExist=db.users.find_one({'email':userData['email']})
-            if(len(userExist)):
-                return "User already exist Choose another email id"
+    if(request.method=="POST"):
+        userData=request.get_json()
+        if(userData['email']=='' or userData['name']=='' or userData['password']==''):
+            return 'Please Choose Correct Choice',status.HTTP_403_FORBIDDEN
+        else:
+            try:
+                validate(instance=userData,schema=schema)
+            except:
+                validationError="Error"
+                 
+            if(not validationError):
+                userExist=db.users.find_one({'email':userData['email']})
+                if((userExist)): 
+                    return "User already exist Choose another email id",status.HTTP_409_CONFLICT
+                else:
+                    # userPassword=userData['password']
+                    userData['password']=generate_password_hash(password=userData['password'])
+                    resultUser=db.users.insert_one(document=userData)
+                    if(resultUser.inserted_id):
+                        return "User Successfully Inserted",status.HTTP_200_OK
+                    else:
+                        return 'User Cannot be Added',status.HTTP_400_BAD_REQUEST
+            else:
+                return "Please Choose Correct Choice",status.HTTP_403_FORBIDDEN
+                    
+
+
+@app.route("/login",methods=["POST"])
+def login():
+    if(request.method=="POST"):
+        userData=request.get_json()
+        if(userData['email']=='' or userData['password']==''):
+            return 'Please Choose Correct Choice',status.HTTP_403_FORBIDDEN
+        else:
+            userData_in_Database=db.users.find_one({'email':userData['email']})
+            if(not userData_in_Database):
+                return "User doesnot exist",status.HTTP_401_UNAUTHORIZED
             else:
                 # userPassword=userData['password']
-                userData['password']=generate_password_hash(password=userData['password'])
-                resultUser=db.users.insert_one(document=userData)
-                if(resultUser.inserted_id):
-                    return "User Successfully Inserted"
+                passwordCheck=check_password_hash(userData_in_Database['password'],userData['password'])
+                if(passwordCheck==True):
+                    session["userid"]=userData_in_Database['email'] 
+                    print(session)
+                    return "Successfully Login",status.HTTP_200_OK
                 else:
-                    return 'User Cannot be Added'
-        else:
-            return "Please Choose Correct Choice"
+                    return "Incorrect Password",status.HTTP_401_UNAUTHORIZED
                 
-
-
-@app.route("login",methods=["POST"])
-def login():
-    userData=request.get_json()
-    if(userData['email']=='' or userData['password']==''):
-        return 'Please Choose Correct Choice'
-    else:
-        userData_in_Database=db.users.find_one({'email':userData['email']})
-        if(len(userData_in_Database)==0):
-            return "User doesnot exist"
-        else:
-            # userPassword=userData['password']
-            passwordCheck=check_password_hash(userData_in_Database['password'],userData['password'])
-            if(passwordCheck==True):
-                return "Successfully Login"
-            else:
-                return "Incorrect Password"
-            
 
 
 @app.route("/logout")
 def logout():
     # session.pop("username",None)
-    return "Successfully logout"
+    # print(session)
+    session.clear()
+    return "Successfully logout",status.HTTP_200_OK
 
 
         
@@ -440,4 +470,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True) 
