@@ -21,6 +21,7 @@ app.secret_key="rasyog"
 client=pymongo.MongoClient("mongodb://localhost:27017/Rasyog")
 db=client.get_database('Rasyog')
 
+
 # print(db)
 # users=db.user_collection
 
@@ -30,9 +31,11 @@ schema = {
             "properties": {
                 "name": {"type" : "string"},  
                 "email": {"type" : "string"},  
-                "password": {"type" : "string"},  
+                "password": {"type" : "string"},
+                "admin":{"type":"number"}
+
             },
-            "required":["name","email","password"], 
+            "required":["name","email","password"]
 }
 
 
@@ -234,7 +237,6 @@ def margin_graph():
             return "Please Login First",status.HTTP_401_UNAUTHORIZED 
 
 
-
 # Route for Tree Maps
 @app.route('/maps', methods=['POST'])
 def TreeMaps_graph():
@@ -409,30 +411,39 @@ def File_Upload():
 @app.route("/register",methods=["POST"])
 def register():
     if(request.method=="POST"):
-        userData=request.get_json()
-        if(userData['email']=='' or userData['name']=='' or userData['password']==''):
-            return 'Please Choose Correct Choice',status.HTTP_403_FORBIDDEN
-        else:
-            try:
-                validate(instance=userData,schema=schema)
-            except:
-                validationError="Error"
-                 
-            if(not validationError):
-                userExist=db.users.find_one({'email':userData['email']})
-                if((userExist)): 
-                    return "User already exist Choose another email id",status.HTTP_409_CONFLICT
+        if "userid" in session:
+            adminEmail=session["userid"]
+            adminExist=db.users.find_one({'email':adminEmail})
+            if(adminExist["admin"]):
+                userData=request.get_json()
+                if(userData['email']=='' or userData['name']=='' or userData['password']==''):
+                    return 'Please Choose Correct Choice',status.HTTP_403_FORBIDDEN
                 else:
-                    # userPassword=userData['password']
-                    userData['password']=generate_password_hash(password=userData['password'])
-                    resultUser=db.users.insert_one(document=userData)
-                    if(resultUser.inserted_id):
-                        return "User Successfully Inserted",status.HTTP_200_OK
+                    try:
+                        validationError=validate(instance=userData,schema=schema)
+                        # validationError=None
+                    except:  
+                        validationError="Error"
+
+                    if(not validationError):
+                        userExist=db.users.find_one({'email':userData['email']})
+                        if((userExist)): 
+                            return "User already exist Choose another email id",status.HTTP_409_CONFLICT
+                        else:
+                            # userPassword=userData['password']
+                            # print(validationError)
+                            userData['password']=generate_password_hash(password=userData['password'])
+                            resultUser=db.users.insert_one(document=userData)
+                            if(resultUser.inserted_id):
+                                return "User Successfully Inserted",status.HTTP_200_OK
+                            else:
+                                return 'User Cannot be Added',status.HTTP_400_BAD_REQUEST
                     else:
-                        return 'User Cannot be Added',status.HTTP_400_BAD_REQUEST
+                        return "Please Choose Correct Choice",status.HTTP_403_FORBIDDEN
             else:
-                return "Please Choose Correct Choice",status.HTTP_403_FORBIDDEN
-                    
+                return "Only Admin Allowed to register users",status.HTTP_400_BAD_REQUEST
+        else: 
+            return "Please Login first",status.HTTP_400_BAD_REQUEST               
 
 
 @app.route("/login",methods=["POST"])
@@ -450,12 +461,11 @@ def login():
                 passwordCheck=check_password_hash(userData_in_Database['password'],userData['password'])
                 if(passwordCheck==True):
                     session["userid"]=userData_in_Database['email'] 
-                    print(session)
+                    # print(session)
                     return "Successfully Login",status.HTTP_200_OK
                 else:
                     return "Incorrect Password",status.HTTP_401_UNAUTHORIZED
                 
-
 
 @app.route("/logout")
 def logout():
@@ -465,7 +475,27 @@ def logout():
     return "Successfully logout",status.HTTP_200_OK
 
 
-        
+@app.route("/ChangePassword",methods=["POST"])
+def ChangePassword():
+    if(request.method=='POST'):
+        if "userid" in session:
+            userdata=request.get_json()
+            user_email=session["userid"]
+            # print(user_email)
+            userData_in_Database=db.users.find_one({'email':user_email})
+            if(check_password_hash(userData_in_Database["password"],userdata["oldpassword"])):
+                updated_data=db.users.update_one({"email":user_email},{"$set":{"password":generate_password_hash(userdata["newpassword"])}})
+                # print(updated_data.upserted_id())
+                return "Successfully Updated",status.HTTP_200_OK
+            else:
+                return "Invalid Credentials"
+        else:
+            return "Please Login First"
+
+
+
+            
+
 
 
 
