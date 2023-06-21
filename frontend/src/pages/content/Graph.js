@@ -19,6 +19,7 @@ function Graph(props) {
           graph: props.selectedOptionId,
           starting: props.valueStart,
           end: props.valueEnd,
+          
         },
         {
           headers: {

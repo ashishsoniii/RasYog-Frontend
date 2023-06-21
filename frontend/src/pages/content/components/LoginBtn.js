@@ -28,17 +28,23 @@ export default function LoginBtn() {
 
   const handleLogin = () => {
     axios
-      .post("http://127.0.0.1:5000/login", {
-        email,
-        password,
-      })
+      .post(
+        "http://127.0.0.1:5000/login",
+        { withCredentials: true },
+        {
+          email,
+          password,
+        }
+      )
       .then((response) => {
+        console.log(response);
         // Assuming the server returns a success status
-        if (response.status === 200) {
-          // Store login status using cookies or any other desired method
+        const cookies = response.headers["set-cookie"];
+        if (cookies) {
           setLoggedIn(true);
           console.log("Login successful");
         }
+        console.log("Login successful but cookie! not set!");
       })
       .catch((error) => {
         console.error("Login failed:", error);
