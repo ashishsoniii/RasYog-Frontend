@@ -17,6 +17,8 @@ CORS(app)
 
 
 app.secret_key="rasyog"
+# app.SESSION_COOKIE_HTTPONLY=False
+app.config["SESSION_COOKIE_HTTPONLY"]=False
 
 client=pymongo.MongoClient("mongodb://localhost:27017/Rasyog")
 db=client.get_database('Rasyog')
@@ -109,7 +111,7 @@ def Tree_Route(id,end):
 
 
 # def Data_Taxonomic_Route(id,start,end):
-#         if(id==1):
+#         if(id==1): 
 #             return [jmt.sunburst_particular_brand_for_product(start,end),jmt.Overall_Sunbust(start,end)]
 #         elif(id==2):
 #              return [jmt.treemap_particular_brand_for_product(start,end),jmt.treemap_brand_similar_product_with_color_design(start,end),jmt.treemap_brand_similar_product_with_design(start,end),jmt.Overall_treemap(start,end)]
@@ -142,6 +144,8 @@ def TreeMap_Taxonomic_Route(id):
 
 @app.route('/')
 def home():
+    # response.set_cook
+    # session["userid"]="Hi" 
     return jsonify(message="JM Store Data Anyalsis"),status.HTTP_200_OK
 
 # Route for Option in Select box
@@ -461,8 +465,9 @@ def login():
                 passwordCheck=check_password_hash(userData_in_Database['password'],userData['password'])
                 if(passwordCheck==True):
                     session["userid"]=userData_in_Database['email'] 
+                    
                     # print(session)
-                    return "Successfully Login",status.HTTP_200_OK
+                    return f"Successfully Login ",status.HTTP_200_OK
                 else:
                     return "Incorrect Password",status.HTTP_401_UNAUTHORIZED
                 
