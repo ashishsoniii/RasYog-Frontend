@@ -3,6 +3,7 @@ import axios from "axios";
 import Plot from "react-plotly.js";
 import "./Content.css";
 import { motion } from "framer-motion";
+axios.defaults.withCredentials = true;
 
 function Graph(props) {
   const [plots, setPlots] = useState([]);
@@ -19,9 +20,9 @@ function Graph(props) {
           graph: props.selectedOptionId,
           starting: props.valueStart,
           end: props.valueEnd,
-          
         },
-        {
+        {withCredentials: true,
+
           headers: {
             "Content-Type": "application/json",
           },

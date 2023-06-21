@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -10,13 +10,19 @@ import axios from "axios";
 import Fab from "@mui/material/Fab";
 import { AiOutlineLogin } from "react-icons/ai";
 
-// axios.defaults.withCredentials = true;
-
 export default function LoginBtn() {
   const [open, setOpen] = useState(false);
-  const [email, setemail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("email");
+    if (storedEmail) {
+      setLoggedIn(true);
+      setEmail(storedEmail);
+    }
+  }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -30,21 +36,27 @@ export default function LoginBtn() {
     axios
       .post(
         "http://127.0.0.1:5000/login",
-        { withCredentials: true },
         {
           email,
           password,
+        },
+        {
+          withCredentials: true,
         }
       )
       .then((response) => {
         console.log(response);
         // Assuming the server returns a success status
-        const cookies = response.headers["set-cookie"];
+        const cookies = response.headers["Set-Cookie"];
+        console.log(cookies + "This is cookies!");
+        setLoggedIn(true);
         if (cookies) {
-          setLoggedIn(true);
+          localStorage.setItem("cookie", cookies);
+          console.log("Login cookie seted");
+      
           console.log("Login successful");
         }
-        console.log("Login successful but cookie! not set!");
+        localStorage.setItem("email", email); // Store email in local storage
       })
       .catch((error) => {
         console.error("Login failed:", error);
@@ -55,12 +67,15 @@ export default function LoginBtn() {
 
   const handleLogout = () => {
     axios
-      .get("http://127.0.0.1:5000/logout")
+      .get("http://127.0.0.1:5000/logout", {
+        withCredentials: true,
+      })
       .then((response) => {
         // Assuming the server returns a success status
         if (response.status === 200) {
-          // Clear login status using cookies or any other desired method
+          // Clear login status and remove email from local storage
           setLoggedIn(false);
+          localStorage.removeItem("email");
           console.log("Logout successful");
         }
       })
@@ -72,9 +87,6 @@ export default function LoginBtn() {
   if (loggedIn) {
     return (
       <div>
-        {/* <Button variant="outlined" onClick={handleLogout}>
-          Logout
-        </Button> */}
         <Fab variant="extended" onClick={handleLogout}>
           <AiOutlineLogin className="svg-login-icon" sx={{ mr: 1 }} />
           <p className="login-name">{email}</p>
@@ -125,7 +137,7 @@ export default function LoginBtn() {
                 label="email"
                 variant="outlined"
                 value={email}
-                onChange={(e) => setemail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <br />
               <br />

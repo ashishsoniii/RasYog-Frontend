@@ -36,10 +36,14 @@ function LiveSearch(props) {
       try {
         const response = await axios.get(
           `http://127.0.0.1:5000/store?id=${props.topic}`,
-          { cancelToken: source.token }
+          {
+            // cancelToken: source.token,
+            withCredentials: true, // Set withCredentials to true
+          }
         );
         // const response = await axios.get(
         //   `http://127.0.0.1:5000/store?id=${props.topic}`,
+        //   { withCredentials: true } // Alternative way to set withCredentials
         // );
         const { plot_name, display_option } = response.data;
         setPlotName(plot_name);
@@ -55,8 +59,7 @@ function LiveSearch(props) {
     fetchData();
 
     return () => {
-      // Cancel the request when component unmounts or when topic prop changes
-      source.cancel("LiveSearch component unmounted or topic prop changed");
+      source.cancel(); // Cancel the request on cleanup
     };
   }, [props.topic]);
 

@@ -13,12 +13,16 @@ import pymongo
 from jsonschema import validate
 # import sys
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True)
 
 
 app.secret_key="rasyog"
 # app.SESSION_COOKIE_HTTPONLY=False
 app.config["SESSION_COOKIE_HTTPONLY"]=False
+app.config['SESSION_COOKIE_SECURE'] = True
+
+app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+
 
 client=pymongo.MongoClient("mongodb://localhost:27017/Rasyog")
 db=client.get_database('Rasyog')
@@ -152,7 +156,7 @@ def home():
 @app.route('/store')
 def Choose_Option():
     # if('username' in session and session['username']=="pranav"):
-    # print(session)
+    print(session)
     if "userid" in session:
         Fun=(dict(request.args))
         Fun_id=Fun['id'].replace(" ","").lower()
@@ -450,26 +454,29 @@ def register():
             return "Please Login first",status.HTTP_400_BAD_REQUEST               
 
 
-@app.route("/login",methods=["POST"])
+from flask import request, make_response
+from werkzeug.security import check_password_hash
+
+@app.route("/login", methods=["POST"])
 def login():
-    if(request.method=="POST"):
-        userData=request.get_json()
-        if(userData['email']=='' or userData['password']==''):
-            return 'Please Choose Correct Choice',status.HTTP_403_FORBIDDEN
+    if request.method == "POST":
+        userData = request.get_json()
+        if userData['email'] == '' or userData['password'] == '':
+            return 'Please choose the correct choice', 403
         else:
-            userData_in_Database=db.users.find_one({'email':userData['email']})
-            if(not userData_in_Database):
-                return "User doesnot exist",status.HTTP_401_UNAUTHORIZED
+            userData_in_Database = db.users.find_one({'email': userData['email']})
+            if not userData_in_Database:
+                return "User does not exist", 401
             else:
-                # userPassword=userData['password']
-                passwordCheck=check_password_hash(userData_in_Database['password'],userData['password'])
-                if(passwordCheck==True):
-                    session["userid"]=userData_in_Database['email'] 
-                    
-                    # print(session)
-                    return f"Successfully Login ",status.HTTP_200_OK
+                passwordCheck = check_password_hash(userData_in_Database['password'], userData['password'])
+                if passwordCheck:
+                    session["userid"] = userData_in_Database['email']
+                    response = make_response("Successfully logged in", 200)
+                    response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+                    response.headers['Access-Control-Allow-Credentials'] = 'true'
+                    return response
                 else:
-                    return "Incorrect Password",status.HTTP_401_UNAUTHORIZED
+                    return "Incorrect password", 401
                 
 
 @app.route("/logout")
