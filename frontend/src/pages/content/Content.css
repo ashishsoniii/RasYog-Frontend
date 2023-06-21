@@ -535,16 +535,7 @@
 }
 
 
-.slider-icon.left {
-    left: 100%;
-    /* rotate: revert; */
-    transform: rotate(180deg);
-}
-.slider-icon.right {
-    left: 100%;
-    /* rotate: revert; */
-    transform: rotate(180deg);
-}
+
 
 /* Year Slider  */
 /* Year Slider  */
@@ -616,7 +607,18 @@
     flex-direction: column; */
 }
 
+.svg-login-icon{
+    font-size: 2rem;
+    /* padding-right: 1rem; */
+}
+.login-name{
+    font-size: 1.3rem;
+    margin-left: 2rem;
+}
 
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+    background: floralwhite;
+}
 
 
 /* Cards on team page! */
@@ -657,6 +659,29 @@
     letter-spacing: 0.025em;
     font-size: 1.7rem;
     padding-top: 3%;
+}
+
+
+/* Float Login Button */
+/* Float Login Button */
+/* Float Login Button */
+/* Float Login Button */
+
+.loginFloat {
+    position: fixed;
+    top: 6rem;
+    bottom: 0;
+    right: 2rem;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    z-index: 1000;
+    display: flex;
+
+
+}
+
+.bg-dialog-login {
+    background-color: #99f5e9;
 }
 
 

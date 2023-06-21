@@ -7,6 +7,7 @@ import Home from "./pages/content/Home";
 import DataAnalysis from "./pages/content/DataAnalysis.js";
 import Team from "./pages/content/components/Team";
 import UploadFile from "./pages/content/UploadFile";
+import LoginBtn from "./pages/content/components/LoginBtn";
 
 const App = () => {
   const [topic, setTopic] = useState("data");
@@ -20,12 +21,14 @@ const App = () => {
   };
   return (
     <>
+        <div className="loginFloat">
+        <LoginBtn />
+      </div>
       <div className="bg">
         <Navbar
           onTopicChange={handleTopicChange}
           onAcitiveTopicChange={handleActiveTopicChange}
         />
-        
       </div>
       <Routes>
         <Route exact path="/" element={<Home />} />

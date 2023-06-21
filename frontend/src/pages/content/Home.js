@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./Content.css";
 // import Project from "./Project";
 import Buttonz from "./components/Button.js";
-import Button2 from "./components/Button_2.js";
+import Button_2 from "./components/Button_2.js";
 import ReactSlider from "./components/ReactSlider.js";
+// import Team from "./components/Team";
 import { NavLink } from "react-router-dom";
 
 const Home = () => {
@@ -33,10 +34,10 @@ const Home = () => {
           <div className="column col-home-l">
             {activeState === "Sales Insights" && (
               <div className="Show data">
-                <div className="heading-footer ">
+                <h2 className="heading-footer ">
                   {/* <img className="footer-logo" src={logo} alt="" /> */}
                   <h2 className="Center">{activeState}</h2>
-                </div>
+                </h2>
                 <p>
                   Explore our website's sales analysis with <br /> charts and
                   graphs to uncover insights on <br /> sales, cost to company,
@@ -47,10 +48,10 @@ const Home = () => {
 
             {activeState === "Popularity & Margin" && (
               <div className="Show data">
-                <div className="heading-footer ">
+                <h2 className="heading-footer ">
                   {/* <img className="footer-logo" src={logo} alt="" /> */}
                   <h2 className="Center">{activeState}</h2>
-                </div>
+                </h2>
                 <p>
                   Visualizing Popularity and Margin of Our <br />{" "}
                   Products/Brands Over the Years! Explore Our <br /> Graphical
@@ -61,10 +62,10 @@ const Home = () => {
 
             {activeState === "Sales Distribution" && (
               <div className="Show data">
-                <div className="heading-footer ">
+                <h2 className="heading-footer ">
                   {/* <img className="footer-logo" src={logo} alt="" /> */}
                   <h2 className="Center">{activeState}</h2>
-                </div>
+                </h2>
                 <p>
                   Detailed view of distribution based on <br /> popularity,
                   sales, and margin with our <br /> informative and visually
@@ -83,6 +84,12 @@ const Home = () => {
       {/*  */}
       {/*  */}
 
+      {/*
+       */}
+      {/*  */}
+      {/* new section  */}
+      {/*  */}
+
       <div
         className="main-home-text white-area tax-data"
         style={{ marginBottom: 0 }}
@@ -93,16 +100,16 @@ const Home = () => {
       <div className="section2">
         <div className="row white-area">
           <div className="column col-home-l">
-            <Button2 setActiveState={setActiveState2} />
+            <Button_2 setActiveState={setActiveState2} />
           </div>
 
           <div className="column col-home-r">
             {activeState2 === "Maps Taxonomic" && (
               <div className="Show data">
-                <div className="heading-footer ">
+                <h2 className="heading-footer ">
                   {/* <img className="footer-logo" src={logo} alt="" /> */}
                   <h2 className="Center">{activeState2}</h2>
-                </div>
+                </h2>
                 <p>
                   a graphical representation of the relationships <br /> between
                   Brands, Products, Design, Size, and Color, <br /> showing how
@@ -114,10 +121,10 @@ const Home = () => {
 
             {activeState2 === "Data Taxonomic" && (
               <div className="Show data">
-                <div className="heading-footer ">
+                <h2 className="heading-footer ">
                   {/* <img className="footer-logo" src={logo} alt="" /> */}
                   <h2 className="Center">{activeState2}</h2>
-                </div>
+                </h2>
                 <p>
                   Includes the different brands available, <br /> the various
                   products offered under each brand, <br /> the design options
@@ -139,23 +146,24 @@ const Home = () => {
       </div>
 
       <ReactSlider />
-      <div className="team-upload">
-        <section className="team bg-add">
-          <div className="main-text-team">Update Data </div>
-          <NavLink to="/upload">
-            <div className="main-text-team btn-team">Upload Files!</div>
-          </NavLink>
-        </section>
-        <hr />
-        <section className="team">
-          <div className="main-text-team">
-            Your Partner in Business Analysis{" "}
-          </div>
-          <NavLink to="/team">
-            <div className="main-text-team btn-team">Discover Our Team!</div>
-          </NavLink>
-        </section>
-      </div>
+
+      <section className="team bg-add">
+        <div className="main-text-team">Update Data </div>
+        <NavLink to="/upload">
+          <div className="main-text-team btn-team">Upload Files!</div>
+        </NavLink>
+      </section>
+
+      <section className="team">
+        <div className="main-text-team">Your Partner in Business Analysis </div>
+        <NavLink to="/team">
+          <div className="main-text-team btn-team">Discover Our Team!</div>
+        </NavLink>
+
+        {/* <Cards /> */}
+
+        {/* <Cards /> */}
+      </section>
     </>
   );
 };

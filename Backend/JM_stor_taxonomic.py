@@ -24,10 +24,10 @@ End_Year=2022
 df=df.drop(['Size','Unnamed: 0'], axis = 1)
 dff = df[['Date','Product Category','Department','Brand','product','Design','Color','size','Qty']]
 
-dff['Date'] = pd.to_datetime(dff['Date'])
+# dff['Date'] = pd.to_datetime(dff['Date'])
 
 # dff['Date'] = pd.to_datetime(dff['Date'],format='ISO8601')
-# dff['Date'] = pd.to_datetime(dff['Date'],format='mixed', dayfirst=True)
+dff['Date'] = pd.to_datetime(dff['Date'],format='mixed', dayfirst=True)
 
 dff['year'] = dff['Date'].dt.year
 dff['month'] = dff['Date'].dt.month
