@@ -16,7 +16,7 @@ function RegisterDialog(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
-    // eslint-disable-next-line
+  // eslint-disable-next-line
   const [open, setOpen] = useState(true);
 
   const handleClose = () => {
@@ -47,11 +47,12 @@ function RegisterDialog(props) {
         // console.log(response);
         // Assuming the server returns a success status
         window.alert("User Has Been Added Successfully!");
-        
+
         handleClose(); // Close the dialog after successful registration
       })
-      .catch((error) => {
-        window.alert("UnSuccessfully!");
+      .catch((error, response) => {
+        // console.log(response);
+        window.alert(error.response.data);
         console.error("Registration failed:", error.response);
         // Handle the error accordingly
       });
