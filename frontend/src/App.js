@@ -13,6 +13,11 @@ const App = () => {
   const [topic, setTopic] = useState("data");
   const [activeTopic, setActiveTopic] = useState("Data Analysis");
 
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
+
   const handleTopicChange = (newTopic) => {
     setTopic(newTopic);
   };
@@ -21,8 +26,17 @@ const App = () => {
   };
   return (
     <>
-        <div className="loginFloat">
-        <LoginBtn />
+      <div className="loginFloat">
+        <LoginBtn
+          open={open}
+          setOpen={setOpen}
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
+        />
       </div>
       <div className="bg">
         <Navbar
@@ -31,18 +45,18 @@ const App = () => {
         />
       </div>
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={<Home  setOpen={setOpen}         loggedIn={loggedIn}/>} />
         <Route
           exact
           path="/dataAnalysis"
-          element={<DataAnalysis topic={topic} activeTopic={activeTopic} />}
+          element={<DataAnalysis topic={topic} activeTopic={activeTopic} loggedIn={loggedIn} setOpen={setOpen} />}
         />
         <Route
           exact
           path="/team"
           element={<Team topic={topic} activeTopic={activeTopic} />}
         />
-        <Route exact path="/upload" element={<UploadFile />} />
+        <Route exact path="/upload" element={<UploadFile loggedIn={loggedIn} />} />
       </Routes>
       <Footer />
     </>

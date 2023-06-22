@@ -10,7 +10,8 @@ import img7 from "../../../assets/card-img/105_maps_t.png";
 import img8 from "../../../assets/card-img/102_payments.png";
 import DialogGraph from "./DialogGraph";
 
-import "../Content.css"
+import "../Content.css";
+import LoginAlert from "./LoginAlert";
 
 const Baz = (props) => {
   const [diagOpen, setDiagOpen] = useState(false);
@@ -102,7 +103,9 @@ const Baz = (props) => {
         setvalueStart(2014);
         setvalueEnd(2022);
         setDiagOpen(true);
-        setdescription("Tree Maps : Popularity Analysis for Products upto Brand Level");
+        setdescription(
+          "Tree Maps : Popularity Analysis for Products upto Brand Level"
+        );
       },
     },
     {
@@ -135,17 +138,22 @@ const Baz = (props) => {
 
   return (
     <>
-      <DialogGraph
-        diagOpen={diagOpen}
-        setDiagOpen={setDiagOpen}
-        topic={topic}
-        selectedOptionId={selectedOptionId}
-        valueStart={valueStart}
-        valueEnd={valueEnd}
-        setselectedOptionId={setselectedOptionId}
-        description={description}
-        onClose={() => setDiagOpen(false)}
-      />
+      {props.loggedIn && (
+        <DialogGraph
+          diagOpen={diagOpen}
+          setDiagOpen={setDiagOpen}
+          topic={topic}
+          selectedOptionId={selectedOptionId}
+          valueStart={valueStart}
+          valueEnd={valueEnd}
+          setselectedOptionId={setselectedOptionId}
+          description={description}
+          onClose={() => setDiagOpen(false)}
+        />
+      )}
+      {!props.loggedIn && diagOpen && (
+        <LoginAlert loggedIn={props.loggedIn} setOpen={props.setOpen} onClose={() => {setDiagOpen(false); }} />
+      )}
       <div
         style={{
           display: "flex",

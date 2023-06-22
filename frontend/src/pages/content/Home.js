@@ -6,7 +6,7 @@ import Button2 from "./components/Button_2.js";
 import ReactSlider from "./components/ReactSlider.js";
 import { NavLink } from "react-router-dom";
 
-const Home = () => {
+const Home = (props) => {
   const [activeState, setActiveState] = useState("Sales Insights");
   const [activeState2, setActiveState2] = useState("Maps Taxonomic");
   return (
@@ -138,7 +138,11 @@ const Home = () => {
         </div>
       </div>
 
-      <ReactSlider />
+      <ReactSlider         loggedIn = {props.loggedIn}
+        setOpen ={props.setOpen}
+/>
+
+      
       <div className="team-upload">
         <section className="team bg-add">
           <div className="main-text-team">Update Data </div>

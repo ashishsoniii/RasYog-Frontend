@@ -22,9 +22,10 @@ function DataAnalysis(props) {
     setValueEnd(newValueEnd);
   };
 
-  const handleOptionClick = (item) => {
-    setSelectedOption(item.plot);
-    setSelectedOptionId(item.id);
+  const handleOptionClick = (item, props) => {
+      setSelectedOption(item.plot);
+      setSelectedOptionId(item.id);
+    
   };
   useEffect(() => {
     setSelectedOptionId(0);
@@ -70,7 +71,10 @@ function DataAnalysis(props) {
             "Welcome to our taxonomic data, the secret sauce of our store. With our detailed categorization system, you'll be able to navigate our collection with ease and discover new products that match your preferences. Whether you're a seasoned shopper or a first-time visitor, our taxonomic data makes your shopping experience hassle-free and enjoyable."
           )}{" "}
         </div>
+        
         <LiveSearch
+        loggedIn = {props.loggedIn}
+        setOpen ={props.setOpen}
           topic={props.topic}
           handleOptionClick={handleOptionClick}
           setDisplayStart={setDisplayStart}

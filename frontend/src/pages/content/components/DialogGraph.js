@@ -25,6 +25,7 @@ export default function DialogGraph(props) {
       {/* <Button variant="outlined" onClick={handleClickOpen}>
         Open dialog
       </Button> */}
+      
       <Dialog
         fullScreen
         open={props.diagOpen}

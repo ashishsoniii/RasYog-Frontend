@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
+import LoginAlert from "./LoginAlert";
 
 function LiveSearch(props) {
   const [plotName, setPlotName] = useState([]);
   // eslint-disable-next-line
   const [displayOption, setDisplayOption] = useState(false);
-  // const [displayStart, setDisplayStart] = useState(false);
-  // const [displayEnd, setDisplayEnd] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Select your option");
@@ -84,9 +83,12 @@ function LiveSearch(props) {
     <div>
       <div className="select-container">
         <div
-          className={`select-menu ${isOpen ? "active" : ""}`}
+          className={`select-menu ${isOpen && props.loggedIn ? "active" : ""}`}
           ref={selectMenuRef}
         >
+        {isOpen && !props.loggedIn
+        && <LoginAlert setOpen ={props.setOpen} />
+        }
           <button className="select-btn" onClick={() => setIsOpen(!isOpen)}>
             <span className="sBtn-text">{selectedOption}</span>
             <i className="bx bx-chevron-down"></i>
