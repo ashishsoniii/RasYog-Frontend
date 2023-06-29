@@ -1,4 +1,4 @@
-from flask import Flask, request,jsonify,session
+from flask import Flask, request,jsonify,session,make_response
 import JM_Store as ry
 import JM_stor_taxonomic as jmt
 from flask_api import status
@@ -12,6 +12,7 @@ import pymongo
 # import os
 from jsonschema import validate
 # import sys
+import send_email
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
@@ -20,14 +21,14 @@ app.secret_key="rasyog"
 # app.SESSION_COOKIE_HTTPONLY=False
 app.config["SESSION_COOKIE_HTTPONLY"]=False
 app.config['SESSION_COOKIE_SECURE'] = True
-
 app.config['SESSION_COOKIE_SAMESITE'] = 'None'
 
 
-client=pymongo.MongoClient("mongodb://localhost:27017/Rasyog")
-db=client.get_database('Rasyog')
-
-
+client=pymongo.MongoClient("mongodb+srv://rasyog:RVd18LGeMfmD4NfS@cluster0.p1dxni4.mongodb.net/?retryWrites=true&w=majority")
+db=client.get_database("rasyog")
+# print(db.list_collection_names())
+user_credentials=db.get_collection("user_credentials")
+# print(list(user_credentials.find()))
 # print(db)
 # users=db.user_collection
 
@@ -38,10 +39,10 @@ schema = {
                 "name": {"type" : "string"},  
                 "email": {"type" : "string"},  
                 "password": {"type" : "string"},
-                "admin":{"type":"number"}
+                "isAdmin":{"type":"number"}
 
             },
-            "required":["name","email","password"]
+            "required":["name","email","password","isAdmin"]
 }
 
 
@@ -156,8 +157,8 @@ def home():
 @app.route('/store')
 def Choose_Option():
     # if('username' in session and session['username']=="pranav"):
-    print(session)
-    if "userid" in session:
+    # print(session)
+    # if "userid" in session:
         Fun=(dict(request.args))
         Fun_id=Fun['id'].replace(" ","").lower()
         # print(Fun)
@@ -173,8 +174,8 @@ def Choose_Option():
                 # "display_option":True
             }
         return jsonify(graph_data),status.HTTP_200_OK
-    else:
-        return "Please Login First",status.HTTP_401_UNAUTHORIZED 
+    # else:
+        # return "Please Login First",status.HTTP_401_UNAUTHORIZED 
 
 # Route for Data Analysis        
 @app.route('/data', methods=['POST'])
@@ -421,8 +422,8 @@ def register():
     if(request.method=="POST"):
         if "userid" in session:
             adminEmail=session["userid"]
-            adminExist=db.users.find_one({'email':adminEmail})
-            if(adminExist["admin"]):
+            adminExist=user_credentials.find_one({'email':adminEmail})
+            if(adminExist["isAdmin"]):
                 userData=request.get_json()
                 if(userData['email']=='' or userData['name']=='' or userData['password']==''):
                     return 'Please Choose Correct Choice',status.HTTP_403_FORBIDDEN
@@ -434,16 +435,30 @@ def register():
                         validationError="Error"
 
                     if(not validationError):
-                        userExist=db.users.find_one({'email':userData['email']})
+                        userExist=user_credentials.find_one({'email':userData['email']})
                         if((userExist)): 
                             return "User already exist Choose another email id",status.HTTP_409_CONFLICT
                         else:
                             # userPassword=userData['password']
                             # print(validationError)
                             userData['password']=generate_password_hash(password=userData['password'])
-                            resultUser=db.users.insert_one(document=userData)
+                            resultUser=user_credentials.insert_one(document=userData)
                             if(resultUser.inserted_id):
-                                return "User Successfully Inserted",status.HTTP_200_OK
+
+                                # Website User data
+                                sender_email = 'Email_id'
+                                sender_password = 'password'
+                                reciever_email = 'Reciever_email'
+                                subject = 'Rasyog website permission'
+                                message = 'Hi user, you can now access rasyog your email and password are....'
+
+                                # isEmailSuccess=send_email.send_email(sender_email, sender_password, reciever_email, subject, message) 
+                                isEmailSuccess=True  # comment this line and uncomment above line
+
+                                if isEmailSuccess==True:
+                                    return "User Successfully Inserted",status.HTTP_200_OK
+                                else:
+                                    return "User Successfully Added but Error Occur while Sending Email",status.HTTP_400_BAD_REQUEST
                             else:
                                 return 'User Cannot be Added',status.HTTP_400_BAD_REQUEST
                     else:
@@ -454,19 +469,17 @@ def register():
             return "Please Login first",status.HTTP_400_BAD_REQUEST               
 
 
-from flask import request, make_response
-from werkzeug.security import check_password_hash
 
 @app.route("/login", methods=["POST"])
 def login():
     if request.method == "POST":
         userData = request.get_json()
         if userData['email'] == '' or userData['password'] == '':
-            return 'Please choose the correct choice', 403
+            return 'Please choose the correct choice',status.HTTP_403_FORBIDDEN
         else:
-            userData_in_Database = db.users.find_one({'email': userData['email']})
+            userData_in_Database = user_credentials.find_one({'email': userData['email']})
             if not userData_in_Database:
-                return "User does not exist", 401
+                return "User does not exist",status.HTTP_401_UNAUTHORIZED 
             else:
                 passwordCheck = check_password_hash(userData_in_Database['password'], userData['password'])
                 if passwordCheck:
@@ -476,7 +489,7 @@ def login():
                     response.headers['Access-Control-Allow-Credentials'] = 'true'
                     return response
                 else:
-                    return "Incorrect password", 401
+                    return "Incorrect password",status.HTTP_401_UNAUTHORIZED 
                 
 
 @app.route("/logout")
@@ -494,15 +507,18 @@ def ChangePassword():
             userdata=request.get_json()
             user_email=session["userid"]
             # print(user_email)
-            userData_in_Database=db.users.find_one({'email':user_email})
+            userData_in_Database=user_credentials.find_one({'email':user_email})
+            print(userdata) 
+            print(check_password_hash(userData_in_Database["password"],userdata["oldpassword"]))
             if(check_password_hash(userData_in_Database["password"],userdata["oldpassword"])):
-                updated_data=db.users.update_one({"email":user_email},{"$set":{"password":generate_password_hash(userdata["newpassword"])}})
+                updated_data=user_credentials.update_one({"email":user_email},{"$set":{"password":generate_password_hash(userdata["newpassword"])}})
                 # print(updated_data.upserted_id())
-                return "Successfully Updated",status.HTTP_200_OK
+                session.clear()
+                return "Successfully Updated",status.HTTP_200_OK 
             else:
-                return "Invalid Credentials"
+                return "Invalid Credentials",status.HTTP_401_UNAUTHORIZED
         else:
-            return "Please Login First"
+            return "Please Login First",status.HTTP_401_UNAUTHORIZED 
 
 
 

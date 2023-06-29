@@ -4,7 +4,7 @@ from numerize import numerize
 import plotly.express as px
 from json import dumps
 from plotly.utils import PlotlyJSONEncoder
-from upload import df1 as df
+# from upload import df1 as df
 # import warnings
 
 # warnings.filterwarnings('ignore')
@@ -23,7 +23,7 @@ from upload import df1 as df
 Starting_Year=2014
 End_Year=2022
 
-# df = pd.read_excel('Store_data_v2.xlsx')
+df = pd.read_excel('Store_data_v2.xlsx')
 # df = pd.read_excel('/home/yoglabs/mysite/Files/Store_data_v2.xlsx')
 # print(df)
 df['year'] = df['Date'].dt.year

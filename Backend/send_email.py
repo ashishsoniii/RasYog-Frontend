@@ -28,14 +28,16 @@ def send_email(sender_email, sender_password, reciever_email, subject, message):
         server.quit()
 
         print("Email sent successfully!")
+        return True
     except smtplib.SMTPException as e:
         print("Error occurred while sending the email:", e)
+        return False
 
-# Example usage:
-sender_email = 'Email_id'
-sender_password = 'password'
-reciever_email = 'Reciever_email'
-subject = 'Rasyog website permission'
-message = 'Hi user, you can now access rasyog your email and password are....'
+# # Example usage:
+# sender_email = 'Email_id'
+# sender_password = 'password'
+# reciever_email = 'Reciever_email'
+# subject = 'Rasyog website permission'
+# message = 'Hi user, you can now access rasyog your email and password are....'
 
-send_email(sender_email, sender_password, reciever_email, subject, message)
+# send_email(sender_email, sender_password, reciever_email, subject, message)
