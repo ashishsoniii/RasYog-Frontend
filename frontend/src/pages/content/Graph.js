@@ -15,7 +15,7 @@ function Graph(props) {
       setLoading(true);
 
       const response = await axios.post(
-        `http://127.0.0.1:5000/${props.topic}`,
+        `https://yoglabs.pythonanywhere.com/${props.topic}`,
         {
           graph: props.selectedOptionId,
           starting: props.valueStart,
