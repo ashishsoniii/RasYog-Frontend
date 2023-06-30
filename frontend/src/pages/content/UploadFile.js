@@ -48,7 +48,7 @@ function UploadFile() {
       formData.append("File2", file2);
 
       axios
-        .post("http://127.0.0.1:5000/upload", formData)
+        .post("https://yoglabs.pythonanywhere.com/upload", formData)
         .then((response) => {
           console.log(response.data);
           window.alert("File uploaded successfully!");

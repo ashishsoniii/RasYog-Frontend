@@ -32,7 +32,7 @@ function RegisterDialog(props) {
     // Make an API request to register the user
     axios
       .post(
-        "http://127.0.0.1:5000/register",
+        "https://yoglabs.pythonanywhere.com/register",
         {
           name,
           email,
@@ -53,7 +53,7 @@ function RegisterDialog(props) {
       .catch((error, response) => {
         // console.log(response);
         window.alert(error.response.data);
-        console.error("Registration failed:", error.response);
+        // console.error("Registration failed:", error.response);
         // Handle the error accordingly
       });
   };

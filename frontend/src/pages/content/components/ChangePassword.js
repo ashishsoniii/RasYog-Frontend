@@ -37,7 +37,9 @@ function RegisterChangePassword(props) {
         handleClose(); // Close the dialog after handling password change
       })
       .catch((error) => {
-        console.error("Password change failed:", error.response);
+        window.alert(error.response.data);
+
+        // console.error("Password change failed:", error.response);
         // Handle the error accordingly
       });
   };

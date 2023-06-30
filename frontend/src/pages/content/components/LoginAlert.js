@@ -40,7 +40,7 @@ export default function LoginAlert(props) {
         </DialogContent> */}
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleCloseLogin} autoFocus>
+          <Button onClick={handleCloseLogin} variant="contained"  autoFocus>
             Login
           </Button>
         </DialogActions>

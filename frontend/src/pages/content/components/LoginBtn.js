@@ -49,7 +49,7 @@ export default function LoginBtn({
 
     axios
       .post(
-        "http://127.0.0.1:5000/login",
+        "https://yoglabs.pythonanywhere.com/login",
         {
           email,
           password,
@@ -75,7 +75,9 @@ export default function LoginBtn({
         sessionStorage.setItem("email", email); // Store email in session storage
       })
       .catch((error) => {
-        console.error("Login failed:", error.response);
+        window.alert(error.response.data);
+
+        // console.error("Login failed:", error.response);
         if (error.response.status === 401) {
           setError("Wrong Credential. Please try again.");
         } else {
@@ -88,7 +90,7 @@ export default function LoginBtn({
 
   const handleLogout = () => {
     axios
-      .get("http://127.0.0.1:5000/logout", {
+      .get("https://yoglabs.pythonanywhere.com/logout", {
         withCredentials: true,
       })
       .then((response) => {
@@ -102,7 +104,9 @@ export default function LoginBtn({
         }
       })
       .catch((error) => {
-        console.error("Logout failed:", error);
+        window.alert(error.response.data);
+
+        // console.error("Logout failed:", error);
       });
   };
 
