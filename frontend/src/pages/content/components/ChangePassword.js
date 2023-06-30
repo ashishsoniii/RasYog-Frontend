@@ -22,7 +22,7 @@ function RegisterChangePassword(props) {
   const handleChangePassword = () => {
     axios
       .post(
-        "http://127.0.0.1:5000/ChangePassword",
+        "https://yoglabs.pythonanywhere.com/ChangePassword",
         {
           oldpassword,
           newpassword,
