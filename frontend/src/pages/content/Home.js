@@ -4,7 +4,6 @@ import "./Content.css";
 import Buttonz from "./components/Button.js";
 import Button2 from "./components/Button_2.js";
 import ReactSlider from "./components/ReactSlider.js";
-import { NavLink } from "react-router-dom";
 
 const Home = (props) => {
   const [activeState, setActiveState] = useState("Sales Insights");
@@ -28,7 +27,7 @@ const Home = (props) => {
         </div>
       </div>
 
-      <div className="section1">
+      <div className="section1" id="analysis">
         <div className="row white-area">
           <div className="column col-home-l">
             {activeState === "Sales Insights" && (
@@ -143,7 +142,7 @@ const Home = (props) => {
 />
 
       
-      <div className="team-upload">
+      {/* <div className="team-upload">
         <section className="team bg-add">
           <div className="main-text-team">Update Data </div>
           <NavLink to="/upload">
@@ -159,7 +158,7 @@ const Home = (props) => {
             <div className="main-text-team btn-team">Discover Our Team!</div>
           </NavLink>
         </section>
-      </div>
+      </div> */}
     </>
   );
 };

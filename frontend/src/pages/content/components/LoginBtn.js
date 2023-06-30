@@ -8,9 +8,15 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { TextField, Menu, MenuItem } from "@mui/material";
 import axios from "axios";
 import Fab from "@mui/material/Fab";
-import { AiOutlineLogin, AiOutlineLogout, AiOutlineKey } from "react-icons/ai";
+import {
+  AiOutlineLogin,
+  AiOutlineLogout,
+  AiOutlineKey,
+  AiOutlineDatabase,
+} from "react-icons/ai";
 import RegisterChangePassword from "./ChangePassword";
 import RegisterDialog from "./RegisterDialog";
+import { NavLink } from "react-router-dom";
 
 export default function LoginBtn({
   email,
@@ -49,6 +55,7 @@ export default function LoginBtn({
 
     axios
       .post(
+        // "http://127.0.0.1:5000/login",
         "https://yoglabs.pythonanywhere.com/login",
         {
           email,
@@ -73,6 +80,8 @@ export default function LoginBtn({
           // console.log("Login cookie set");
         }
         sessionStorage.setItem("email", email); // Store email in session storage
+        // Redirect to "/dataAnalysis" page
+        window.location.href = "/dataAnalysis";
       })
       .catch((error) => {
         window.alert(error.response.data);
@@ -158,6 +167,11 @@ export default function LoginBtn({
           open={Boolean(anchorEl)}
           onClose={handleMenuClose}
         >
+          <MenuItem>
+            <AiOutlineDatabase sx={{ mr: 1 }} />
+            <NavLink to="/upload">Upload Files </NavLink>
+          </MenuItem>
+
           <MenuItem onClick={handleRegisteruser}>
             <AiOutlineKey sx={{ mr: 1 }} />
             Register Users

@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Footer.css";
+import { NavLink, useLocation } from "react-router-dom";
 // import logo from "../../assets/logo/logo-white.png";
 function Footer() {
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+  const handleNavLinkClick = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <footer className="footer-main">
@@ -23,11 +32,19 @@ function Footer() {
           </div>
           <div className="column right-col">
             <h2>Powered by YogLabs</h2>
-            <a className="footer-links-f1" href="mailto:info.ras@yoglabs.ai">
-              info.ras@yoglabs.ai
-            </a>
+            <NavLink
+              className="footer-links-f1"
+              to="/team"
+              onClick={handleNavLinkClick}
+              activeclassname=""
+            >
+              Meet Our Team
+            </NavLink>
             <a className="footer-links-f2" href="https://yoglabs.ai">
               yoglabs.ai
+            </a>
+            <a className="footer-links-f1" href="mailto:info.ras@yoglabs.ai">
+              info.ras@yoglabs.ai
             </a>
           </div>
         </div>
