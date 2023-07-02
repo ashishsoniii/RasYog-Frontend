@@ -3,6 +3,7 @@ import LiveSearch from "./components/LiveSearch";
 import Slider from "./components/Slider";
 import SliderReverse from "./components/SliderReverse";
 import Graph from "./Graph";
+import jaipurM from "../../assets/logo/jaipur_Modern.png"
 
 function DataAnalysis(props) {
   const [selectedOption, setSelectedOption] = useState("Select your option");
@@ -40,6 +41,12 @@ function DataAnalysis(props) {
       {/* <h1> Hraph me hu!</h1>
       <h1> {selectedOptionId}!</h1> */}
       <div className="on-home-bg">
+        <div className="main-home-text">
+        
+        
+        <img src={jaipurM} className="svg-login-icon-onhomepage" alt="" />
+
+        </div>
         <div className="main-home-text">{props.activeTopic}</div>
         <div className="main-home-sub-text">
           {props.topic === "data" ? (

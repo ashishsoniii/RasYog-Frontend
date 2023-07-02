@@ -4,6 +4,8 @@ import "./Content.css";
 import Buttonz from "./components/Button.js";
 import Button2 from "./components/Button_2.js";
 import ReactSlider from "./components/ReactSlider.js";
+import jaipurM from "../../assets/logo/jaipur_Modern.png";
+import { motion } from "framer-motion";
 
 const Home = (props) => {
   const [activeState, setActiveState] = useState("Sales Insights");
@@ -150,7 +152,19 @@ const Home = (props) => {
       <div className="team-upload">
         <section className="team">
           <div className="main-text-team">Partnerships</div>
-          
+          <a href="http://www.jaipurmodern.com/" target="__blank">
+
+          <motion.img
+            whileHover={{
+              scale: 1.1,
+              transition: { duration: 1 },
+            }}
+            whileTap={{ scale: 0.9 }}
+            src={jaipurM}
+            className="svg-login-icon-onhomepage-above-footer"
+            alt=""
+          />
+          </a>
         </section>
       </div>
 

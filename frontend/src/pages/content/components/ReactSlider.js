@@ -159,7 +159,7 @@ const Baz = (props) => {
           display: "flex",
           justifyContent: "center",
           marginTop: "10em",
-          marginBottom: "7em",
+          marginBottom: "0em",
         }}
       >
         <ReactCardSlider slides={slides} />

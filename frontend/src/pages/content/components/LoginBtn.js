@@ -17,6 +17,7 @@ import {
 import RegisterChangePassword from "./ChangePassword";
 import RegisterDialog from "./RegisterDialog";
 import { NavLink } from "react-router-dom";
+import jaipurM from "../../../assets/logo/jaipur_Modern.png";
 
 export default function LoginBtn({
   email,
@@ -155,6 +156,7 @@ export default function LoginBtn({
           <AiOutlineLogin className="svg-login-icon" sx={{ mr: 1 }} />
           <p className="login-name">{email}</p>
         </Fab>
+       
         <Menu
           sx={{
             position: "fixed",
@@ -200,10 +202,11 @@ export default function LoginBtn({
   return (
     <div>
       <Fab variant="extended" onClick={handleOpen}>
-        <AiOutlineLogin className="svg-login-icon" sx={{ mr: 1 }} />
+        {/* <AiOutlineLogin className="svg-login-icon" sx={{ mr: 1 }} /> */}
+        <img src={jaipurM} className="svg-login-icon" alt="" />
         <p className="login-name">Login</p>
       </Fab>
-
+      
       <Dialog
         open={open}
         onClose={handleClose}

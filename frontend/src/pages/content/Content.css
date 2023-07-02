@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 
 
+
 .project-main {
     position: relative;
     padding-left: 12rem;
@@ -228,6 +229,8 @@
     background-color: #F2F2F2;
     padding-top: 5rem;
     padding-bottom: 1rem;
+    padding-left: 14rem;
+    padding-right: 17rem;
 
 }
 
@@ -265,15 +268,15 @@
 }
 
 .col-home-l {
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
 .col-home-r {
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
 .Center {
-    font-size: 4.2rem;
+    font-size: 3rem;
 }
 
 .tax-data {
@@ -607,16 +610,55 @@
     flex-direction: column; */
 }
 
-.svg-login-icon{
+.svg-login-icon {
     font-size: 2rem;
+    width: 10rem;
     /* padding-right: 1rem; */
 }
-.login-name{
-    font-size: 1.3rem;
-    margin-left: 2rem;
+
+.svg-login-icon-onhomepage {
+    font-size: 5rem;
+    width: 25rem;
+    /* padding-right: 1rem; */
 }
 
-.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+.svg-login-icon-onhomepage-above-footer {
+    font-size: 5rem;
+    margin-top: 5rem;
+
+    width: 25rem;
+    /* padding-right: 1rem; */
+    /* add border with design */
+    /* 3d  */
+
+}
+
+
+.svg-login-icon-onhomepage-above-footer:hover {
+    background:
+        linear-gradient(to right, black 4px, transparent 4px) 0 0,
+        linear-gradient(to left, black 4px, transparent 4px) 100% 100%,
+        linear-gradient(to bottom, black 4px, transparent 4px) 0 0,
+        linear-gradient(to top, black 4px, transparent 4px) 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    /* transition: background-position 0.5s ease-in; */
+
+
+
+}
+
+
+.login-name {
+    font-size: 1.3rem;
+    margin-left: 2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
     background: floralwhite;
 }
 
@@ -688,7 +730,7 @@
 
 
 /* coloring ras rasyog */
-.color-ras-color-it{
+.color-ras-color-it {
     color: #52104f;
     font-size: 2.3rem;
 }
@@ -1203,4 +1245,3 @@
 
     }
 }
-
