@@ -123,14 +123,15 @@ function Team() {
       <div className="on-home-bg ">
         <div className="main-home-text"> About Us! </div>
         <div className="main-home-sub-text main-home-sub-text_about-US">
-          Welcome to RASYOG, featured by YOGLABS. Our team has conducted a
-          taxonomic and sales analysis of a departmental store, organized into
-          categories based on similarities and differences. Our aim is to
-          provide valuable insights for store managers and customers, using
-          data-driven insights to enhance decision-making. Powered by YogLabs,
-          our user-friendly interface makes it easy to navigate and understand.
-          <br />
-          Contact us to learn more!
+          Discerning Chemistry of Taste (RasYog) by AI driven understanding of
+          the relationships between Consumer, Brand & Products. Our mission is
+          to develop a research fostered mutually beneficial relationship
+          between researchers and industry. This research with data bartering,
+          we envision, will be done with a strong Indian context not just from a
+          data perspective but also leveraging Indian Aesthetic and Cognitive
+          theories within the AI modeling. Thus accomplishing a larger vision of
+          rejuvenating the cultural awareness as well as scientific interest in
+          Indian philosophies for aesthetics and human behavior.
         </div>
       </div>
       <div className="white-bg">

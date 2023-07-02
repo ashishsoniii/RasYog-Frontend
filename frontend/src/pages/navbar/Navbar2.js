@@ -80,7 +80,7 @@ const Navbar2 = (props) => {
                 onClick={handleNavLinkClick}
 
               >
-                Analysis
+                Fashion Analytics
               </NavLink>
             </li>
             <li>

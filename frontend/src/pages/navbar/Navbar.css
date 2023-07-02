@@ -44,6 +44,8 @@ li {
     justify-content: start;
     align-items: center;
     margin-left: 5rem;
+    z-index: 999;
+
 }
 
 .logo-img {
@@ -62,11 +64,11 @@ li {
 .menu-link ul {
     height: 8rem;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     /* color: aliceblue; */
     color: black;
-    margin-left: -31rem;
+    margin-left: -51rem;
 
 }
 

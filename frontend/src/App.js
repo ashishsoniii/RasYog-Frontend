@@ -40,14 +40,14 @@ const App = () => {
         />
       </div>
       <div className="bg">
-
-      {loggedIn ? 
-        <Navbar
-          onTopicChange={handleTopicChange}
-          onAcitiveTopicChange={handleActiveTopicChange}
-        /> :
-        <Navbar2 />
-      }
+        {loggedIn ? (
+          <Navbar
+            onTopicChange={handleTopicChange}
+            onAcitiveTopicChange={handleActiveTopicChange}
+          />
+        ) : (
+          <Navbar2 />
+        )}
       </div>
       <Routes>
         <Route

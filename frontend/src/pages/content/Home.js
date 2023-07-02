@@ -12,18 +12,26 @@ const Home = (props) => {
     <>
       <div className="on-home-bg">
         <div className="main-home-text">{"RASYOG"}</div>
+        <div className="main-home-sub-text color-ras-color-it">
+          Fashion AI for Indian Aesthetics (Ras)
+        </div>
         <div className="main-home-sub-text">
-          This is a comprehensive taxonomic and sales analysis of a departmental
-          store. Our team has analyzed and organized the store's data into
-          various categories based on similarities and differences, including
-          product categories, brand categories, and price categories. We have
-          also analyzed sales data to provide insights into product popularity
-          and availability. The results of this analysis have been presented in
-          a user-friendly interface that is easy to navigate and understand.
-          Whether you are a store manager looking to optimize product offerings
-          or a customer looking for a more efficient shopping experience, our
-          taxonomic and sales analysis can provide valuable insights to enhance
-          your decision-making process.{" "}
+          Applying AI on Indian Consumer data of Fashion Brands for building
+          scientific understanding for Indian Aesthetics and helping better
+          decision making for the Fashion Industry. A mutually beneficial
+          partnership between the research community and industry based on
+          data-driven AI research. In the process also rejuvenating the cultural
+          awareness as well as scientific research in the <br /> field of Indian
+          Philosophies for Aesthetics (Ras).
+          <br />
+          <br />
+          The first version of RasYog provides a comprehensive taxonomic and
+          sales analysis of fashion store data. Leveraging powerful visual
+          analytics techniques to easily analyze and organize your data into
+          various categories of products, brands and pricing based on
+          similarities and differences. Also allows for dynamic temporal
+          analytics of sales data to provide insights into both product
+          popularity and availability.
         </div>
       </div>
 
@@ -82,12 +90,12 @@ const Home = (props) => {
       {/*  */}
       {/*  */}
 
-      <div
+      {/* <div
         className="main-home-text white-area tax-data"
         style={{ marginBottom: 0 }}
       >
         {"Taxonomic"}
-      </div>
+      </div> */}
 
       <div className="section2">
         <div className="row white-area">
@@ -137,28 +145,16 @@ const Home = (props) => {
         </div>
       </div>
 
-      <ReactSlider         loggedIn = {props.loggedIn}
-        setOpen ={props.setOpen}
-/>
+      <ReactSlider loggedIn={props.loggedIn} setOpen={props.setOpen} />
 
-      
-      {/* <div className="team-upload">
-        <section className="team bg-add">
-          <div className="main-text-team">Update Data </div>
-          <NavLink to="/upload">
-            <div className="main-text-team btn-team">Upload Files!</div>
-          </NavLink>
-        </section>
-        <hr />
+      <div className="team-upload">
         <section className="team">
-          <div className="main-text-team">
-            Your Partner in Business Analysis{" "}
-          </div>
-          <NavLink to="/team">
-            <div className="main-text-team btn-team">Discover Our Team!</div>
-          </NavLink>
+          <div className="main-text-team">Partnerships</div>
+          
         </section>
-      </div> */}
+      </div>
+
+      {/* partnership */}
     </>
   );
 };

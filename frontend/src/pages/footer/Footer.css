@@ -76,9 +76,10 @@ html {
 }
 
 .footer-links-f1 {
-  color: #60bb49;
+  color: #a9a9a9;
   justify-content: center;
   display: flex;
+  padding-right: 1.7rem;
 
 }
 
@@ -97,4 +98,14 @@ html {
   justify-content: center;
   display: flex;
   font-size: 2.5rem;
+}
+
+.flex-lgao-footer-meh{
+  display: flex;
+  justify-content: center;
+}
+
+
+.footer-logo{
+  width: 6rem;
 }

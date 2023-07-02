@@ -680,10 +680,18 @@
 
 }
 
+
 .bg-dialog-login {
     background-color: #99f5e9;
 }
 
+
+
+/* coloring ras rasyog */
+.color-ras-color-it{
+    color: #52104f;
+    font-size: 2.3rem;
+}
 
 
 
