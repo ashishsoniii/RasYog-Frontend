@@ -154,9 +154,11 @@ export default function LoginBtn({
       <>
         <Fab variant="extended" onClick={handleMenuOpen}>
           <AiOutlineLogin className="svg-login-icon" sx={{ mr: 1 }} />
+
           <p className="login-name">{email}</p>
+          {/* <img src={jaipurM} className="svg-login-icon" alt="" /> */}
         </Fab>
-       
+
         <Menu
           sx={{
             position: "fixed",
@@ -206,7 +208,7 @@ export default function LoginBtn({
         <img src={jaipurM} className="svg-login-icon" alt="" />
         <p className="login-name">Login</p>
       </Fab>
-      
+
       <Dialog
         open={open}
         onClose={handleClose}

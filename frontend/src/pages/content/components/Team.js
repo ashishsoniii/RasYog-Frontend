@@ -25,6 +25,10 @@ function Team() {
         url: "https://github.com/ashishsoniii/",
         icon: <GrGithub />,
       },
+      link3: {
+        url: "https://ashishsoni.studio/",
+        icon: <CgWebsite />,
+      },
     },
   ];
   const cardsData3 = [

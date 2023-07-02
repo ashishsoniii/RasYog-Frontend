@@ -283,11 +283,11 @@
 
 .Center {
     font-size: 2.5rem;
-  
-        justify-content: center;
-        display: flex;
-        align-items: center;
-    
+
+    justify-content: center;
+    display: flex;
+    align-items: center;
+
 }
 
 .tax-data {
@@ -304,7 +304,7 @@
 .team-upload {
     display: flex;
     justify-content: center;
-    margin-bottom: 3rem;
+    /* margin-bottom: 3rem; */
 
 
 }
@@ -324,7 +324,7 @@
 /* Team page CSS*/
 
 .team {
-    padding: 12rem 10rem 21rem 11rem;
+    padding: 12rem 10rem 12rem 11rem;
 
 }
 
@@ -374,7 +374,7 @@
 
 
 .main-home-sub-text_about-US {
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
 
@@ -662,7 +662,9 @@
 
 .login-name {
     font-size: 1.3rem;
-    margin-left: 2rem;
+    margin-right: 1rem;
+    font-weight: 600;
+    margin-top: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 150px;
@@ -760,17 +762,6 @@
 
 
 
-
-
-@media (max-width: 1400px) {
-    .on-home-bg {
-
-        margin-top: -58rem;
-        margin-bottom: 2%;
-
-    }
-}
-
 @media (max-width: 28000px) {
     .on-home-bg {
 
@@ -783,6 +774,17 @@
         min-height: 700px;
     }
 }
+
+
+@media (max-width: 1400px) {
+    .on-home-bg {
+
+        margin-top: -58rem;
+        margin-bottom: 2%;
+
+    }
+}
+
 
 @media (max-width: 1141px) {
 
@@ -1103,23 +1105,27 @@
     color: black;
 }
 
-.heading-footer{
+.heading-footer {
     font-size: 1.5rem;
     display: flex;
     justify-content: center;
 }
+
 @media (max-width: 513px) {
 
-    .heading-footer{
+    .heading-footer {
         font-size: 1.5rem;
     }
-    .footer-heading-sub-txt{
+
+    .footer-heading-sub-txt {
         font-size: 1.3rem;
     }
+
     .footer-links-f1 {
-        
+
         font-size: 1rem;
     }
+
     .main-text-team {
 
         font-size: 2rem;
@@ -1211,6 +1217,7 @@
         padding-right: 1rem;
     }
 }
+
 @media (max-width: 375px) {
 
     .main-text-team {
