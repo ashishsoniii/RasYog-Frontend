@@ -24,7 +24,10 @@ function Footer() {
               <img className="footer-logo" src={logo} alt="" />
               <h2 className="Center">RASYOG</h2>
             </h2>
+            <div className="footer-heading-sub-txt">
+
             Fashion AI for Indian Aesthetics (Ras)
+            </div>
           </div>
           <div className="column right-col">
             {/* <h2>Powered by YogLabs</h2> */}

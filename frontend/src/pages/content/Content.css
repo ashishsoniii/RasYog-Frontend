@@ -155,7 +155,7 @@
 .main-home-sub-text {
     display: flex;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 1.6rem;
     text-align: center;
     margin-left: 10%;
     margin-right: 10%;
@@ -260,7 +260,7 @@
 
 .col-inside {
     margin-left: 1.7% !important;
-    font-size: 2rem !important;
+    font-size: 1.4rem !important;
 }
 
 
@@ -274,15 +274,20 @@
 }
 
 .col-home-l {
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
 .col-home-r {
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
 .Center {
-    font-size: 3rem;
+    font-size: 2.5rem;
+  
+        justify-content: center;
+        display: flex;
+        align-items: center;
+    
 }
 
 .tax-data {
@@ -718,7 +723,7 @@
 .loginFloat {
     position: fixed;
     top: 6rem;
-    bottom: 0;
+    /* bottom: 0; */
     right: 2rem;
     margin-right: 2%;
     margin-bottom: 2%;
@@ -832,7 +837,7 @@
 
     .col-inside {
         margin-left: 1% !important;
-        font-size: 1.5rem !important;
+        font-size: 1.3rem !important;
     }
 
     .card {
@@ -1031,7 +1036,7 @@
 
     .col-inside {
         /* margin-left: 1% !important; */
-        font-size: 1rem !important;
+        font-size: 0.9rem !important;
         padding: 3px 24px !important;
     }
 
@@ -1098,7 +1103,23 @@
     color: black;
 }
 
+.heading-footer{
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
 @media (max-width: 513px) {
+
+    .heading-footer{
+        font-size: 1.5rem;
+    }
+    .footer-heading-sub-txt{
+        font-size: 1.3rem;
+    }
+    .footer-links-f1 {
+        
+        font-size: 1rem;
+    }
     .main-text-team {
 
         font-size: 2rem;
@@ -1181,6 +1202,15 @@
 
 }
 
+@media (max-width: 420px) {
+    .white-area {
+        background-color: #F2F2F2;
+        padding-top: 5rem;
+        padding-bottom: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
 @media (max-width: 375px) {
 
     .main-text-team {

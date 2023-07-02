@@ -151,7 +151,7 @@ export default function LoginBtn({
 
   if (loggedIn) {
     return (
-      <div>
+      <>
         <Fab variant="extended" onClick={handleMenuOpen}>
           <AiOutlineLogin className="svg-login-icon" sx={{ mr: 1 }} />
           <p className="login-name">{email}</p>
@@ -195,12 +195,12 @@ export default function LoginBtn({
         {openRegisterdDialog && (
           <RegisterDialog setOpenChangePasswordDialog={setOpenRegisterDialog} />
         )}
-      </div>
+      </>
     );
   }
 
   return (
-    <div>
+    <>
       <Fab variant="extended" onClick={handleOpen}>
         {/* <AiOutlineLogin className="svg-login-icon" sx={{ mr: 1 }} /> */}
         <img src={jaipurM} className="svg-login-icon" alt="" />
@@ -280,6 +280,6 @@ export default function LoginBtn({
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 }
