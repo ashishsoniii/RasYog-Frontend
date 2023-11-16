@@ -153,10 +153,10 @@ export default function LoginBtn({
     return (
       <>
         <Fab variant="extended" onClick={handleMenuOpen}>
-          <AiOutlineLogin className="svg-login-icon" sx={{ mr: 1 }} />
+          {/* <AiOutlineLogin className="svg-login-icon" sx={{ mr: 1 }} /> */}
 
+          <img src={jaipurM} className="svg-login-icon-img" alt="" />
           <p className="login-name">{email}</p>
-          {/* <img src={jaipurM} className="svg-login-icon" alt="" /> */}
         </Fab>
 
         <Menu
@@ -204,8 +204,8 @@ export default function LoginBtn({
   return (
     <>
       <Fab variant="extended" onClick={handleOpen}>
-        {/* <AiOutlineLogin className="svg-login-icon" sx={{ mr: 1 }} /> */}
-        <img src={jaipurM} className="svg-login-icon" alt="" />
+        <AiOutlineLogin className="svg-login-icon" sx={{ mr: 1 }} />
+        {/* <img src={jaipurM} className="svg-login-icon" alt="" /> */}
         <p className="login-name">Login</p>
       </Fab>
 

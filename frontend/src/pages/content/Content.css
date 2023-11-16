@@ -623,7 +623,13 @@
 
 .svg-login-icon {
     font-size: 2rem;
-    width: 10rem;
+    width: 3rem;
+    /* padding-right: 1rem; */
+}
+
+.svg-login-icon-img {
+    font-size: 2rem;
+    width: 5rem;
     /* padding-right: 1rem; */
 }
 
@@ -664,7 +670,7 @@
     font-size: 1.3rem;
     margin-right: 1rem;
     font-weight: 600;
-    margin-top: 5px;
+    /* margin-top: 5px; */
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 150px;
