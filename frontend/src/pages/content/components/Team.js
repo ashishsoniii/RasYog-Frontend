@@ -1,3 +1,6 @@
+// Team Page to show detail of Developers
+// Team -> UserCards (card)
+
 import React from "react";
 import "../Content.css";
 import UserCards2 from "./UserCards2";
@@ -12,6 +15,9 @@ import tanya from "../../../assets/developer/tanya.jpeg";
 import anjali from "../../../assets/developer/anjali.jpeg";
 
 function Team() {
+
+    // data goes into UserCards as props!
+
   const cardsData1 = [
     {
       content: "Ashish Soni",
@@ -125,6 +131,8 @@ function Team() {
   return (
     <div className="full-team">
       <div className="on-home-bg ">
+
+      {/* heading - About Us! */}
         <div className="main-home-text"> About Us! </div>
         <div className="main-home-sub-text main-home-sub-text_about-US">
           Discerning Chemistry of Taste (RasYog) by AI driven understanding of

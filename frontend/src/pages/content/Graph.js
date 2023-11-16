@@ -6,13 +6,14 @@ import { motion } from "framer-motion";
 axios.defaults.withCredentials = true;
 
 function Graph(props) {
-  const [plots, setPlots] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [plots, setPlots] = useState([]); // Stores Plot Data!
+  const [loading, setLoading] = useState(true); // Checks Loading State
+  const [error, setError] = useState(false); // Display Error!
 
   const fetchData = async () => {
     try {
       setLoading(true);
+      // API CALL to my friend Backend!!
 
       const response = await axios.post(
         `https://yoglabs.pythonanywhere.com/${props.topic}`,
@@ -21,13 +22,18 @@ function Graph(props) {
           starting: props.valueStart,
           end: props.valueEnd,
         },
-        {withCredentials: true,
+        {
+          withCredentials: true,
 
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
+
+      // setting data in plotArray (later in plot) (Backend Data)
+      // using 1<=i<=4 because max plots can be 4
+      // data|layout|frames(animations)
 
       const plotsArray = [];
       for (let i = 1; i <= 4; i++) {
@@ -56,6 +62,7 @@ function Graph(props) {
     }
   };
 
+  //to fetch data when selectedOptionId & years changes!
   useEffect(() => {
     if (props.selectedOptionId) {
       setLoading(true);
@@ -66,6 +73,8 @@ function Graph(props) {
     }
     // eslint-disable-next-line
   }, [props.selectedOptionId, props.valueStart, props.valueEnd]);
+
+    //to clean plots when heading(topic of plot) change!
 
   useEffect(() => {
     setLoading(false);
@@ -99,9 +108,11 @@ function Graph(props) {
               ></motion.div>
             </div>
           ) : error ? (
-            <div>Error fetching data. Please try again later.</div>
+            <div>Error fetching data. Please try again later.</div>  // error Displayer
           ) : (
             plots.length > 0 &&
+                        // Plotting Graphs --> maps -> reusable compponents shows maps od data in plot array!            
+
             plots.map((plot, index) => (
               <div key={index} className="plotlyi">
                 {/* {console.log(plot.frames)} */}

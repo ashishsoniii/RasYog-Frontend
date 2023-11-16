@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import "./Content.css";
 // import Project from "./Project";
 import Buttonz from "./components/Button.js";
-import Button2 from "./components/Button_2.js";
+import Button2 from "./components/Button_2.js"; // name differne tbcz of pascal_case error
 import ReactSlider from "./components/ReactSlider.js";
 import jaipurM from "../../assets/logo/jaipur_Modern.png";
 import { motion } from "framer-motion";
 
 const Home = (props) => {
-  const [activeState, setActiveState] = useState("Sales Insights");
-  const [activeState2, setActiveState2] = useState("Maps Taxonomic");
+  const [activeState, setActiveState] = useState("Sales Insights"); // section 1 button option!
+  const [activeState2, setActiveState2] = useState("Maps Taxonomic"); // section 2 button option!
   return (
     <>
       <div className="on-home-bg">
@@ -40,6 +40,8 @@ const Home = (props) => {
       <div className="section1" id="analysis">
         <div className="row white-area">
           <div className="column col-home-l">
+            {/* Section 1 --> three divs --> shows which is tiggered!! */}
+
             {activeState === "Sales Insights" && (
               <div className="Show data">
                 <div className="heading-footer ">
@@ -92,12 +94,11 @@ const Home = (props) => {
       {/*  */}
       {/*  */}
 
-      {/* <div
-        className="main-home-text white-area tax-data"
-        style={{ marginBottom: 0 }}
-      >
-        {"Taxonomic"}
-      </div> */}
+      {/*  */}
+      {/*  */}
+      {/*  */}
+      {/*  */}
+      {/* Section 2 --> two divs --> shows which is tiggered!! */}
 
       <div className="section2">
         <div className="row white-area">
@@ -147,23 +148,34 @@ const Home = (props) => {
         </div>
       </div>
 
+      {/* React slider component (TAken from other's Package)*/}
+      {/* React slider component */}
+      {/* React slider component */}
+      {/* React slider component */}
+
       <ReactSlider loggedIn={props.loggedIn} setOpen={props.setOpen} />
+      {/* React slider component */}
+      {/* React slider component */}
+      {/* React slider component */}
+
+      {/* Section 3 (divides into 2 upper ->Upload data files to backend | lower -> show team members) */}
+
+      {/* (left -> uplaod an excel | csv) */}
 
       <div className="team-upload">
         <section className="team">
           <div className="main-text-team">Partnerships</div>
           <a href="http://www.jaipurmodern.com/" target="__blank">
-
-          <motion.img
-            whileHover={{
-              scale: 1.1,
-              transition: { duration: 1 },
-            }}
-            whileTap={{ scale: 0.9 }}
-            src={jaipurM}
-            className="svg-login-icon-onhomepage-above-footer"
-            alt=""
-          />
+            <motion.img
+              whileHover={{
+                scale: 1.1,
+                transition: { duration: 1 },
+              }}
+              whileTap={{ scale: 0.9 }}
+              src={jaipurM}
+              className="svg-login-icon-onhomepage-above-footer"
+              alt=""
+            />
           </a>
         </section>
       </div>

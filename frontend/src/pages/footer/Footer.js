@@ -22,6 +22,8 @@ function Footer() {
         <div className="row">
           <div className="column">
             <div className="heading-footer">
+              {/* Left div sdection here! */}
+
               <img className="footer-logo" src={logo} alt="" />
               <h2 className="Center">RASYOG</h2>
               {/* <img src={jaipurM} className="svg-login-icon" alt="" /> */}
@@ -70,19 +72,7 @@ function Footer() {
             </div>
           </div>
         </div>
-        {/* <hr />
-        <div className="row">
-          <div className="column">
-            <h3 className="yoglabs">
-              <span>R</span>as
-              <span>Y</span>og © {new Date().getFullYear()} */}
-        {/* <p>Let's get in touch on any of these platforms.</p> */}
-        {/* </h3>
-          </div> */}
-        {/* <div className="column">
-            <h5>YogLabs</h5>
-          </div> */}
-        {/* </div> */}
+
         <br />
         <br />
       </footer>

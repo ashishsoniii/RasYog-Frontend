@@ -2,6 +2,8 @@
 import React from "react";
 import "../Content.css";
 
+// This is code for card -> appears on team page -> 1 line 3 card...
+
 function Cards({ cardsData }) {
   return (
     <section className="Cards cards-middle">

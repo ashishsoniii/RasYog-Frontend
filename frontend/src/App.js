@@ -4,9 +4,9 @@ import Navbar from "./pages/navbar/Navbar";
 import "./App.css";
 import Footer from "./pages/footer/Footer";
 import Home from "./pages/content/Home";
-import DataAnalysis from "./pages/content/DataAnalysis.js";
-import Team from "./pages/content/components/Team";
-import UploadFile from "./pages/content/UploadFile";
+import DataAnalysis from "./pages/content/DataAnalysis.js"; // page for analysis (Access through Navbar!) // route -> /dataAnalysis
+import Team from "./pages/content/components/Team"; // team detial here!
+import UploadFile from "./pages/content/UploadFile"; // Component to upload file to backend! --> route -> /upload!
 import LoginBtn from "./pages/content/components/LoginBtn";
 import Navbar2 from "./pages/navbar/Navbar2";
 
@@ -19,12 +19,17 @@ const App = () => {
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
 
+  // updates Headeding | endpoint sfor axios request for graph fetching!
   const handleTopicChange = (newTopic) => {
     setTopic(newTopic);
   };
+
+  // sets heading! on dataAnalysis!
   const handleActiveTopicChange = (newTopic) => {
     setActiveTopic(newTopic);
   };
+
+  // Structure
   return (
     <>
       <div className="loginFloat">
@@ -49,6 +54,9 @@ const App = () => {
           <Navbar2 />
         )}
       </div>
+
+      {/* Landing Page Route - Displays all info for project! */}
+
       <Routes>
         <Route
           exact

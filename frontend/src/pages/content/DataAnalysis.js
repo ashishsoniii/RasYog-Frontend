@@ -3,7 +3,12 @@ import LiveSearch from "./components/LiveSearch";
 import Slider from "./components/Slider";
 import SliderReverse from "./components/SliderReverse";
 import Graph from "./Graph";
-import jaipurM from "../../assets/logo/jaipur_Modern.png"
+import jaipurM from "../../assets/logo/jaipur_Modern.png";
+
+// This page is landing page to display all plots (it takes props(sets from there) from navbar compnent )
+// props
+// props.topic  --> endpont and its short form
+// props.activeTopic  -> gives heading onpage
 
 function DataAnalysis(props) {
   const [selectedOption, setSelectedOption] = useState("Select your option");
@@ -16,17 +21,27 @@ function DataAnalysis(props) {
   const [displayStart, setDisplayStart] = useState(true);
   const [displayEnd, setDisplayEnd] = useState(false);
 
+  // slider value updation (start|fordward)
+
   const handleSliderChange = (newValueStart) => {
     setValueStart(newValueStart);
   };
+
+  // slider value updation (Reverse | end year)
+
   const handleSliderEndChange = (newValueEnd) => {
     setValueEnd(newValueEnd);
   };
+
+  //sets plot option seclected from liveSearch Component!
 
   const handleOptionClick = (item, props) => {
     setSelectedOption(item.plot);
     setSelectedOptionId(item.id);
   };
+
+  // As topic change it resets all value (sets it to default setting)
+
   useEffect(() => {
     setSelectedOptionId(0);
     setDisplayStart(true);
@@ -41,11 +56,13 @@ function DataAnalysis(props) {
       {/* <h1> Hraph me hu!</h1>
       <h1> {selectedOptionId}!</h1> */}
       <div className="on-home-bg">
-        <div className="main-home-text">
-        
-        
-        <img src={jaipurM} className="svg-login-icon-onhomepage" alt="" />
+        {/* Heading */}
 
+        <div className="main-home-text">
+          {/* Setting its corresponding text to activeTopic via topic!  */}
+          {/* there are 6 routes in total! */}
+
+          <img src={jaipurM} className="svg-login-icon-onhomepage" alt="" />
         </div>
         <div className="main-home-text">{props.activeTopic}</div>
         <div className="main-home-sub-text">
@@ -78,6 +95,9 @@ function DataAnalysis(props) {
           )}{" "}
         </div>
 
+        {/*  A component to select which graph to be displayed! */}
+        {/* This sets up optionID! */}
+
         <LiveSearch
           loggedIn={props.loggedIn}
           setOpen={props.setOpen}
@@ -86,6 +106,9 @@ function DataAnalysis(props) {
           setDisplayStart={setDisplayStart}
           setDisplayEnd={setDisplayEnd}
         />
+
+        {/*  Fordward Sloder Logic HErE! */}
+
         {!(displayStart === false && displayEnd === false) && (
           <div>
             {!displayStart && (
@@ -98,6 +121,9 @@ function DataAnalysis(props) {
                 </div>
               </>
             )}
+
+            {/* Reverse Slider Here! */}
+
             {displayEnd && (
               <>
                 {!displayStart && (
@@ -115,6 +141,9 @@ function DataAnalysis(props) {
                   {/* <p>Selected valueStart: {valueEnd}</p> */}
                 </div>
                 <br />
+
+                {/* Display value of SLider!!!!! */}
+
                 {!displayStart && displayEnd && (
                   <div className="main-home-sub-text year-text">
                     {valueStart} - {valueEnd}
@@ -127,6 +156,11 @@ function DataAnalysis(props) {
             )}
           </div>
         )}
+
+        {/* MAIN COMPONENT ->  this component shows graph!!!! */}
+        {/* MAIN COMPONENT ->  this component shows graph!!!! */}
+        {/* Reminder -> Topic sets endpoint of routes! */}
+
         <Graph
           selectedOption={selectedOption}
           selectedOptionId={selectedOptionId}

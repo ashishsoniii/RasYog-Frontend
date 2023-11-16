@@ -5,13 +5,18 @@ import excel from "../../assets/excel.png";
 function UploadFile() {
   const [file1, setFile1] = useState(null);
   const [file2, setFile2] = useState(null);
+
+  //stores File Name!
   const [selectedFileName1, setSelectedFileName1] = useState(
     "Select an Excel File"
   );
+
+  //stores File Name!
   const [selectedFileName2, setSelectedFileName2] = useState(
     "Select an Excel File"
   );
 
+  //updating fileName | File Upload
   const handleFile1Change = (event) => {
     const selectedFile = event.target.files[0];
     setFile1(selectedFile);
@@ -20,6 +25,7 @@ function UploadFile() {
     );
   };
 
+  //updating fileName | File Upload
   const handleFile2Change = (event) => {
     const selectedFile = event.target.files[0];
     setFile2(selectedFile);
@@ -40,6 +46,8 @@ function UploadFile() {
       fileHandler(droppedFile);
     }
   };
+
+  // This function handles file upload feature with backend i.e. it make's post request to backend API
 
   const handleUpload = () => {
     if (file1 && file2) {
@@ -65,6 +73,8 @@ function UploadFile() {
   return (
     <>
       <div className="containerz">
+        {/* Code for Input of 1st file is here | it accepts -> .xlsx, .xls, .csv  */}
+
         <div
           className="drop-area"
           onDragOver={handleDragOver}
@@ -88,6 +98,8 @@ function UploadFile() {
             <p className="selected-file-name">{selectedFileName1}</p>
           </label>
         </div>
+
+        {/* Code for Input of 2nd file is here | it accepts -> .xlsx, .xls, .csv  */}
 
         <div
           className="drop-area"

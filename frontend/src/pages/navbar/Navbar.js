@@ -13,10 +13,14 @@ const Navbar = (props) => {
   const [showMediaIcons, setShowMediaIcons] = useState(false);
   const menuRef = useRef();
 
+  // Shows Menu!
   const handleMenuClick = () => {
     setShowMediaIcons(!showMediaIcons);
   };
 
+  //  handleClickOutside function-> handles clicks that occur outside of a specific element(menu).
+  // menuRef.current -> menuRef has a current value (existance in DOM)
+  // !menuRef.current.contains(event.target) --> it checks if the clicked element is outside the menu.
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
       setShowMediaIcons(false);
@@ -24,9 +28,11 @@ const Navbar = (props) => {
   };
 
   useEffect(() => {
+    // Add event listener to handle clicks outside the menu
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
+      // Clean up event listener on unmount
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);

@@ -14,6 +14,8 @@ import "../Content.css";
 import LoginAlert from "./LoginAlert";
 
 const Baz = (props) => {
+    //  props all that graph component required!
+
   const [diagOpen, setDiagOpen] = useState(false);
 
   const [selectedOptionId, setselectedOptionId] = useState(false);
@@ -22,6 +24,13 @@ const Baz = (props) => {
   const [topic, settopic] = useState("");
   const [description, setdescription] = useState("Hi");
 
+
+
+    // Slides -> it has data to display -> required by graph component!
+  // overview!->
+  // React Sider -> Dialog Graph -> Graph!!!!!!!!!
+
+  
   // selectedOptionId={2}
   // valueStart={2014}
   // valueEnd={2017}

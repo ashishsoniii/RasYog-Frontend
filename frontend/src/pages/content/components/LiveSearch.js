@@ -2,15 +2,24 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import LoginAlert from "./LoginAlert";
 
+
+//Component to select Selection of graph (sets up Selected option ID / Name)
+
+
+
 function LiveSearch(props) {
   const [plotName, setPlotName] = useState([]);
   // eslint-disable-next-line
   const [displayOption, setDisplayOption] = useState(false);
-
+  
+  // show | hide option 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Select your option");
   // eslint-disable-next-line
   const [selectedOptionId, setSelectedOptionId] = useState(0);
+
+
+    // used to handle outside click!
 
   const selectMenuRef = useRef(null);
 
@@ -24,10 +33,18 @@ function LiveSearch(props) {
     setIsOpen(false);
   };
 
+
+    // resets options to default
+
+
+
   useEffect(() => {
     setSelectedOptionId(0);
     setSelectedOption("Select your option");
   }, [props.topic]); // reset the state variables when props.topic changes
+
+
+
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -58,11 +75,15 @@ function LiveSearch(props) {
     fetchData();
 
     return () => {
+      // Cancel the request when component unmounts or when topic prop changes
+
       source.cancel(); // Cancel the request on cleanup
     };
   }, [props.topic]);
 
   useEffect(() => {
+        // Logic fir click outside to close menu!
+
     const handleClickOutside = (event) => {
       if (
         selectMenuRef.current &&
@@ -94,6 +115,8 @@ function LiveSearch(props) {
             <i className="bx bx-chevron-down"></i>
           </button>
           <ul className="options">
+                    {/* show plot option available from backend!!! */}
+
             {plotName.map((item) => (
               <li
                 className="option"
@@ -102,6 +125,8 @@ function LiveSearch(props) {
                   handleOptionClick(item);
                 }}
               >
+                            {/* shows names of tile - plots  */}
+
                 <span className="option-color"></span>
                 <span className="option-text">{item.plot}</span>
               </li>
