@@ -62,7 +62,7 @@ function DataAnalysis(props) {
           {/* Setting its corresponding text to activeTopic via topic!  */}
           {/* there are 6 routes in total! */}
 
-          <img src={jaipurM} className="svg-login-icon-onhomepage" alt="" />
+          {/* <img src={jaipurM} className="svg-login-icon-onhomepage" alt="" /> */}
         </div>
         <div className="main-home-text">{props.activeTopic}</div>
         <div className="main-home-sub-text">
@@ -98,76 +98,86 @@ function DataAnalysis(props) {
         {/*  A component to select which graph to be displayed! */}
         {/* This sets up optionID! */}
 
-        <LiveSearch
-          loggedIn={props.loggedIn}
-          setOpen={props.setOpen}
-          topic={props.topic}
-          handleOptionClick={handleOptionClick}
-          setDisplayStart={setDisplayStart}
-          setDisplayEnd={setDisplayEnd}
-        />
+        <br />
 
-        {/*  Fordward Sloder Logic HErE! */}
+        <div className="Plot-viewer">
+          <div className="Plot-viewer-inside">
+            <LiveSearch
+              loggedIn={props.loggedIn}
+              setOpen={props.setOpen}
+              topic={props.topic}
+              handleOptionClick={handleOptionClick}
+              setDisplayStart={setDisplayStart}
+              setDisplayEnd={setDisplayEnd}
+            />
 
-        {!(displayStart === false && displayEnd === false) && (
-          <div>
-            {!displayStart && (
-              <>
-                <div className="slider-label">Start Year: {valueStart}</div>
-                <div className="slider-select">
-                  <br />
-                  <Slider onChange={handleSliderChange} />
-                  {/* <div>Selected valueStart: {valueStart}</div> */}
-                </div>
-              </>
-            )}
+            {/*  Fordward Sloder Logic HErE! */}
 
-            {/* Reverse Slider Here! */}
-
-            {displayEnd && (
-              <>
+            {!(displayStart === false && displayEnd === false) && (
+              <div>
                 {!displayStart && (
-                  <div className="slider-label">End Year: {valueEnd}</div>
+                  <>
+                    <div className="slider-label">Start Year: {valueStart}</div>
+                    <div className="slider-select">
+                      <br />
+                      <Slider onChange={handleSliderChange} />
+                      {/* <div>Selected valueStart: {valueStart}</div> */}
+                    </div>
+                  </>
                 )}
-                {displayStart && (
-                  <div className="slider-label">Selected Year: {valueEnd}</div>
-                )}
-                <div className="slider-select">
-                  <br />
-                  <SliderReverse
-                    onChange={handleSliderEndChange}
-                    valueStart={valueStart}
-                  />
-                  {/* <p>Selected valueStart: {valueEnd}</p> */}
-                </div>
-                <br />
 
-                {/* Display value of SLider!!!!! */}
+                {/* Reverse Slider Here! */}
 
-                {!displayStart && displayEnd && (
-                  <div className="main-home-sub-text year-text">
-                    {valueStart} - {valueEnd}
-                  </div>
-                )}
-                {/* {displayStart && (
+                {displayEnd && (
+                  <>
+                    {!displayStart && (
+                      <div className="slider-label">End Year: {valueEnd}</div>
+                    )}
+                    {displayStart && (
+                      <div className="slider-label">
+                        Selected Year: {valueEnd}
+                      </div>
+                    )}
+                    <div className="slider-select">
+                      <br />
+                      <SliderReverse
+                        onChange={handleSliderEndChange}
+                        valueStart={valueStart}
+                      />
+                      {/* <p>Selected valueStart: {valueEnd}</p> */}
+                    </div>
+                    <br />
+
+                    {/* Display value of SLider!!!!! */}
+
+                    {!displayStart && displayEnd && (
+                      <div className="main-home-sub-text year-text">
+                        {valueStart} - {valueEnd}
+                      </div>
+                    )}
+                    {/* {displayStart && (
                   <div className="main-home-sub-text year-text">{valueEnd}</div>
                 )} */}
-              </>
+                  </>
+                )}
+              </div>
             )}
+
+            {/* MAIN COMPONENT ->  this component shows graph!!!! */}
+            {/* MAIN COMPONENT ->  this component shows graph!!!! */}
+            {/* Reminder -> Topic sets endpoint of routes! */}
+
+            <div>
+              <Graph
+                selectedOption={selectedOption}
+                selectedOptionId={selectedOptionId}
+                topic={props.topic}
+                valueStart={valueStart}
+                valueEnd={valueEnd}
+              />
+            </div>
           </div>
-        )}
-
-        {/* MAIN COMPONENT ->  this component shows graph!!!! */}
-        {/* MAIN COMPONENT ->  this component shows graph!!!! */}
-        {/* Reminder -> Topic sets endpoint of routes! */}
-
-        <Graph
-          selectedOption={selectedOption}
-          selectedOptionId={selectedOptionId}
-          topic={props.topic}
-          valueStart={valueStart}
-          valueEnd={valueEnd}
-        />
+        </div>
       </div>
     </>
   );

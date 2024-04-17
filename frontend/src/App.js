@@ -11,8 +11,8 @@ import LoginBtn from "./pages/content/components/LoginBtn";
 import Navbar2 from "./pages/navbar/Navbar2";
 
 const App = () => {
-  const [topic, setTopic] = useState("data");
-  const [activeTopic, setActiveTopic] = useState("Temporal Sales Insights");
+  const [topic, setTopic] = useState("margin");
+  const [activeTopic, setActiveTopic] = useState("Popularity and Margin Analysis");
 
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
