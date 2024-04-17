@@ -15,12 +15,12 @@ function Home() {
         <div className="home-textt">Powered By YogLabs</div>
         <div className="arrange-this-item">
           <div className="home-sub-small-textt">
-            Analyse the Food Data with Power of DineYog's Algo! & Sell what
+            Analyse the Fashion Data with Power of RasYog's Algo! & Sell what
             customer want!
           </div>
         </div>
         <div className="home-textt-small-small-blured">
-          Unveiling the All-Time Best Seller - Pizza!
+          Unveiling the All-Time Best Seller - Pajama!
         </div>
 
         <div className="cardssss">
@@ -35,7 +35,7 @@ function Home() {
               </div>
               <div className="btn-btn">
                 <Link to="/matrix">
-                  <div className="btn-text">Explore</div>
+                  {/* <div className="btn-text">Explore</div> */}
                 </Link>
               </div>
             </div>
@@ -55,7 +55,7 @@ function Home() {
               </div>
               <div className="btn-btn">
                 <Link to="/nonTemporal">
-                  <div className="btn-text">Explore</div>
+                  {/* <div className="btn-text">Explore</div> */}
                 </Link>
               </div>
             </div>
@@ -81,7 +81,7 @@ function Home() {
               </div>
               <div className="btn-btn">
                 <Link to="/nonTemporal">
-                  <div className="btn-text">Explore</div>
+                  {/* <div className="btn-text">Explore</div> */}
                 </Link>
               </div>
             </div>
@@ -102,7 +102,7 @@ function Home() {
               </div>
               <div className="btn-btn">
                 <Link to="/FPM">
-                  <div className="btn-text">Explore</div>
+                  {/* <div className="btn-text">Explore</div> */}
                 </Link>
               </div>
             </div>
@@ -121,7 +121,7 @@ function Home() {
               </div>
               <div className="btn-btn">
                 <Link to="/forcast">
-                  <div className="btn-text">Explore</div>
+                  {/* <div className="btn-text">Explore</div> */}
                 </Link>
               </div>
             </div>
