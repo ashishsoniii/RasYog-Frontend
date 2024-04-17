@@ -20,7 +20,6 @@ const Navbar = (props) => {
 
   //  handleClickOutside function-> handles clicks that occur outside of a specific element(menu).
   // menuRef.current -> menuRef has a current value (existance in DOM)
-  // !menuRef.current.contains(event.target) --> it checks if the clicked element is outside the menu.
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
       setShowMediaIcons(false);
@@ -63,7 +62,7 @@ const Navbar = (props) => {
         >
           <ul>
             <li>
-              <NavLink
+              {/* <NavLink
                 className="nav-link nav-link-ltr"
                 to="/dataAnalysis"
                 activeclassname="active"
@@ -74,7 +73,7 @@ const Navbar = (props) => {
                 }}
               >
                 Temporal Sales Insights
-              </NavLink>
+              </NavLink> */}
             </li>
             <li>
               <NavLink
@@ -149,6 +148,15 @@ const Navbar = (props) => {
                 Data Taxonomic
               </NavLink>
             </li> */}
+            <li>
+              <NavLink
+                className="nav-link nav-link-ltr"
+                to="/team"
+                activeclassname="active"
+              >
+                About Us
+              </NavLink>
+            </li>
           </ul>
         </div>
 

@@ -37,19 +37,19 @@ const Baz = (props) => {
   // topic={"data"}
 
   const slides = [
-    {
-      image: img1,
-      title: "Bar Plot",
-      description: "Margin, Sales, and Effcost",
-      clickEvent: () => {
-        settopic("data");
-        setselectedOptionId(1);
-        setvalueStart(2014);
-        setvalueEnd(2022);
-        setDiagOpen(true);
-        setdescription("Margin, Sales, and Effcost");
-      },
-    },
+    // {
+    //   image: img1,
+    //   title: "Bar Plot",
+    //   description: "Margin, Sales, and Effcost",
+    //   clickEvent: () => {
+    //     settopic("data");
+    //     setselectedOptionId(1);
+    //     setvalueStart(2014);
+    //     setvalueEnd(2022);
+    //     setDiagOpen(true);
+    //     setdescription("Margin, Sales, and Effcost");
+    //   },
+    // },
     {
       image: img2,
       title: "Popularity And Margin",
@@ -63,19 +63,19 @@ const Baz = (props) => {
         setdescription("Popularity Vs Margin for Brands");
       },
     },
-    {
-      image: img3,
-      title: "Facets",
-      description: "Facets: Bar Plot with months and year",
-      clickEvent: () => {
-        settopic("data");
-        setselectedOptionId(2);
-        setvalueStart(2014);
-        setvalueEnd(2022);
-        setDiagOpen(true);
-        setdescription("Facets: Bar Plot with months and year");
-      },
-    },
+    // {
+    //   image: img3,
+    //   title: "Facets",
+    //   description: "Facets: Bar Plot with months and year",
+    //   clickEvent: () => {
+    //     settopic("data");
+    //     setselectedOptionId(2);
+    //     setvalueStart(2014);
+    //     setvalueEnd(2022);
+    //     setDiagOpen(true);
+    //     setdescription("Facets: Bar Plot with months and year");
+    //   },
+    // },
     {
       image: img4,
       title: "Generalized Analysis",

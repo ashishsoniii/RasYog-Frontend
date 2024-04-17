@@ -172,11 +172,15 @@ export default function LoginBtn({
           onClose={handleMenuClose}
         >
           <MenuItem>
-            <AiOutlineDatabase sx={{ mr: 1 }} />
+            {/* <AiOutlineDatabase sx={{ mr: 1 }} /> */}
             <NavLink to="/upload">Upload Files </NavLink>
           </MenuItem>
+          <MenuItem>
+            {/* <AiOutlineDatabase sx={{ mr: 1 }} /> */}
+            <NavLink to="/team">About Us </NavLink>
+          </MenuItem>
 
-          <MenuItem onClick={handleRegisteruser}>
+          {/* <MenuItem onClick={handleRegisteruser}>
             <AiOutlineKey sx={{ mr: 1 }} />
             Register Users
           </MenuItem>
@@ -187,7 +191,7 @@ export default function LoginBtn({
           <MenuItem onClick={handleLogout}>
             <AiOutlineLogout sx={{ mr: 1 }} />
             Logout
-          </MenuItem>
+          </MenuItem> */}
         </Menu>
         {openChangePasswordDialog && (
           <RegisterChangePassword

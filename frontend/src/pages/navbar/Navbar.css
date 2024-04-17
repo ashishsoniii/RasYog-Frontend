@@ -167,7 +167,8 @@ li {
 .nav-link {
 
     padding: 20px 0px;
-    margin: 0px 20px;
+    /* margin: 0px 20px; */
+    margin-left: 7rem;
     display: inline-block;
     position: relative;
 }
@@ -246,7 +247,7 @@ li {
 }
 
 /* responsive css style  */
-@media (max-width: 1292px) {
+@media (max-width: 1272px) {
 
     .menu-link ul li a {
 
@@ -293,10 +294,11 @@ li {
     }
 
     .mobile-menu-link {
-        grid-column: 2/4;
+        grid-column: 1/4;
         position: relative;
         z-index: 99;
-        margin-top: 1rem;
+        /* margin-left: 24em; */
+        /* margin-top: 1rem; */
     }
 
     .mobile-menu-link {
@@ -314,10 +316,11 @@ li {
     }
 
     .mobile-menu-link ul {
-        height: 20rem;
+        height: 35rem;
         display: flex;
         justify-content: space-around;
         flex-direction: column;
+        margin-left: -7rem;
         /* align-items: flex-start; */
         align-items: center;
     }

@@ -139,7 +139,7 @@
 .main-home-text {
     display: flex;
     justify-content: center;
-    font-size: 4.3rem;
+    font-size: 5.3rem;
     /* font-weight: 900; */
     /* font-family: 'Fredoka One', cursive; */
     font-family: 'Ubuntu', sans-serif;
@@ -155,7 +155,7 @@
 .main-home-sub-text {
     display: flex;
     justify-content: center;
-    font-size: 1.6rem;
+    font-size: 2.4rem;
     text-align: center;
     margin-left: 10%;
     margin-right: 10%;
@@ -603,7 +603,7 @@
 }
 
 .MuiPaper-root {
-    background-image: linear-gradient(45deg, #947add, #e85555);
+    /* background-image: linear-gradient(45deg, #947add, #e85555); */
 
 }
 
@@ -629,7 +629,7 @@
 
 .svg-login-icon-img {
     font-size: 2rem;
-    width: 5rem;
+    width: 12rem;
     /* padding-right: 1rem; */
 }
 
@@ -791,6 +791,15 @@
     }
 }
 
+@media (max-width: 1116px) {
+   
+    .main-home-sub-text {
+        font-size: 2rem;
+
+    }
+}
+
+
 
 @media (max-width: 1141px) {
 
@@ -901,7 +910,7 @@
     }
 }
 
-@media (max-width: 756px) {
+@media (max-width: 826px) {
     .on-home-bg {
 
         margin-top: -63rem;
@@ -986,93 +995,25 @@
         font-size: 4rem;
     }
 
-    .on-home-bg {
-
-        margin-top: -84%;
-        margin-bottom: 9%;
-
-    }
-
-    .bg {
-        min-height: 600px;
-    }
-}
-
-
-
-@media (max-width: 580px) {
-    .on-home-bg {
-
-        margin-top: -46rem;
-        margin-bottom: 2%;
-
-    }
-
-    .col-home-l {
-        font-size: 1.5rem;
-    }
-
-    .col-home-r {
-        font-size: 1.5rem;
-    }
-
-    .Center {
-        font-size: 2rem;
-    }
-
-    .tax-data {
-        font-size: 2.5rem;
-    }
-
-
-    .no-graph {
-        font-size: 2rem;
+    .main-home-sub-text {
         text-align: center;
-        /* justify-content: center; */
+        font-size: 1.8rem;
     }
 
     .on-home-bg {
 
-        margin-top: -135%;
+        /* margin-top: -64%; */
         margin-bottom: 9%;
 
     }
 
     .bg {
-        min-height: 800px;
+        min-height: 700px;
     }
-
-    .col-inside {
-        /* margin-left: 1% !important; */
-        font-size: 0.9rem !important;
-        padding: 3px 24px !important;
-    }
-
-
-
-    .cPsKcu {
-        padding: 3px 19px !important;
-    }
-
-
-    .team {
-        padding: 8rem 0rem 21rem 0rem;
-
-    }
-
-    .main-text-team {
-        font-size: 1.2rem;
-    }
-
-
-    .team-upload hr {
-        height: 23rem;
-    }
-
-
-
-
 }
+
+
+
 
 
 @media (max-width: 543px) {
@@ -1118,6 +1059,10 @@
 }
 
 @media (max-width: 513px) {
+    .svg-login-icon-img{
+        width: 6rem;
+
+    }
 
     .heading-footer {
         font-size: 1.5rem;
@@ -1158,6 +1103,13 @@
     }
 }
 
+
+
+
+
+
+
+
 @media (max-width: 485px) {
     .col-inside {
         padding: 3px 19px !important;
@@ -1171,13 +1123,25 @@
         font-size: 1.5rem;
 
     }
+    .bg{
+        max-height: 500px;
+    }
+
+    .on-home-bg {
+
+        /* margin-top: -169%; */
+        margin-bottom: 1%;
+
+    }
 }
 
 @media (max-width: 450px) {
 
+    /*  */
+
     .on-home-bg {
 
-        margin-top: -169%;
+        /* margin-top: -169%; */
         margin-bottom: 12%;
 
     }
@@ -1200,19 +1164,6 @@
 }
 
 
-@media (max-width: 400px) {
-
-
-
-
-    .on-home-bg {
-
-        margin-top: -180%;
-        /* margin-bottom: 20%; */
-
-    }
-
-}
 
 @media (max-width: 420px) {
     .white-area {
@@ -1236,13 +1187,14 @@
 
     .on-home-bg {
 
-        margin-top: -195%;
+        /* margin-top: -195%; */
         /* margin-bottom: 20%; */
 
     }
 
 
 }
+
 
 @media (max-width: 332px) {
     .image-container {
@@ -1252,9 +1204,10 @@
     }
 
 
+
     .on-home-bg {
 
-        margin-top: -225%;
+        /* margin-top: -225%; */
         margin-bottom: 20%;
 
     }
@@ -1267,13 +1220,24 @@
 
     }
 
+    .main-home-sub-text
+    {
+        font-size: 1.3rem;
+    }
+
+    .svg-login-icon-img{
+        width: 4rem;
+
+    }
+
+
 }
 
 @media (max-width: 288px) {
 
     .on-home-bg {
 
-        margin-top: -265%;
+        /* margin-top: -265%; */
         margin-bottom: 20%;
 
     }
@@ -1293,4 +1257,34 @@
 
 
     }
+    
+}
+@media (max-width: 266px) {
+
+    .on-home-bg {
+
+        /* margin-top: -265%; */
+        margin-bottom: 20%;
+
+    }
+
+    .col-inside {
+        padding: 2px 10px !important;
+    }
+
+    .cPsKcu {
+        padding: 2px 10px !important;
+    }
+
+    .main-text-team {
+
+        font-size: 1rem;
+        font-weight: 200;
+
+
+    }
+    .main-home-sub-text{
+        font-size: 1.2rem;
+    }
+    
 }

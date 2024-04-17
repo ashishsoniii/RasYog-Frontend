@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+
+.home-intro {
+    padding-top: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+.badge {
+    display: flex;
+    justify-content: center;
+}
+
+.badge-btn {
+    background-color: rgb(236, 255, 127);
+    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+    border-radius: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+
+
+}
+
+
+.home-textt {
+    display: flex;
+    justify-content: center;
+
+    font-size: 3.3rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.home-sub-small-textt {
+    display: flex;
+    justify-content: center;
+    color: rgb(63, 63, 63);
+    font-size: 2.3rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    width: 40%;
+    align-items: center;
+    text-align: center;
+}
+
+.arrange-this-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.home-textt-small-small-blured {
+    display: flex;
+    justify-content: center;
+
+    font-size: 1.7rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: rgb(63, 63, 63);
+    opacity: 0.9;
+}
+
+
+.cardssss {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7rem;
+    margin-top: 2rem;
+
+}
+
+
+.card1 {
+    background-color: rgb(5, 255, 172);
+    width: 50rem;
+    /* height: 20rem; */
+    border-radius: 1.7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3% 4%;
+    box-shadow: 0 0 1rem 0.2rem rgb(0 0 0 / 10%);
+
+    background-image: linear-gradient(212deg, #dad0ff, #9cfff2);
+
+}
+
+.card2 {
+    background-color: rgb(255, 255, 255);
+    width: 50rem;
+    /* height: 20rem; */
+    border-radius: 1.7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3% 4%;
+    /* add 3d glow */
+    box-shadow: 0 0 1rem 0.2rem rgb(0 0 0 / 10%);
+
+}
+
+.card1-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: flex-start;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card1-text1 {
+    font-size: 2rem;
+    font-weight: 700;
+
+}
+
+.card1-text2 {
+    text-align: justify;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgb(63, 63, 63);
+}
+
+.btn-btn {
+    display: flex;
+    justify-content: flex-start;
+
+
+}
+
+.btn-text {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    padding: 0.6rem 1rem 0.6rem 1rem;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 2rem;
+    /* add transform 3 sec */
+    transition: all 0.3s ease-in-out;
+
+}
+
+.btn-text:hover {
+    background-color: rgb(73, 73, 73);
+
+
+}
+
+
+
+@media (max-width: 1121px) {
+
+    .home-intro {
+        padding-top: 20%;
+    }
+    
+
+}
+@media (max-width: 1121px) {
+
+    .home-intro {
+        padding-top: 20%;
+    }
+    
+
+}
+
+
+@media (max-width: 663px) {
+
+
+    /* 663 */
+
+    .home-sub-small-textt {
+
+        width: 90%;
+
+    }
+
+}
+
+@media (max-width: 549px) {
+
+
+    /* 663 */
+
+    .card1-text1 {
+
+        font-size: 1.5rem;
+    }
+
+    .card1-text2 {
+        font-size: 1rem;
+
+    }
+
+    .btn-text {
+        font-size: 1.1rem;
+
+    }
+}
+
+@media (max-width: 485px) {
+
+    .home-intro {
+        padding-top: 40%;
+    }
+    
+    .home-sub-small-textt{
+        font-size: 1.8rem;
+    }
+    .home-textt-small-small-blured{
+        font-size: 1.4rem;
+    }
+
+}
+
+@media (max-width: 437px) {
+
+
+    .cardssss {
+        display: contents;
+    }
+
+    .home-textt{
+        font-size: 2.8rem;
+    }
+    .home-sub-small-textt{
+        font-size: 1.4rem;
+    }
+    .home-intro{
+        gap: 2.4rem;
+    }
+
+.home-textt-small-small-blured{
+    font-size: 1rem;
+}
+
+    .card1 {
+        width: 100%;
+    }
+
+    .card2 {
+        width: 100%;
+    }
+
+}
+
+
+
+@media (max-width: 385px) {
+
+    .home-intro {
+        padding-top: 30%;
+    }
+    
+
+}
