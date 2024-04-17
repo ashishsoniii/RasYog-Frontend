@@ -16,7 +16,7 @@ function Graph(props) {
       // API CALL to my friend Backend!!
 
       const response = await axios.post(
-        `https://yoglabs.pythonanywhere.com/${props.topic}`,
+        `http://127.0.0.1:5000/${props.topic}`,
         {
           graph: props.selectedOptionId,
           starting: props.valueStart,

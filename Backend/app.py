@@ -24,10 +24,10 @@ app.config['SESSION_COOKIE_SECURE'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'None'
 
 
-client=pymongo.MongoClient("mongodb+srv://rasyog:RVd18LGeMfmD4NfS@cluster0.p1dxni4.mongodb.net/?retryWrites=true&w=majority")
-db=client.get_database("rasyog")
+# client=pymongo.MongoClient("mongodb+srv://rasyog:RVd18LGeMfmD4NfS@cluster0.p1dxni4.mongodb.net/?retryWrites=true&w=majority")
+# db=client.get_database("rasyog")
 # print(db.list_collection_names())
-user_credentials=db.get_collection("user_credentials")
+# user_credentials=db.get_collection("user_credentials")
 # print(list(user_credentials.find()))
 # print(db)
 # users=db.user_collection
@@ -182,7 +182,7 @@ def Choose_Option():
 def data_graph():
     if request.method == 'POST':
         # if('username' in session and session['username']=="pranav"):
-        if "userid" in session:
+        # if "userid" in session:
             graphInfo= (request.get_json())
             graph_id=graphInfo["graph"]
             from_year=int(graphInfo['starting'])
@@ -206,8 +206,8 @@ def data_graph():
                 # 'display_option':True
             }
             return jsonify(JSON_Data),status.HTTP_200_OK
-        else:
-            return "Please Login First",status.HTTP_401_UNAUTHORIZED 
+        # else:
+            # return "Please Login First",status.HTTP_401_UNAUTHORIZED 
 
 
 
@@ -215,7 +215,7 @@ def data_graph():
 @app.route('/margin', methods=['POST'])
 def margin_graph():
     if request.method == 'POST':
-        if "userid" in session:
+        # if "userid" in session:
 
             graphInfo= (request.get_json())
             graph_id=int(graphInfo["graph"])
@@ -242,15 +242,15 @@ def margin_graph():
                 # 'display_option':True
             }
             return jsonify(JSON_Data),status.HTTP_200_OK
-        else:
-            return "Please Login First",status.HTTP_401_UNAUTHORIZED 
+        # else:
+            # return "Please Login First",status.HTTP_401_UNAUTHORIZED 
 
 
 # Route for Tree Maps
 @app.route('/maps', methods=['POST'])
 def TreeMaps_graph():
     if request.method == 'POST':
-        if "userid" in session:
+        # if "userid" in session:
             graphInfo=(request.get_json())
             graph_id=int(graphInfo["graph"])
             from_year=int(graphInfo['starting'])
@@ -271,8 +271,8 @@ def TreeMaps_graph():
                 # 'display_option':True
             }
             return jsonify(JSON_Data),status.HTTP_200_OK
-        else:
-            return "Please Login First",status.HTTP_401_UNAUTHORIZED 
+        # else:
+        #     return "Please Login First",status.HTTP_401_UNAUTHORIZED 
 
 
 # 
@@ -280,7 +280,7 @@ def TreeMaps_graph():
 @app.route('/mapstaxonomic', methods=['POST', 'GET'])
 def Tree_Maps_Taxonomic():
     if request.method == 'POST':
-        if "userid" in session:
+        # if "userid" in session:
          
             graphInfo= (request.get_json())
             graph_id=int(graphInfo["graph"])
@@ -301,15 +301,15 @@ def Tree_Maps_Taxonomic():
                 # 'display_option':True
             }
             return jsonify(JSON_Data),status.HTTP_200_OK
-        else:
-            return "Please Login First",status.HTTP_401_UNAUTHORIZED 
+        # else:
+        #     return "Please Login First",status.HTTP_401_UNAUTHORIZED 
 
     
 # Route for Taxonomic Analysis
 @app.route('/taxonomic', methods=['POST', 'GET'])
 def Taxonomic_analysis():
     if request.method == 'POST':
-        if "userid" in session:
+        # if "userid" in session:
 
             graphInfo= (request.get_json())
             graph_id=int(graphInfo["graph"])
@@ -347,8 +347,8 @@ def Taxonomic_analysis():
                 # 'display_option':True
             }
             return (JSON_Data),status.HTTP_200_OK
-        else:
-                return "Please Login First",status.HTTP_401_UNAUTHORIZED 
+        # else:
+        #         return "Please Login First",status.HTTP_401_UNAUTHORIZED 
 
 
 
@@ -356,7 +356,7 @@ def Taxonomic_analysis():
 @app.route('/datataxonomic', methods=['POST', 'GET'])
 def Data_Anaylsis_Taxonomic():
     if request.method == 'POST':
-        if "userid" in session:
+        # if "userid" in session:
             graphInfo= (request.get_json())
             graph_id=int(graphInfo["graph"])
             from_year=int(graphInfo['starting'])
@@ -389,14 +389,14 @@ def Data_Anaylsis_Taxonomic():
                 # 'display_option':True
             }
             return (JSON_Data),status.HTTP_200_OK
-        else:
-            return "Please Login First",status.HTTP_401_UNAUTHORIZED 
+        # else:
+        #     return "Please Login First",status.HTTP_401_UNAUTHORIZED 
 
 
 @app.route("/upload",methods=['POST'])
 def File_Upload():
     if(request.method=='POST'):
-        if "userid" in session:
+        # if "userid" in session:
             if 'File1' not in request.files or 'File2' not in request.files:
                 return 'Files not found in the request', status.HTTP_400_BAD_REQUEST
             
@@ -414,8 +414,8 @@ def File_Upload():
             # Upload_File()
             # Reload()
             return 'Files uploaded successfully',status.HTTP_200_OK
-        else:
-                return "Please Login First",status.HTTP_401_UNAUTHORIZED 
+        # else:
+        #         return "Please Login First",status.HTTP_401_UNAUTHORIZED 
 
 @app.route("/register",methods=["POST"])
 def register():
@@ -503,7 +503,7 @@ def logout():
 @app.route("/ChangePassword",methods=["POST"])
 def ChangePassword():
     if(request.method=='POST'):
-        if "userid" in session:
+        # if "userid" in session:
             userdata=request.get_json()
             user_email=session["userid"]
             # print(user_email)
@@ -517,8 +517,8 @@ def ChangePassword():
                 return "Successfully Updated",status.HTTP_200_OK 
             else:
                 return "Invalid Credentials",status.HTTP_401_UNAUTHORIZED
-        else:
-            return "Please Login First",status.HTTP_401_UNAUTHORIZED 
+        # else:
+        #     return "Please Login First",status.HTTP_401_UNAUTHORIZED 
 
 
 

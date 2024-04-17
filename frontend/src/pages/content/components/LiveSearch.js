@@ -51,7 +51,7 @@ function LiveSearch(props) {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://yoglabs.pythonanywhere.com/store?id=${props.topic}`,
+          `http://127.0.0.1:5000/store?id=${props.topic}`,
           {
             // cancelToken: source.token,
             withCredentials: true, // Set withCredentials to true

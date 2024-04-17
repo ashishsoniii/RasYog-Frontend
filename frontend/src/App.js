@@ -17,7 +17,7 @@ const App = () => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   // updates Headeding | endpoint sfor axios request for graph fetching!
   const handleTopicChange = (newTopic) => {
