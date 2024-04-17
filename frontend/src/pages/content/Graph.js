@@ -16,7 +16,7 @@ function Graph(props) {
       // API CALL to my friend Backend!!
 
       const response = await axios.post(
-        `http://127.0.0.1:5000/${props.topic}`,
+        `https://rasyog.azurewebsites.net/${props.topic}`,
         {
           graph: props.selectedOptionId,
           starting: props.valueStart,
